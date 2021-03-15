@@ -1,3 +1,4 @@
+apply plugin: 'realm-android'
 android {
     buildToolsVersion "29.0.3"
     compileSdkVersion 29
@@ -18,7 +19,7 @@ android {
     }
     defaultConfig {
         applicationId "com.mygdx.game"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -31,6 +32,9 @@ android {
     }
 }
 
+realm {
+    syncEnabled = true
+}
 
 // called every time gradle gets executed, takes the native dependencies of
 // the natives configuration, and extracts them to the proper libs/ folders
