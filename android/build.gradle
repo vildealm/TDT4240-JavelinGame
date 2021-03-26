@@ -23,6 +23,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -92,12 +93,13 @@ task run(type: Exec) {
 dependencies {
     implementation "pl.mk5.gdx-fireapp:gdx-fireapp-android:3.0.2"
 
-    implementation platform("com.google.firebase:firebase-bom:25.12.0")
+
     implementation 'com.google.firebase:firebase-core'
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     // Add this if you need google authorization
     implementation 'com.google.android.gms:play-services-auth:18.1.0'

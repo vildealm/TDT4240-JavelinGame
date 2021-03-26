@@ -7,6 +7,6 @@ import com.mygdx.game.JavelinGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new JavelinGame(), config);
+		new LwjglApplication(new JavelinGame(new DesktopInterfaceClass()), config);
 	}
 }
