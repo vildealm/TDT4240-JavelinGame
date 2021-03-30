@@ -1,19 +1,22 @@
 package com.mygdx.game.model.states;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.controller.ScreenFactory;
 
-public class MenuState extends State {
+public class MenuState implements State {
     private BitmapFont font;
+    private GameStateManager gsm;
+    private Screen currentScreen;
     TextButton startButton;
     TextButton.TextButtonStyle textButtonStyle;
     Skin skin;
@@ -21,9 +24,11 @@ public class MenuState extends State {
     Stage stage;
 
 
-    public MenuState(GameStateManager gsm){
-        super(gsm);
-        stage = new Stage();
+    MenuState(GameStateManager gsm) {
+        this.gsm = gsm;
+        currentScreen = ScreenFactory.getScreen("MENU");
+        render();
+        /*stage = new Stage();
         font = new BitmapFont();
         textButtonStyle = new TextButton.TextButtonStyle();
         skin = new Skin();
@@ -44,13 +49,27 @@ public class MenuState extends State {
             {
                 System.out.println("You clicked me!");
             }
-        });
+        });*/
     }
 
-    public void clickButton() {
 
+    @Override
+    public void render() {
+        gsm.game.setScreen(currentScreen);
     }
 
+    @Override
+    public void changeState(State state) {
+        gsm.changeState(state);
+    }
+
+    @Override
+    public void updateScreen(String type) {
+        currentScreen = ScreenFactory.getScreen(type);
+        render();
+    }
+}
+/*
     @Override
     public void handleInput() {
         if(startButton.isPressed()){
@@ -62,7 +81,6 @@ public class MenuState extends State {
     @Override
     public void update(float dt) {
         handleInput();
-
     }
 
     @Override
@@ -70,10 +88,22 @@ public class MenuState extends State {
         sb.begin();
         startButton.draw(sb,1 );
         sb.end();
-
     }
 
-    public void dispose(){
-
+    public void dispose() {
     }
+/*
+
+public class MenuState implements State {
+
+    private GameStateManager gsm;
+    private Screen currentScreen;
+
+    MenuState(GameStateManager gsm){
+        this.gsm = gsm;
+        currentScreen = ScreenFactory.getScreen("MENU");
+        render();
+    }
+
 }
+*/
