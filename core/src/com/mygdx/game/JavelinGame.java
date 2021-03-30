@@ -14,7 +14,7 @@ import com.mygdx.game.model.states.MenuState;
 public class JavelinGame extends Game {
 	private SpriteBatch batch;
 	private static JavelinGame INSTANCE;
-	private GameStateManager gsm;
+	public GameStateManager gsm;
 
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;

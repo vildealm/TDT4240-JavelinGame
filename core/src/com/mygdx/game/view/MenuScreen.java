@@ -36,27 +36,28 @@ public class MenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         Button startButton = createButton(playBtn,2f,"PLAY");
         stage.addActor(startButton);
-
     }
 
     @Override
     public void render(float delta) {
         game.getBatch().begin(); // Draw elements to Sprite Batch
         game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
+        //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         game.getBatch().end();
         stage.draw();
     }
 
-    private Button createButton(Texture texture, float xPos, final String nextScreen){
+    private Button createButton(Texture texture, float xPos, final String txtScreen){
         Button startButton = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
+        startButton.setSize(Gdx.graphics.getWidth()/10f  ,   Gdx.graphics.getHeight()/7f);
+        startButton.setPosition(Gdx.graphics.getWidth() / xPos - startButton.getWidth()/2f,Gdx.graphics.getHeight() / 10f*3f - startButton.getHeight() / 2f);
         //startButton = new TextButton("START GAME", textButtonStyle);
-
         startButton.addListener(new ClickListener(){
-
-            public void clicked(InputEvent event, Actor actor)
+            @Override
+            public void clicked(InputEvent event, float xpos, float ypos)
             {
                 System.out.println("You clicked me!");
+                game.gsm.updateScreen(txtScreen);
             }
         });
         return startButton;
