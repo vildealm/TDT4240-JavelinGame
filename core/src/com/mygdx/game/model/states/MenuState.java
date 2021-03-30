@@ -24,7 +24,7 @@ public class MenuState implements State {
     Stage stage;
 
 
-    MenuState(GameStateManager gsm) {
+    public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
         currentScreen = ScreenFactory.getScreen("MENU");
         render();

@@ -36,8 +36,8 @@ public class JavelinGame extends Game {
 			engine = new Engine();
 			batch = new SpriteBatch();
 		gsm = new GameStateManager(this);
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		//gsm.push(new MenuState(gsm));
+		Gdx.gl.glClearColor(0, 0, 1, 1);
+		gsm.push(new MenuState(gsm));
 		screenFactory = new ScreenFactory();
 	}
 
