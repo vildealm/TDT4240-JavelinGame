@@ -40,7 +40,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        game.getBatch().begin(); // Draw elements to Sprite Batch
+        game.getBatch().begin();
         game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         game.getBatch().end();
