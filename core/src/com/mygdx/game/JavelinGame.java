@@ -1,10 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
@@ -16,7 +14,6 @@ public class JavelinGame extends ApplicationAdapter {
 	public static final int HEIGHT = 800;
 	public static final String TITLE = "Javelin Game";
 
-	
 	@Override
 	public void create () {
 
