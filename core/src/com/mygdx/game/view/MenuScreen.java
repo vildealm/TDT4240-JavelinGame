@@ -19,7 +19,7 @@ public class MenuScreen implements Screen {
 
     private Stage stage;
     private JavelinGame game;
-
+    private Texture gameName;
     private Texture background;
     private Texture playBtn;
 
@@ -27,8 +27,9 @@ public class MenuScreen implements Screen {
     public MenuScreen(JavelinGame game, Engine engine){
         super();
         this.game = game;
-        background = Assets.getTexture(Assets.mainBackground);
-        playBtn = Assets.getTexture(Assets.gameScreenButton);
+        gameName = Assets.getTexture(Assets.logo);
+        //background = Assets.getTexture(Assets.menuBackground);
+        //playBtn = Assets.getTexture(Assets.gameScreenButton);
     }
     @Override
     public void show() {
@@ -41,7 +42,8 @@ public class MenuScreen implements Screen {
     @Override
     public void render(float delta) {
         game.getBatch().begin();
-        game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
+        Gdx.gl.glClearColor(0, 0, 1, 1);
+        //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         game.getBatch().end();
         stage.draw();
