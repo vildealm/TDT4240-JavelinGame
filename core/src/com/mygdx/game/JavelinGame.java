@@ -12,6 +12,7 @@ import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
 
 public class JavelinGame extends Game {
+
 	private SpriteBatch batch;
 	private static JavelinGame INSTANCE;
 	public GameStateManager gsm;
@@ -26,6 +27,7 @@ public class JavelinGame extends Game {
 	public static final String TITLE = "Javelin Game";
 
 	public SpriteBatch getBatch() { return batch; }
+
 	public static JavelinGame getInstance() {
 		return INSTANCE;
 	}

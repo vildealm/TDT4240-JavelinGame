@@ -27,9 +27,9 @@ public class MenuScreen implements Screen {
     public MenuScreen(JavelinGame game, Engine engine){
         super();
         this.game = game;
-        gameName = Assets.getTexture(Assets.logo);
-        //background = Assets.getTexture(Assets.menuBackground);
-        //playBtn = Assets.getTexture(Assets.gameScreenButton);
+        //gameName = Assets.getTexture(Assets.logo);
+        background = Assets.getTexture(Assets.menuBackground);
+        playBtn = Assets.getTexture(Assets.gameScreenButton);
     }
     @Override
     public void show() {
@@ -41,9 +41,9 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        //Gdx.gl.glClearColor(0, 0, 1, 1);
         game.getBatch().begin();
-        Gdx.gl.glClearColor(0, 0, 1, 1);
-        //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
+        game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         game.getBatch().end();
         stage.draw();
