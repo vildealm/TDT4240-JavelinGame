@@ -21,7 +21,7 @@ public class MenuScreen implements Screen {
     private JavelinGame game;
     private Texture gameName;
     private Texture background;
-    private Texture playBtn;
+    //private Texture playBtn;
 
 
     public MenuScreen(JavelinGame game, Engine engine){
@@ -29,14 +29,14 @@ public class MenuScreen implements Screen {
         this.game = game;
         //gameName = Assets.getTexture(Assets.logo);
         background = Assets.getTexture(Assets.menuBackground);
-        playBtn = Assets.getTexture(Assets.gameScreenButton);
+        //playBtn = Assets.getTexture(Assets.gameScreenButton);
     }
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        Button startButton = createButton(playBtn,2f,"PLAY");
-        stage.addActor(startButton);
+        //Button startButton = createButton(playBtn,2f,"PLAY");
+        //stage.addActor(startButton);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class MenuScreen implements Screen {
         stage.draw();
     }
 
-    private Button createButton(Texture texture, float xPos, final String txtScreen){
+    /*private Button createButton(Texture texture, float xPos, final String txtScreen){
         Button startButton = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         startButton.setSize(Gdx.graphics.getWidth()/10f  ,   Gdx.graphics.getHeight()/7f);
         startButton.setPosition(Gdx.graphics.getWidth() / xPos - startButton.getWidth()/2f,Gdx.graphics.getHeight() / 10f*3f - startButton.getHeight() / 2f);
@@ -64,6 +64,7 @@ public class MenuScreen implements Screen {
         });
         return startButton;
     }
+     */
 
     @Override
     public void resize(int width, int height) {

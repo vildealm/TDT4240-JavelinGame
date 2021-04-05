@@ -27,7 +27,7 @@ public class MenuState implements State {
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
         currentScreen = ScreenFactory.getScreen("MENU");
-        render();
+        renderScreen();
         /*stage = new Stage();
         font = new BitmapFont();
         textButtonStyle = new TextButton.TextButtonStyle();
@@ -54,7 +54,7 @@ public class MenuState implements State {
 
 
     @Override
-    public void render() {
+    public void renderScreen() {
         gsm.game.setScreen(currentScreen);
     }
 
@@ -66,7 +66,12 @@ public class MenuState implements State {
     @Override
     public void updateScreen(String type) {
         currentScreen = ScreenFactory.getScreen(type);
-        render();
+        renderScreen();
+    }
+
+    @Override
+    public boolean shouldChangeState(String type) {
+        return false;
     }
 }
 /*

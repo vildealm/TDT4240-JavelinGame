@@ -30,7 +30,7 @@ public class SettingState implements State {
     }*/
 
     @Override
-    public void render() {
+    public void renderScreen() {
 
     }
 
@@ -42,5 +42,10 @@ public class SettingState implements State {
     @Override
     public void updateScreen(String type) {
 
+    }
+
+    @Override
+    public boolean shouldChangeState(String type) {
+        return false;
     }
 }

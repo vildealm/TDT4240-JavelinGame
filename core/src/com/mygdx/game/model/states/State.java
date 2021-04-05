@@ -2,11 +2,13 @@ package com.mygdx.game.model.states;
 
 public interface State {
 
-    void render();
+    void renderScreen();
 
     void changeState(State state);
 
     void updateScreen(String type);
+
+    boolean shouldChangeState(String type);
 }
    /*public OrthographicCamera cam;
     public Vector3 mouse;

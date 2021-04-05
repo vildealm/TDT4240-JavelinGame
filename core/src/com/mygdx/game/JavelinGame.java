@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.LoadingState;
 import com.mygdx.game.model.states.MenuState;
 
 public class JavelinGame extends Game {
@@ -39,7 +40,7 @@ public class JavelinGame extends Game {
 			batch = new SpriteBatch();
 		gsm = new GameStateManager(this);
 		Gdx.gl.glClearColor(0, 0, 1, 1);
-		gsm.push(new MenuState(gsm));
+		gsm.push(new LoadingState(gsm));
 		screenFactory = new ScreenFactory();
 	}
 

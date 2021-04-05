@@ -14,6 +14,11 @@ public class GameState implements State{
         font = new BitmapFont();
     }
 
+    @Override
+    public boolean shouldChangeState(String type) {
+        return false;
+    }
+
    /* @Override
     public void handleInput() {
 
@@ -37,7 +42,7 @@ public class GameState implements State{
     }*/
 
     @Override
-    public void render() {
+    public void renderScreen() {
 
     }
 

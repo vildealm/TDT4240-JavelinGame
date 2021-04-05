@@ -8,10 +8,10 @@ public class Assets {
 
     //Backgrounds
     public static String menuBackground = "textures/backgrounds/background.png"; //Background used outside gameplay
-    public static String gameScreenButton = "textures/buttons/playBtn.png"; //Go to Game screen
+    //public static String gameScreenButton = "textures/buttons/playBtn.png"; //Go to Game screen
 
     //TextField
-    public static String textFieldBackground = "textures/backgrounds/textfield.png"; //Used to make TextField visible
+    //public static String textFieldBackground = "textures/backgrounds/textfield.png"; //Used to make TextField visible
 
     private static AssetManager assetManager;
 
@@ -24,8 +24,8 @@ public class Assets {
     }
 
     public static void load() {
-        assetManager.load("textures/backgrounds/background.png", Texture.class);
-        assetManager.load(gameScreenButton, Texture.class);
+        assetManager.load(menuBackground, Texture.class);
+        //assetManager.load(gameScreenButton, Texture.class);
     }
     public static boolean update(){
         return assetManager.update();

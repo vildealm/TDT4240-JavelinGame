@@ -11,7 +11,7 @@ public class EndState implements State {
 
 
     @Override
-    public void render() {
+    public void renderScreen() {
 
     }
 
@@ -24,4 +24,9 @@ public class EndState implements State {
     public void updateScreen(String type) {
 
     }
+    @Override
+    public boolean shouldChangeState(String type) {
+        return false;
+    }
+
 }

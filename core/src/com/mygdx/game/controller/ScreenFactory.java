@@ -3,6 +3,7 @@ package com.mygdx.game.controller;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Screen;
 import com.mygdx.game.JavelinGame;
+import com.mygdx.game.view.LoadingScreen;
 import com.mygdx.game.view.MenuScreen;
 
 public class ScreenFactory {
@@ -12,6 +13,8 @@ public class ScreenFactory {
 
     public static Screen getScreen(String screenType){
         switch (screenType){
+            case "LOADING":
+                return new LoadingScreen(game,engine);
             case "MENU":
                 return new MenuScreen(game, engine);
 
