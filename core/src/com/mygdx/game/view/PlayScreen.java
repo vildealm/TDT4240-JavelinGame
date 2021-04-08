@@ -1,10 +1,12 @@
 package com.mygdx.game.view;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -15,10 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
 
-public class PlayScreen implements Screen {
+public class PlayScreen implements Screen2 {
 
     private BitmapFont font;
-    private Stage stage;
+    //private Stage stage;
     private JavelinGame game;
     private Texture gameName;
     private Texture background;
@@ -35,20 +37,23 @@ public class PlayScreen implements Screen {
     }
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        //stage = new Stage(new ScreenViewport());
+        //Gdx.input.setInputProcessor(stage);
     }
 
     @Override
-    public void render(float delta) {
-        //Gdx.gl.glClearColor(0, 0, 1, 1);
-        game.getBatch().begin();
-        game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        font.draw(game.getBatch(), "PlayScreen!", 70, 180);
+    public void render(float delta, SpriteBatch sb) {
+        Gdx.gl.glClearColor(0, 0, 1, 1);
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
+        sb.begin();
+        //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
+        font.draw(sb, "PlayScreen!", 70, 180);
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        game.getBatch().end();
-        stage.draw();
+        sb.end();
+        //stage.draw();
     }
+
 
 
     @Override

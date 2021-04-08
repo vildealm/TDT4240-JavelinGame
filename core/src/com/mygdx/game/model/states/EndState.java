@@ -1,6 +1,8 @@
 package com.mygdx.game.model.states;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.view.Screen2;
 
 public class EndState extends State {
 
@@ -19,12 +21,22 @@ public class EndState extends State {
     }
 
     @Override
-    public void renderScreen(SpriteBatch sb) {
+    public void renderBatch(SpriteBatch sb) {
+
+    }
+
+    @Override
+    public void renderScreen() {
 
     }
 
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public Screen2 getScreen() {
+        return null;
     }
 }

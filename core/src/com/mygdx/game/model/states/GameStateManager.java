@@ -1,4 +1,6 @@
 package com.mygdx.game.model.states;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.JavelinGame;
 
@@ -22,9 +24,13 @@ public class GameStateManager {
     public void pop(){
         states.pop();
     }
+
     public void set(State state){
-        states.pop();
+        pop();
         states.push(state);
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        Gdx.app.log("#GSM", String.valueOf(states));
+
     }
 
 
@@ -33,7 +39,21 @@ public class GameStateManager {
 
     }
 
-    public void renderScreen(SpriteBatch sb){
-        states.peek().renderScreen(sb);
+    public void renderScreen(){
+
+    }
+
+    public void renderBatch(SpriteBatch sb) {
+        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        //Gdx.app.log("#GSM", String.valueOf(states.peek().getScreen()));
+        states.peek().renderScreen();
+        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        //Gdx.app.log("#GSM", String.valueOf(states.peek().getScreen()));
+        states.peek().getScreen().render(Gdx.graphics.getDeltaTime(),sb);
+
+    }
+
+    public Stack getStates() {
+        return states;
     }
 }

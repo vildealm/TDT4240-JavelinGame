@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
+import com.mygdx.game.view.Screen2;
 
 public class JavelinGame extends ApplicationAdapter {
 	private SpriteBatch batch;
@@ -16,19 +18,25 @@ public class JavelinGame extends ApplicationAdapter {
 	public static final int HEIGHT = 800;
 	public static final String TITLE = "Javelin Game";
 	public ScreenFactory screenFactory;
-	protected Screen screen;
+	protected Screen2 screen;
 
 	public static final JavelinGame INSTANCE = new JavelinGame();
 
 	public JavelinGame(){
 
-			batch = new SpriteBatch();
-			gsm = new GameStateManager(this);
-			//Gdx.gl.glClearColor(1, 0, 0, 1);
-			gsm.push(new MenuState(gsm));
-			screenFactory = new ScreenFactory();
 	}
 
+	@Override
+	public void create () {
+		batch = new SpriteBatch();
+		gsm = new GameStateManager(this);
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		gsm.push(new MenuState(gsm));
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		Gdx.app.log("#Javelin", String.valueOf(gsm.getStates()));
+		screenFactory = new ScreenFactory();
+
+	}
 
 
 	public static JavelinGame getInstance() {
@@ -39,7 +47,7 @@ public class JavelinGame extends ApplicationAdapter {
 		return batch;
 	}
 
-	public void setScreen (Screen screen) {
+	public void setScreen (Screen2 screen) {
 		if (this.screen != null) this.screen.hide();
 		this.screen = screen;
 		if (this.screen != null) {
@@ -50,10 +58,17 @@ public class JavelinGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		/*if (screen!= null) {
+			screen.render(Gdx.graphics.getDeltaTime(),batch);
+		}*/
+		//gsm.renderBatch(batch);
+		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		//Gdx.gl.glClearColor(1, 0, 0, 1);
+		//gsm.renderScreen(batch);
 		gsm.update(Gdx.graphics.getDeltaTime());
-		gsm.renderScreen(batch);
+		if(screen!=null){
+			gsm.renderBatch(batch);
+		}
 
 	}
 	
