@@ -18,7 +18,7 @@ public abstract class State {
 
     public abstract void handleInput();
     public abstract void update(float dt);
-    public abstract void render(SpriteBatch sb);
+    public abstract void renderScreen(SpriteBatch sb);
     public abstract void dispose();
 
 

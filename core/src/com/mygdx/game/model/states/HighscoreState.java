@@ -18,7 +18,7 @@ public class HighscoreState extends State{
     }
 
     @Override
-    public void render(SpriteBatch sb) {
+    public void renderScreen(SpriteBatch sb) {
 
     }
 

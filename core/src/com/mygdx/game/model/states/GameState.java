@@ -24,7 +24,7 @@ public class GameState extends State{
     }
 
     @Override
-    public void render(SpriteBatch sb) {
+    public void renderScreen(SpriteBatch sb) {
         sb.begin();
         font.draw(sb, "GAME STATE!" , 90, 90);
         sb.end();
