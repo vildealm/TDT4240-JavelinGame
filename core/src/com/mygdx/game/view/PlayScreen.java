@@ -19,6 +19,7 @@ import com.mygdx.game.JavelinGame;
 
 public class PlayScreen implements Screen2 {
 
+    private SpriteBatch batch;
     private BitmapFont font;
     //private Stage stage;
     private JavelinGame game;
@@ -30,6 +31,7 @@ public class PlayScreen implements Screen2 {
     public PlayScreen(JavelinGame game){
         super();
         this.game = game;
+        batch = new SpriteBatch();
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
         font = new BitmapFont();
@@ -42,15 +44,15 @@ public class PlayScreen implements Screen2 {
     }
 
     @Override
-    public void render(float delta, SpriteBatch sb) {
+    public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
-        sb.begin();
+        batch.begin();
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        font.draw(sb, "PlayScreen!", 70, 180);
+        font.draw(batch, "PlayScreen!", 70, 180);
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        sb.end();
+        batch.end();
         //stage.draw();
     }
 

@@ -45,11 +45,6 @@ public class MenuState extends State {
     }
 
 
-    @Override
-    public void renderBatch(SpriteBatch sb) {
-
-    }
-
 
     @Override
     public void renderScreen() {

@@ -20,11 +20,6 @@ public class Settingstate extends State {
 
     }
 
-    @Override
-    public void renderBatch(SpriteBatch sb) {
-
-    }
-
 
     @Override
     public void renderScreen() {

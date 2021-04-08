@@ -3,6 +3,7 @@ package com.mygdx.game.view;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class MenuScreen implements Screen2 {
 
+    private SpriteBatch batch;
     //private Stage stage;
     private JavelinGame game;
     private Texture gameName;
@@ -30,6 +32,7 @@ public class MenuScreen implements Screen2 {
     public MenuScreen(JavelinGame game){
         super();
         this.game = game;
+        batch = new SpriteBatch();
         font = new BitmapFont();
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
@@ -40,14 +43,13 @@ public class MenuScreen implements Screen2 {
         //Gdx.input.setInputProcessor(stage);
     }
 
-    @Override
-    public void render(float delta, SpriteBatch sb) {
+    public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1);
-        sb.begin();
-        font.draw(sb, "MENU", 70, 100);
+        batch.begin();
+        font.draw(batch, "MENU", 70, 100);
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        sb.end();
+        batch.end();
         //stage.draw();
     }
 

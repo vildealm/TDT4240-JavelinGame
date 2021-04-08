@@ -20,10 +20,6 @@ public class EndState extends State {
 
     }
 
-    @Override
-    public void renderBatch(SpriteBatch sb) {
-
-    }
 
     @Override
     public void renderScreen() {

@@ -39,17 +39,14 @@ public class GameStateManager {
 
     }
 
-    public void renderScreen(){
 
-    }
-
-    public void renderBatch(SpriteBatch sb) {
+    public void renderBatch() {
         //Gdx.app.setLogLevel(Application.LOG_DEBUG);
         //Gdx.app.log("#GSM", String.valueOf(states.peek().getScreen()));
         states.peek().renderScreen();
         //Gdx.app.setLogLevel(Application.LOG_DEBUG);
         //Gdx.app.log("#GSM", String.valueOf(states.peek().getScreen()));
-        states.peek().getScreen().render(Gdx.graphics.getDeltaTime(),sb);
+        states.peek().getScreen().render(Gdx.graphics.getDeltaTime());
 
     }
 

@@ -33,11 +33,6 @@ public class GameState extends State{
 
 
     @Override
-    public void renderBatch(SpriteBatch sb) {
-
-    }
-
-    @Override
     public void renderScreen() {
         gsm.game.setScreen(currentScreen);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
