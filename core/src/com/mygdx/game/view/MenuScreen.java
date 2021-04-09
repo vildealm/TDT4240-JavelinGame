@@ -36,6 +36,7 @@ public class MenuScreen implements Screen2 {
         font = new BitmapFont();
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
+
     }
 
     public void show() {
