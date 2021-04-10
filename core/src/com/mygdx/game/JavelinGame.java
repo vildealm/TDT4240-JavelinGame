@@ -35,7 +35,6 @@ public class JavelinGame extends ApplicationAdapter {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		Gdx.app.log("#Javelin", String.valueOf(gsm.getStates()));
 		screenFactory = new ScreenFactory();
-
 	}
 
 
