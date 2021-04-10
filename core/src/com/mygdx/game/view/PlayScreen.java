@@ -45,7 +45,6 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
         batch.begin();

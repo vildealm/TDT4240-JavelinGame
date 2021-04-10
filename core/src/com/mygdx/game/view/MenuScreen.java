@@ -44,7 +44,6 @@ public class MenuScreen implements Screen2 {
     }
 
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 1, 1);
         batch.begin();
         font.draw(batch, "MENU", 70, 100);
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo

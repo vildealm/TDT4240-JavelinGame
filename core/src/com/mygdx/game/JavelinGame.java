@@ -30,7 +30,7 @@ public class JavelinGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager(this);
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		//Gdx.gl.glClearColor(1, 0, 0, 1);
 		gsm.push(new MenuState(gsm));
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		Gdx.app.log("#Javelin", String.valueOf(gsm.getStates()));
@@ -65,7 +65,8 @@ public class JavelinGame extends ApplicationAdapter {
 		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Gdx.gl.glClearColor(1, 0, 0, 1);
 		//gsm.renderScreen(batch);
-		Gdx.gl.glClearColor(0, 0, 1, 1);
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());
 		if(screen!=null){
 			gsm.renderBatch();
