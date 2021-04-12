@@ -26,13 +26,14 @@ public class AndroidInterfaceClass implements FirebaseInterface {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private UUID id;
-    private ArrayList<com.mygdx.game.model.components.Score> highscores= new ArrayList<>();
+    private ArrayList<Score> highscores= new ArrayList<>();
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("highscore");
     }
 
+    //Initializes user by logging in
     @Override
     public void initUser() {
         mAuth = FirebaseAuth.getInstance();
@@ -40,14 +41,16 @@ public class AndroidInterfaceClass implements FirebaseInterface {
         user=mAuth.getCurrentUser();
     }
 
+    //Collects the data from the database.
+    //Query sorts the data, and collects the 10 last objects (the ones who have thrown the longest)
     @Override
-    public ArrayList<com.mygdx.game.model.components.Score> getDataFromDb() {
+    public ArrayList<Score> getDataFromDb() {
         Query sortedData = myRef.orderByChild("score").limitToLast(10);
         sortedData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    com.mygdx.game.model.components.Score score = postSnapshot.getValue(Score.class);
+                    Score score = postSnapshot.getValue(Score.class);
                     highscores.add(score);
                 }
             }
@@ -99,7 +102,7 @@ public class AndroidInterfaceClass implements FirebaseInterface {
 
     }
 
-
+    //Function for posting data to database
     @Override
     public void setValueInDb(String username, Double score, String country) {
         myRef = database.getReference("highscore");

@@ -3,6 +3,7 @@ package com.mygdx.game.view;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -35,6 +36,9 @@ public class PlayScreen implements Screen2 {
     private TextureRegion tr;
     //private Texture playBtn;
     private float elapsedTime = 0f;
+    private int posX = 20;
+    private int speedX = 0;
+    private int touchCount = 1;
 
 
 
@@ -52,6 +56,19 @@ public class PlayScreen implements Screen2 {
         runningMan = new Animation(1f/ 20f, man.getRegions());
     }
 
+    public void runningControls(){
+        if(speedX > 30){
+            speedX--;
+        }
+        if(Gdx.input.justTouched()){
+            touchCount++;
+            if(speedX<400){
+                speedX = speedX + 20;
+            }
+        }
+        posX += Gdx.graphics.getDeltaTime() * speedX;
+    }
+
     @Override
     public void show() {
         //stage = new Stage(new ScreenViewport());
@@ -61,11 +78,12 @@ public class PlayScreen implements Screen2 {
     @Override
     public void render(float delta) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
+        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        //Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
+        runningControls();
         batch.begin();
         //sprite.draw(batch);
-        batch.draw((TextureRegion) runningMan.getKeyFrame(elapsedTime, true),20, 20);
+        batch.draw((TextureRegion) runningMan.getKeyFrame(elapsedTime, true),posX, 20);
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //font.draw(batch, "PlayScreen!", 70, 180);
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
