@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,9 +31,11 @@ public class PlayScreen implements Screen2 {
     private Texture background;
     private TextureAtlas man;
     private Sprite sprite;
+    private Animation runningMan;
     private TextureRegion tr;
-
     //private Texture playBtn;
+    private float elapsedTime = 0f;
+
 
 
     public PlayScreen(JavelinGame game){
@@ -41,13 +44,14 @@ public class PlayScreen implements Screen2 {
         batch = new SpriteBatch();
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
-        font = new BitmapFont();
+        //font = new BitmapFont();
         man = new TextureAtlas(Gdx.files.internal("running-sheets/RunSprites.atlas"));
-        tr = man.findRegion("0001");
+        tr = man.findRegion("running-sheets/running-1");
         sprite = new Sprite(tr);
         sprite.setPosition(Gdx.graphics.getWidth()/2 - sprite.getWidth()/2, Gdx.graphics.getHeight()/2 - sprite.getHeight()/2);
-
+        runningMan = new Animation(1f/ 20f, man.getRegions());
     }
+
     @Override
     public void show() {
         //stage = new Stage(new ScreenViewport());
@@ -56,17 +60,18 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void render(float delta) {
+        elapsedTime += Gdx.graphics.getDeltaTime();
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
         batch.begin();
-        sprite.draw(batch);
+        //sprite.draw(batch);
+        batch.draw((TextureRegion) runningMan.getKeyFrame(elapsedTime, true),20, 20);
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //font.draw(batch, "PlayScreen!", 70, 180);
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         batch.end();
         //stage.draw();
     }
-
 
 
     @Override
