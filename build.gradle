@@ -75,6 +75,7 @@ project(":android") {
         api "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation platform("com.google.firebase:firebase-bom:26.7.0")
         implementation 'com.google.firebase:firebase-database'
+        implementation 'com.google.firebase:firebase-auth:20.0.3'
         
     }
 }

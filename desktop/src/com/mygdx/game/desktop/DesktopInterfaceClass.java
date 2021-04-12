@@ -1,25 +1,29 @@
 package com.mygdx.game.desktop;
 
 import com.mygdx.game.FirebaseInterface;
+import com.mygdx.game.Score;
+
+import java.util.ArrayList;
 
 public class DesktopInterfaceClass implements FirebaseInterface {
+
     @Override
-    public void SomeFunction() {
+    public void initUser() {
 
     }
 
     @Override
-    public void FirstFirebaseTest() {
+    public ArrayList<Score> getDataFromDb() {
+        return null;
+    }
+
+    @Override
+    public void setOnValueChangedListener() {
 
     }
 
     @Override
-    public void SetOnValueChangedListener() {
-
-    }
-
-    @Override
-    public void SetValueInDb(String target, String value) {
+    public void setValueInDb(String username, Double score, String country) {
 
     }
 }

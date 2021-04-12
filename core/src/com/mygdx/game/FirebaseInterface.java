@@ -1,12 +1,16 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+
 public interface FirebaseInterface {
 
-    public void SomeFunction();
+    public void initUser();
 
-    public void FirstFirebaseTest();
+    public ArrayList<Score> getDataFromDb();
 
-    public void SetOnValueChangedListener();
+    public void setOnValueChangedListener();
 
-    public void SetValueInDb(String target, String value);
+    public int getUserPos();
+
+    public void setValueInDb(String username, Double score, String country);
 }

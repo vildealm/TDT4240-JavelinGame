@@ -1,23 +1,31 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+
 public class CoreInterfaceClass implements FirebaseInterface {
-    @Override
-    public void SomeFunction() {
-        System.out.println("Hello");
-    }
 
     @Override
-    public void FirstFirebaseTest() {
-        
-    }
-
-    @Override
-    public void SetOnValueChangedListener() {
+    public void initUser() {
 
     }
 
     @Override
-    public void SetValueInDb(String target, String value) {
+    public ArrayList<Score> getDataFromDb() {
+        return null;
+    }
+
+    @Override
+    public void setOnValueChangedListener() {
+
+    }
+
+    @Override
+    public int getUserPos() {
+        return 0;
+    }
+
+    @Override
+    public void setValueInDb(String username, Double score, String country) {
 
     }
 }
