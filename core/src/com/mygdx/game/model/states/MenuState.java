@@ -26,22 +26,20 @@ public class MenuState extends State {
     @Override
     public void handleInput() {
 
-
+/*
         if(Gdx.input.justTouched()){
-            Gdx.app.setLogLevel(Application.LOG_DEBUG);
-            Gdx.app.log("#MENU1", String.valueOf(gsm.getStates()));
             gsm.set(new GameState(gsm));
             //currentScreen = ScreenFactory.getScreen("PLAY");
             //renderScreen();
-            Gdx.app.setLogLevel(Application.LOG_DEBUG);
-            Gdx.app.log("#MENU2", String.valueOf(gsm.getStates()));
             dispose();
         }
+
+ */
     }
 
     @Override
     public void update(float dt) {
-        handleInput();
+        //handleInput();
     }
 
 

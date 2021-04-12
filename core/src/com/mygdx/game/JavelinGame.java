@@ -6,7 +6,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.controller.ScreenFactory;
+import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
 import com.mygdx.game.view.Screen2;
@@ -19,6 +22,7 @@ public class JavelinGame extends ApplicationAdapter {
 	public static final String TITLE = "Javelin Game";
 	public ScreenFactory screenFactory;
 	protected Screen2 screen;
+	private Stage stage;
 
 	public static final JavelinGame INSTANCE = new JavelinGame();
 
@@ -35,6 +39,7 @@ public class JavelinGame extends ApplicationAdapter {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		Gdx.app.log("#Javelin", String.valueOf(gsm.getStates()));
 		screenFactory = new ScreenFactory();
+
 	}
 
 
@@ -68,9 +73,15 @@ public class JavelinGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());
 		if(screen!=null){
-			gsm.renderBatch();
+			gsm.renderBatch(batch);
 		}
 
+
+	}
+
+
+	public GameStateManager getGsm(){
+		return this.gsm;
 	}
 	
 	@Override

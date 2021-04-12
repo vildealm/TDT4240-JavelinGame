@@ -10,7 +10,7 @@ public interface Screen2 {
 
     /** Called when the screen should render itself.
      * @param delta The time in seconds since the last render. */
-    public void render (float delta);
+    public void render (float delta, SpriteBatch sb);
 
     /** @see ApplicationListener#resize(int, int) */
     public void resize (int width, int height);

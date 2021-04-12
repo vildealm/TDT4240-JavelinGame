@@ -23,12 +23,22 @@ public class GameState extends State{
 
     @Override
     public void handleInput() {
+/*
+        if(Gdx.input.justTouched()){
 
+            gsm.set(new MenuState(gsm));
+            //currentScreen = ScreenFactory.getScreen("PLAY");
+            //renderScreen();
+
+            dispose();
+        }
+
+ */
     }
 
     @Override
     public void update(float dt) {
-
+        //handleInput();
     }
 
 
