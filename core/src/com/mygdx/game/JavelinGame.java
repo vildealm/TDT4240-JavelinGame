@@ -72,7 +72,6 @@ public class JavelinGame extends ApplicationAdapter {
 		if(screen!=null){
 			gsm.renderBatch();
 		}
-
 	}
 	
 	@Override
