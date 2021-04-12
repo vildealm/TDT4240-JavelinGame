@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class JavelinGame extends ApplicationAdapter {
 	private SpriteBatch batch;
+	private FirebaseInterface _FBIC;
 
-	
+	public JavelinGame(FirebaseInterface FBIC){_FBIC = FBIC; }
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
