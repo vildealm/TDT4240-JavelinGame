@@ -4,9 +4,12 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,6 +28,10 @@ public class PlayScreen implements Screen2 {
     private JavelinGame game;
     private Texture gameName;
     private Texture background;
+    private TextureAtlas man;
+    private Sprite sprite;
+    private TextureRegion tr;
+
     //private Texture playBtn;
 
 
@@ -35,6 +42,10 @@ public class PlayScreen implements Screen2 {
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
         font = new BitmapFont();
+        man = new TextureAtlas(Gdx.files.internal("running-sheets/RunSprites.atlas"));
+        tr = man.findRegion("0001");
+        sprite = new Sprite(tr);
+        sprite.setPosition(Gdx.graphics.getWidth()/2 - sprite.getWidth()/2, Gdx.graphics.getHeight()/2 - sprite.getHeight()/2);
 
     }
     @Override
@@ -49,8 +60,9 @@ public class PlayScreen implements Screen2 {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
         batch.begin();
+        sprite.draw(batch);
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        font.draw(batch, "PlayScreen!", 70, 180);
+        //font.draw(batch, "PlayScreen!", 70, 180);
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         batch.end();
         //stage.draw();
