@@ -13,6 +13,9 @@ import com.mygdx.game.view.Screen2;
 
 public class JavelinGame extends ApplicationAdapter {
 	private SpriteBatch batch;
+	private FirebaseInterface _FBIC;
+
+	public JavelinGame(FirebaseInterface FBIC){_FBIC = FBIC; }
 	private GameStateManager gsm;
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;
@@ -22,9 +25,7 @@ public class JavelinGame extends ApplicationAdapter {
 
 	public static final JavelinGame INSTANCE = new JavelinGame();
 
-	public JavelinGame(){
-
-	}
+	public JavelinGame(){}
 
 	@Override
 	public void create () {
