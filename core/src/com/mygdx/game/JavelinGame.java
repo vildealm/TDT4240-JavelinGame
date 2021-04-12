@@ -3,9 +3,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.controller.FirebaseInterface;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
@@ -13,6 +13,9 @@ import com.mygdx.game.view.Screen2;
 
 public class JavelinGame extends ApplicationAdapter {
 	private SpriteBatch batch;
+	private FirebaseInterface _FBIC;
+
+	public JavelinGame(FirebaseInterface FBIC){_FBIC = FBIC; }
 	private GameStateManager gsm;
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;
@@ -22,9 +25,7 @@ public class JavelinGame extends ApplicationAdapter {
 
 	public static final JavelinGame INSTANCE = new JavelinGame();
 
-	public JavelinGame(){
-
-	}
+	public JavelinGame(){}
 
 	@Override
 	public void create () {
@@ -35,7 +36,6 @@ public class JavelinGame extends ApplicationAdapter {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		Gdx.app.log("#Javelin", String.valueOf(gsm.getStates()));
 		screenFactory = new ScreenFactory();
-
 	}
 
 
