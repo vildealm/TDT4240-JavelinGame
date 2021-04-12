@@ -3,9 +3,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.controller.FirebaseInterface;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
@@ -71,13 +71,10 @@ public class JavelinGame extends ApplicationAdapter {
 		if(screen!=null){
 			gsm.renderBatch();
 		}
-
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 	}
-
-
 }

@@ -1,7 +1,7 @@
 package com.mygdx.game.desktop;
 
-import com.mygdx.game.FirebaseInterface;
-import com.mygdx.game.Score;
+import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.model.components.Score;
 
 import java.util.ArrayList;
 

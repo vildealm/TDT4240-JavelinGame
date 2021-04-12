@@ -12,19 +12,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.model.components.Score;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 import static android.content.ContentValues.TAG;
 
-public class AndroidInterfaceClass implements FirebaseInterface{
+public class AndroidInterfaceClass implements FirebaseInterface {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private UUID id;
-    private ArrayList<Score> highscores= new ArrayList<>();
+    private ArrayList<com.mygdx.game.model.components.Score> highscores= new ArrayList<>();
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance();
@@ -39,13 +41,13 @@ public class AndroidInterfaceClass implements FirebaseInterface{
     }
 
     @Override
-    public ArrayList<Score> getDataFromDb() {
+    public ArrayList<com.mygdx.game.model.components.Score> getDataFromDb() {
         Query sortedData = myRef.orderByChild("score").limitToLast(10);
         sortedData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    Score score = postSnapshot.getValue(Score.class);
+                    com.mygdx.game.model.components.Score score = postSnapshot.getValue(Score.class);
                     highscores.add(score);
                 }
             }
