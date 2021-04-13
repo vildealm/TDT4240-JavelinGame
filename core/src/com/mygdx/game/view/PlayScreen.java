@@ -120,7 +120,7 @@ public class PlayScreen implements Screen2 {
         batch.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
         //batch.draw((TextureRegion) throwingMan.getKeyFrame(elapsedTime, true),posX, 400);
         font.draw(batch, "Speed: "+ speedX + " Dist:"+random+" Score: "+attempt, 500, 600);
-        batch.draw(javelin, 580,40);
+        //batch.draw(javelin, 580,40);
         batch.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -133,7 +133,7 @@ public class PlayScreen implements Screen2 {
     }
 
     public double calculatePoints(double taps, double dist){
-        return (5*taps*(8-dist))/8;
+        return (5*taps*(15-dist))/15;
     }
 
 
