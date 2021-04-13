@@ -15,8 +15,6 @@ public class MenuState extends State {
         font = new BitmapFont();
         currentScreen = ScreenFactory.getScreen("MENU");
         renderScreen();
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("#MENU", String.valueOf(gsm));
     }
 
     @Override
@@ -43,10 +41,6 @@ public class MenuState extends State {
     @Override
     public void renderScreen() {
         gsm.game.setScreen(currentScreen);
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("#MENU", String.valueOf(currentScreen));
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("#MENU", String.valueOf(gsm.getStates()));
     }
 
     public void dispose(){

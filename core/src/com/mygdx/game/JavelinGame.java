@@ -36,9 +36,11 @@ public class JavelinGame extends ApplicationAdapter {
 		gsm = new GameStateManager(this);
 		//Gdx.gl.glClearColor(1, 0, 0, 1);
 		gsm.push(new LoadingState(gsm));
+		screenFactory = new ScreenFactory(gsm);
+		gsm.push(new MenuState(gsm));
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		Gdx.app.log("#Javelin", String.valueOf(gsm.getStates()));
-		screenFactory = new ScreenFactory();
+		Gdx.app.log("JavelinGamegsm", String.valueOf(gsm));
+
 
 	}
 
@@ -75,10 +77,7 @@ public class JavelinGame extends ApplicationAdapter {
 		if(screen!=null){
 			gsm.renderBatch(batch);
 		}
-
-
 	}
-
 
 	public GameStateManager getGsm(){
 		return this.gsm;

@@ -22,7 +22,7 @@ import com.mygdx.game.model.states.State;
 public class SetupScreen implements Screen2{
 
     //Stage ;
-    private JavelinGame game;
+    private GameStateManager gsm;
     private Stage stage;
     private BitmapFont font;
     private Javelin javelin;
@@ -37,11 +37,11 @@ public class SetupScreen implements Screen2{
     private Texture playBtn;
     private Texture addPlayer;
 
-    public SetupScreen(JavelinGame game){
+    public SetupScreen(GameStateManager gsm){
         super();
         //Assets.load();
         ScreenViewport viewport = new ScreenViewport();
-        this.game = game;
+        this.gsm = gsm;
         this.stage = new Stage(viewport);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("#SetupSceen", String.valueOf(Assets.getTexture(Assets.setupBackground)));

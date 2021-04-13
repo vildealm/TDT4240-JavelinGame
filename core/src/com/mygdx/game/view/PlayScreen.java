@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.components.Javelin;
+import com.mygdx.game.model.states.GameStateManager;
 
 public class PlayScreen implements Screen2 {
 
@@ -33,7 +34,7 @@ public class PlayScreen implements Screen2 {
     private Stage stage;
 
 
-    public PlayScreen(JavelinGame game){
+    public PlayScreen(GameStateManager gsm){
         super();
         this.game = game;
         //background = Assets.getTexture(Assets.menuBackground);
