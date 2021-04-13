@@ -3,15 +3,15 @@ package com.mygdx.game;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.controller.ScreenFactory;
-import com.mygdx.game.model.components.Javelin;
+import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.LoadingState;
 import com.mygdx.game.model.states.MenuState;
+import com.mygdx.game.model.states.SetupState;
 import com.mygdx.game.view.Screen2;
 
 public class JavelinGame extends ApplicationAdapter {
@@ -35,7 +35,7 @@ public class JavelinGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager(this);
 		//Gdx.gl.glClearColor(1, 0, 0, 1);
-		gsm.push(new MenuState(gsm));
+		gsm.push(new LoadingState(gsm));
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		Gdx.app.log("#Javelin", String.valueOf(gsm.getStates()));
 		screenFactory = new ScreenFactory();

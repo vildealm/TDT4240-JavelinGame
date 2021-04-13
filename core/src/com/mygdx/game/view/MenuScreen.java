@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
 
 
@@ -29,8 +30,7 @@ public class MenuScreen implements Screen2 {
         super();
         this.game = game;
         javelin = new Javelin();
-        ScreenViewport viewport = new ScreenViewport();
-        stage = new Stage(viewport);
+        stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         stage.addActor(javelin);
         stage.addTouchFocus(new InputListener(), javelin, javelin, 1,1);

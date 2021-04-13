@@ -1,0 +1,61 @@
+package com.mygdx.game.model;
+
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
+
+public class Assets {
+
+    private static AssetManager assetManager;
+    //Backgrounds
+    public static String setupBackground = "textures/backgrounds/mainBackground.png";
+    public Texture textureBackground = new Texture(setupBackground);
+    private static Sprite sprite;
+
+    /*public static String characterBackground = "";
+
+    //TextField
+    public static String textFieldBackground = ""; //Used to make TextField visible
+
+    //Buttons
+    public static String playButton = ""; // Used in HighscoreScreen to go to ShopScreen
+    public static String addPlayerButton = ""; //Used in GameScreen to go to SettingScreen
+
+    //Textfields
+    public static String setupsTitle =  ""; //Title for settings page
+
+    //Sprites
+    public static String player1 = "";
+    public static String player2 = "";
+    public static String player3 = "";
+    public static String player4 = "";*/
+
+    public Assets(){
+        assetManager = new AssetManager();
+    }
+
+    public static void dispose(){
+        assetManager.dispose();
+    }
+
+    public static void load(){
+        assetManager.load(setupBackground, Texture.class);
+    }
+
+    public static boolean update(){
+        return assetManager.update();
+    }
+
+    public static float getProgress(){
+        return assetManager.getProgress();
+    }
+
+    public static Texture getTexture(String string){
+        return assetManager.get(string, Texture.class);
+    }
+
+
+
+}
