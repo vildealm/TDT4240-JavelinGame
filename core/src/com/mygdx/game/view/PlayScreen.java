@@ -31,15 +31,14 @@ public class PlayScreen implements Screen2 {
     private Texture gameName;
     private Texture background;
     private TextureAtlas man;
-    private Sprite sprite;
+    private TextureAtlas throwMan;
     private Animation runningMan;
-    private TextureRegion tr;
+    private Animation throwingMan;
     //private Texture playBtn;
     private float elapsedTime = 0f;
     private int posX = 20;
     private int speedX = 0;
-    private int touchCount = 1;
-
+    private Animation currentAnim;
 
 
     public PlayScreen(JavelinGame game){
@@ -48,12 +47,11 @@ public class PlayScreen implements Screen2 {
         batch = new SpriteBatch();
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
-        //font = new BitmapFont();
-        man = new TextureAtlas(Gdx.files.internal("running-sheets/RunSprites.atlas"));
-        tr = man.findRegion("running-sheets/running-1");
-        sprite = new Sprite(tr);
-        sprite.setPosition(Gdx.graphics.getWidth()/2 - sprite.getWidth()/2, Gdx.graphics.getHeight()/2 - sprite.getHeight()/2);
-        runningMan = new Animation(1f/ 20f, man.getRegions());
+        man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
+        throwMan = new TextureAtlas(Gdx.files.internal("Throwsprites/throw.atlas"));
+        runningMan = new Animation(5f/ 20f, man.getRegions());
+        throwingMan = new Animation(5f/20f, throwMan.getRegions());
+        currentAnim = runningMan;
     }
 
     public void runningControls(){
@@ -61,12 +59,15 @@ public class PlayScreen implements Screen2 {
             speedX--;
         }
         if(Gdx.input.justTouched()){
-            touchCount++;
             if(speedX<400){
                 speedX = speedX + 20;
             }
         }
         posX += Gdx.graphics.getDeltaTime() * speedX;
+        if(posX > 400){
+            currentAnim = throwingMan;
+            Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        }   Gdx.app.log("#TapCount", String.valueOf(speedX));
     }
 
     @Override
@@ -78,18 +79,21 @@ public class PlayScreen implements Screen2 {
     @Override
     public void render(float delta) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        //Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
         runningControls();
         batch.begin();
-        //sprite.draw(batch);
-        batch.draw((TextureRegion) runningMan.getKeyFrame(elapsedTime, true),posX, 20);
-        //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        //font.draw(batch, "PlayScreen!", 70, 180);
-        //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
+
+        batch.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
+        //batch.draw((TextureRegion) throwingMan.getKeyFrame(elapsedTime, true),posX, 400);
+
+
+
         batch.end();
-        //stage.draw();
     }
+
+    public double calculatePoints(double taps, double dist){
+       return (taps/dist)*10;
+    }
+
 
 
     @Override

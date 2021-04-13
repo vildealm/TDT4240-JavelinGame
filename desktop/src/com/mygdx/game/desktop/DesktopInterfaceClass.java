@@ -19,7 +19,11 @@ public class DesktopInterfaceClass implements FirebaseInterface {
 
     @Override
     public void setOnValueChangedListener() {
+    }
 
+    @Override
+    public int getUserPos() {
+        return 0;
     }
 
     @Override
