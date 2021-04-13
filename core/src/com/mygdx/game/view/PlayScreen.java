@@ -5,6 +5,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -39,12 +41,19 @@ public class PlayScreen implements Screen2 {
     private int posX = 20;
     private int speedX = 0;
     private Animation currentAnim;
+    private ShapeRenderer shapeRenderer;
+    private double attempt;
+    private int counter;
 
 
     public PlayScreen(JavelinGame game){
         super();
         this.game = game;
         batch = new SpriteBatch();
+        font = new BitmapFont();
+        font.setColor(Color.BLACK);
+        font.getData().setScale(3);
+        shapeRenderer = new ShapeRenderer();
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
         man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
@@ -59,6 +68,7 @@ public class PlayScreen implements Screen2 {
             speedX--;
         }
         if(Gdx.input.justTouched()){
+            counter++;
             if(speedX<400){
                 speedX = speedX + 20;
             }
@@ -79,19 +89,32 @@ public class PlayScreen implements Screen2 {
     @Override
     public void render(float delta) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        runningControls();
+        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        //Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
+        if(posX<600){
+            runningControls();
+        }
+        else{
+            attempt = calculatePoints(counter, 1);
+        }
         batch.begin();
 
         batch.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
         //batch.draw((TextureRegion) throwingMan.getKeyFrame(elapsedTime, true),posX, 400);
-
-
-
+        font.draw(batch, "Score: "+attempt, 700, 200);
         batch.end();
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        Gdx.gl.glLineWidth(1);
+        shapeRenderer.setColor(0, 0, 0, 1);
+        shapeRenderer.line(600, 0, 600, 100);
+        shapeRenderer.end();
+
+        //stage.draw();
     }
 
     public double calculatePoints(double taps, double dist){
-       return (taps/dist)*10;
+       return (taps/dist)*3;
     }
 
 
