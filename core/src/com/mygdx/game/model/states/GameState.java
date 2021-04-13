@@ -45,10 +45,6 @@ public class GameState extends State{
     @Override
     public void renderScreen() {
         gsm.game.setScreen(currentScreen);
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("#GAME", String.valueOf(currentScreen));
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("#GAME", String.valueOf(gsm.getStates()));
     }
 
     @Override
