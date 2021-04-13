@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -44,7 +45,15 @@ public class PlayScreen implements Screen2 {
     private ShapeRenderer shapeRenderer;
     private double attempt;
     private int counter;
+    private Texture javelin;
 
+
+    Animation javelin1;
+
+    private Vector2 javelinPosition = new Vector2();
+    private Vector2 javelinVelocity = new Vector2();
+    private float javelinStateTime = 0;
+    private Vector2 javelinGravity = new Vector2();
 
     public PlayScreen(JavelinGame game){
         super();
@@ -61,9 +70,12 @@ public class PlayScreen implements Screen2 {
         runningMan = new Animation(5f/ 20f, man.getRegions());
         throwingMan = new Animation(5f/20f, throwMan.getRegions());
         currentAnim = runningMan;
+        javelin = new Texture("javelin.png");
     }
 
     public void runningControls(){
+      
+
         if(speedX > 30){
             speedX--;
         }
@@ -76,8 +88,10 @@ public class PlayScreen implements Screen2 {
         posX += Gdx.graphics.getDeltaTime() * speedX;
         if(posX > 400){
             currentAnim = throwingMan;
-            Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        }   Gdx.app.log("#TapCount", String.valueOf(speedX));
+            Gdx.app.setLogLevel(Application.LOG_DEBUG);        }
+
+        Gdx.app.log("#TapCount", String.valueOf(speedX));
+
     }
 
     @Override
@@ -102,8 +116,8 @@ public class PlayScreen implements Screen2 {
         batch.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
         //batch.draw((TextureRegion) throwingMan.getKeyFrame(elapsedTime, true),posX, 400);
         font.draw(batch, "Score: "+attempt, 700, 200);
+        batch.draw(javelin, 580,40);
         batch.end();
-
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         Gdx.gl.glLineWidth(1);
         shapeRenderer.setColor(0, 0, 0, 1);
@@ -113,11 +127,9 @@ public class PlayScreen implements Screen2 {
         //stage.draw();
     }
 
-    public double calculatePoints(double taps, double dist){
-       return (taps/dist)*3;
+    public double calculatePoints(double taps, double dist) {
+        return (taps / dist) * 3;
     }
-
-
 
     @Override
     public void resize(int width, int height) {
