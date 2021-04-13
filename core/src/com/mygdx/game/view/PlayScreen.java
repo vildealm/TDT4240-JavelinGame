@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -49,7 +50,15 @@ public class PlayScreen implements Screen2 {
     private double attempt;
     private int counter;
     private int random;
+    private Texture javelin;
 
+
+    Animation javelin1;
+
+    private Vector2 javelinPosition = new Vector2();
+    private Vector2 javelinVelocity = new Vector2();
+    private float javelinStateTime = 0;
+    private Vector2 javelinGravity = new Vector2();
 
     public PlayScreen(JavelinGame game){
         super();
@@ -72,6 +81,8 @@ public class PlayScreen implements Screen2 {
     }
 
     public void runningControls(){
+
+
         if(speedX > 30){
             speedX--;
         }
@@ -109,6 +120,7 @@ public class PlayScreen implements Screen2 {
         batch.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
         //batch.draw((TextureRegion) throwingMan.getKeyFrame(elapsedTime, true),posX, 400);
         font.draw(batch, "Speed: "+ speedX + " Dist:"+random+" Score: "+attempt, 500, 600);
+        batch.draw(javelin, 580,40);
         batch.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
