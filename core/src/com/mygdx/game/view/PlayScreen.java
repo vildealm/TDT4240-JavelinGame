@@ -24,6 +24,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.Random;
+
 public class PlayScreen implements Screen2 {
 
     private SpriteBatch batch;
@@ -44,6 +48,7 @@ public class PlayScreen implements Screen2 {
     private ShapeRenderer shapeRenderer;
     private double attempt;
     private int counter;
+    private int random;
 
 
     public PlayScreen(JavelinGame game){
@@ -61,6 +66,9 @@ public class PlayScreen implements Screen2 {
         runningMan = new Animation(5f/ 20f, man.getRegions());
         throwingMan = new Animation(5f/20f, throwMan.getRegions());
         currentAnim = runningMan;
+        Random rand = new Random();
+        int upperbound = 10;
+        random = rand.nextInt(upperbound);
     }
 
     public void runningControls(){
@@ -76,8 +84,7 @@ public class PlayScreen implements Screen2 {
         posX += Gdx.graphics.getDeltaTime() * speedX;
         if(posX > 400){
             currentAnim = throwingMan;
-            Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        }   Gdx.app.log("#TapCount", String.valueOf(speedX));
+        }
     }
 
     @Override
@@ -95,13 +102,13 @@ public class PlayScreen implements Screen2 {
             runningControls();
         }
         else{
-            attempt = calculatePoints(counter, 1);
+            attempt = (double)Math.round(calculatePoints(counter, random) * 100d) / 100d;
         }
         batch.begin();
 
         batch.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
         //batch.draw((TextureRegion) throwingMan.getKeyFrame(elapsedTime, true),posX, 400);
-        font.draw(batch, "Score: "+attempt, 700, 200);
+        font.draw(batch, "Speed: "+ speedX + " Dist:"+random+" Score: "+attempt, 500, 600);
         batch.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -114,7 +121,7 @@ public class PlayScreen implements Screen2 {
     }
 
     public double calculatePoints(double taps, double dist){
-       return (taps/dist)*3;
+        return (5*taps*(8-dist))/8;
     }
 
 
