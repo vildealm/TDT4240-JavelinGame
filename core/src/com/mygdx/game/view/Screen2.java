@@ -3,6 +3,7 @@ package com.mygdx.game.view;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.model.Assets;
 
 public interface Screen2 {
     /** Called when this screen becomes the current screen for a {@link Game}. */

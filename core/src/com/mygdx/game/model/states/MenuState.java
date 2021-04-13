@@ -21,13 +21,6 @@ public class MenuState extends State {
     public void handleInput() {
 
 
-        if(Gdx.input.justTouched()){
-            gsm.set(new SetupState(gsm));
-            //currentScreen = ScreenFactory.getScreen("PLAY");
-            //renderScreen();
-            dispose();
-        }
-
 
     }
 

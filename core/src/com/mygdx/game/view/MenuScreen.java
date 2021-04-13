@@ -2,7 +2,6 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -11,16 +10,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.JavelinGame;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.SetupState;
 
 
 public class MenuScreen implements Screen2 {
 
-    //private Stage stage;
     private BitmapFont font;
     private Stage stage;
     private Javelin javelin;
@@ -55,8 +53,7 @@ public class MenuScreen implements Screen2 {
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-
-               gsm.set(new GameState(gsm));
+               gsm.set(new SetupState(gsm));
             }
         });
 
@@ -76,8 +73,6 @@ public class MenuScreen implements Screen2 {
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         sb.end();
-
-
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

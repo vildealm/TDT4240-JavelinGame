@@ -17,6 +17,7 @@ import com.mygdx.game.view.Screen2;
 public class JavelinGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private GameStateManager gsm;
+	private Assets assets;
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;
 	public static final String TITLE = "Javelin Game";
@@ -34,14 +35,13 @@ public class JavelinGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager(this);
+		assets = new Assets();
+		assets.load();
 		//Gdx.gl.glClearColor(1, 0, 0, 1);
+		screenFactory = new ScreenFactory(gsm,assets);
 		gsm.push(new LoadingState(gsm));
-		screenFactory = new ScreenFactory(gsm);
-		gsm.push(new MenuState(gsm));
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		Gdx.app.log("JavelinGamegsm", String.valueOf(gsm));
-
-
 	}
 
 
@@ -64,13 +64,6 @@ public class JavelinGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		/*if (screen!= null) {
-			screen.render(Gdx.graphics.getDeltaTime(),batch);
-		}*/
-		//gsm.renderBatch(batch);
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		//Gdx.gl.glClearColor(1, 0, 0, 1);
-		//gsm.renderScreen(batch);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());

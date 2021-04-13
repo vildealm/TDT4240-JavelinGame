@@ -2,9 +2,7 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
 
 public class Assets {
 
@@ -12,7 +10,7 @@ public class Assets {
     //Backgrounds
     public static String setupBackground = "textures/backgrounds/mainBackground.png";
     public Texture textureBackground = new Texture(setupBackground);
-    private static Sprite sprite;
+
 
     /*public static String characterBackground = "";
 
@@ -38,6 +36,10 @@ public class Assets {
 
     public static void dispose(){
         assetManager.dispose();
+    }
+
+    public static AssetManager getManager(){
+        return assetManager;
     }
 
     public static void load(){

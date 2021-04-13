@@ -3,6 +3,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.JavelinGame;
+import com.mygdx.game.model.Assets;
 
 import java.util.Stack;
 

@@ -1,6 +1,7 @@
 package com.mygdx.game.controller;
 import com.mygdx.game.JavelinGame;
 //import com.mygdx.game.view.LoadingScreen;
+import com.mygdx.game.model.Assets;
 import com.mygdx.game.view.LoadingScreen;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Application;
@@ -16,10 +17,12 @@ import com.mygdx.game.view.SetupScreen;
 
 public class ScreenFactory {
     private static GameStateManager gsm;
+    private static Assets assets;
 
 
-    public ScreenFactory(GameStateManager gsm){
+    public ScreenFactory(GameStateManager gsm, Assets assets){
         this.gsm = gsm;
+        this.assets = assets;
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ScreenFactorygsm", String.valueOf(gsm.getStates()));
     }
@@ -29,7 +32,7 @@ public class ScreenFactory {
     public static Screen2 getScreen(String screenType){
         switch (screenType){
             case "LOADING":
-                return new LoadingScreen(gsm);
+                return new LoadingScreen(gsm,assets);
             case "MENU":
                 return new MenuScreen(gsm);
             case "PLAY":
