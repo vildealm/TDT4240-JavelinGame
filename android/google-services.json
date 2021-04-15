@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1041071209360",
+    "project_id": "javelingame-g26",
+    "storage_bucket": "javelingame-g26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041071209360:android:94efb16f2f786b2557d115",
+        "android_client_info": {
+          "package_name": "com.mygdx.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041071209360-o4buoleasovstf23cf82p53mi4b62e7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyxhxdQCo7k7OpCmDem9lnxq27iYeXMN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041071209360-o4buoleasovstf23cf82p53mi4b62e7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
