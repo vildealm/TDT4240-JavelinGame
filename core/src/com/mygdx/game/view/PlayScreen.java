@@ -69,35 +69,38 @@ public class PlayScreen implements Screen2 {
     public PlayScreen(GameStateManager gsm){
         super();
         this.game = game;
-        batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
         shapeRenderer = new ShapeRenderer();
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
+
+        //Player
         man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
         throwMan = new TextureAtlas(Gdx.files.internal("Throwsprites/throw.atlas"));
         runningMan = new Animation(5f/ 20f, man.getRegions());
         throwingMan = new Animation(5f/20f, throwMan.getRegions());
         currentAnim = runningMan;
+
+        //Score
         Random rand = new Random();
         int upperbound = 10;
         random = rand.nextInt(upperbound);
-    }
+
+
         //fra Setting_Screen
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
-        font = new BitmapFont();
-        javelin2 = new Javelin();
+        //javelin2 = new Javelin();
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        stage.addActor(javelin2);
-        stage.addTouchFocus(new InputListener(), javelin2, javelin2, 1,1);
+        //stage.addActor(javelin2);
+        //stage.addTouchFocus(new InputListener(), javelin2, javelin2, 1,1);
+    }
 
+    //Player
     public void runningControls(){
-
-
         if(speedX > 30){
             speedX--;
         }
@@ -120,53 +123,29 @@ public class PlayScreen implements Screen2 {
     }
 
     @Override
-    /*public void render(float delta) {
-        elapsedTime += Gdx.graphics.getDeltaTime();
-        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        //Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
-        if(posX<545){
-            runningControls();
-        }
-        else{
-            attempt = (double)Math.round(calculatePoints(speedX, random) * 100d) / 100d;
-        }
-        batch.begin();
-
-        batch.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
-        //batch.draw((TextureRegion) throwingMan.getKeyFrame(elapsedTime, true),posX, 400);
-        font.draw(batch, "Speed: "+ speedX + " Dist:"+random+" Score: "+attempt, 500, 600);
-        //batch.draw(javelin, 580,40);
-        batch.end();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        Gdx.gl.glLineWidth(1);
-        shapeRenderer.setColor(0, 0, 0, 1);
-        shapeRenderer.line(600, 0, 600, 100);
-        shapeRenderer.end();
-
-        //stage.draw();
-}*/
     public void render(float delta, SpriteBatch sb) {
         elapsedTime += Gdx.graphics.getDeltaTime();
         //Gdx.app.setLogLevel(Application.LOG_DEBUG);
         //Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
+
+        //Player
         if(posX<545){
             runningControls();
         }
         else{
             attempt = (double)Math.round(calculatePoints(speedX, random) * 100d) / 100d;
         }
+
         sb.begin();
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
-        //batch.draw((TextureRegion) throwingMan.getKeyFrame(elapsedTime, true),posX, 400);
-        font.draw(batch, "Speed: "+ speedX + " Dist:"+random+" Score: "+attempt, 500, 600);
+        font.draw(sb, "Speed: "+ speedX + " Dist:"+random+" Score: "+attempt, 500, 600);
         //batch.draw(javelin, 580,40);
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        font.draw(sb, "PlayScreen!", 70, 180);
+        //font.draw(sb, "PlayScreen!", 70, 180);
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         sb.end();
 
-
+        //Makes line, showing where to throw
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         Gdx.gl.glLineWidth(1);
         shapeRenderer.setColor(0, 0, 0, 1);
@@ -177,10 +156,10 @@ public class PlayScreen implements Screen2 {
         stage.draw();
     }
 
+    //Score
     public double calculatePoints(double speed, double dist){
         return (5*(speed/10)*(15-dist))/15;
     }
-
 
 
     @Override

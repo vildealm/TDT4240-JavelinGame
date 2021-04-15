@@ -42,8 +42,8 @@ public class MenuScreen implements Screen2 {
         Gdx.input.setInputProcessor(stage);
         playButtonStyle = new TextButton.TextButtonStyle();
         playButtonStyle.font = font;
-        stage.addActor(javelin);
-        stage.addTouchFocus(new InputListener(), javelin, javelin, 1,1);
+        //stage.addActor(javelin);
+        //stage.addTouchFocus(new InputListener(), javelin, javelin, 1,1);
         font = new BitmapFont();
         TextButton playButton = new TextButton("PLAY", playButtonStyle);
         playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
@@ -57,7 +57,7 @@ public class MenuScreen implements Screen2 {
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-               gsm.set(new SetupState(gsm));
+               gsm.set(new GameState(gsm));
             }
         });
 
