@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 
 public class Javelin extends Actor {
-    Texture texture = new Texture(Gdx.files.internal("textures/running-sheets/running-1.png"));
+    Texture texture = new Texture(Gdx.files.internal("textures/run/running-1.png"));
     Sprite sprite = new Sprite(texture);
 
     public Javelin(){
