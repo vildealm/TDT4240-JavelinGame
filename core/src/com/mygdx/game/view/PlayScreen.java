@@ -109,11 +109,11 @@ public class PlayScreen implements Screen2 {
         elapsedTime += Gdx.graphics.getDeltaTime();
         //Gdx.app.setLogLevel(Application.LOG_DEBUG);
         //Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
-        if(posX<600){
+        if(posX<545){
             runningControls();
         }
         else{
-            attempt = (double)Math.round(calculatePoints(counter, random) * 100d) / 100d;
+            attempt = (double)Math.round(calculatePoints(speedX, random) * 100d) / 100d;
         }
         batch.begin();
 
@@ -132,8 +132,8 @@ public class PlayScreen implements Screen2 {
         //stage.draw();
     }
 
-    public double calculatePoints(double taps, double dist){
-        return (5*taps*(15-dist))/15;
+    public double calculatePoints(double speed, double dist){
+        return (5*(speed/10)*(15-dist))/15;
     }
 
 
