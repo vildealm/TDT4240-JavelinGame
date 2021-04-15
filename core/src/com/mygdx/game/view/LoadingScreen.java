@@ -27,6 +27,7 @@ public class LoadingScreen implements Screen2 {
         this.assets = assets;
         stage = new Stage(new ScreenViewport());
         font = new BitmapFont();
+        font.getData().setScale(4,4);
         this.progress = 0f;
     }
 
@@ -38,14 +39,16 @@ public class LoadingScreen implements Screen2 {
     @Override
     public void render(float delta, SpriteBatch sb) {
         sb.begin();
-        font.draw(sb, "LOADING...", 70, 100);
+
+        font.draw(sb, "LOADING...", (Gdx.graphics.getWidth()/2)-160, (Gdx.graphics.getHeight()/2));
+
         sb.end();
         progress = MathUtils.lerp(progress, Assets.getProgress(), .1f);
         if (Assets.update() && progress >= Assets.getProgress() - 0.001f) {
             dispose();
             gsm.set(new MenuState(gsm));
         }
-        Gdx.gl.glClearColor(187.0f/255.0f, 231.0f/255.0f, 255.0f/255.0f, 1.0f);
+        Gdx.gl.glClearColor(40.0f/255.0f, 110.0f/255.0f, 40.0f/255.0f, 1.0f);
         stage.draw();
     }
 
