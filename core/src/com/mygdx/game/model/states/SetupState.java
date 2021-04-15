@@ -8,49 +8,40 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.view.Screen2;
 
-public class GameState extends State{
+public class SetupState extends State {
 
-    BitmapFont font;
+    private BitmapFont font;
     private Screen2 currentScreen;
 
-
-    public GameState(GameStateManager gsm) {
+    public SetupState(GameStateManager gsm){
         super(gsm);
         font = new BitmapFont();
-        currentScreen = ScreenFactory.getScreen("PLAY");
-
+        currentScreen = ScreenFactory.getScreen("SETTING");
+        renderScreen();
+        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        //Gdx.app.log("#SETTING", String.valueOf(gsm));
     }
 
     @Override
     public void handleInput() {
-/*
-        if(Gdx.input.justTouched()){
-
-            gsm.set(new MenuState(gsm));
-            //currentScreen = ScreenFactory.getScreen("PLAY");
-            //renderScreen();
-
-            dispose();
-        }
-
- */
+    /*if(Gdx.input.justTouched()) {
+        gsm.set(new GameState(gsm));
+        currentScreen = ScreenFactory.getScreen("PLAY");
+        renderScreen();
+        dispose();
+    }*/
     }
+
 
     @Override
-    public void update(float dt) {
-        //handleInput();
-    }
-
+    public void update(float dt) {/*handleInput();*/}//handleInput();}
 
     @Override
     public void renderScreen() {
         gsm.game.setScreen(currentScreen);
     }
 
-    @Override
-    public void dispose() {
-
-    }
+    public void dispose() { }
 
     @Override
     public Screen2 getScreen() {

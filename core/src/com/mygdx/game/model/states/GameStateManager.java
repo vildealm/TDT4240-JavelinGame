@@ -3,6 +3,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.JavelinGame;
+import com.mygdx.game.model.Assets;
 
 import java.util.Stack;
 
@@ -10,6 +11,7 @@ public class GameStateManager {
 
     private Stack<State> states;
     public JavelinGame game;
+    private SpriteBatch sb;
 
     public GameStateManager(JavelinGame game)
     {
@@ -40,13 +42,13 @@ public class GameStateManager {
     }
 
 
-    public void renderBatch() {
+    public void renderBatch(SpriteBatch sb) {
         //Gdx.app.setLogLevel(Application.LOG_DEBUG);
         //Gdx.app.log("#GSM", String.valueOf(states.peek().getScreen()));
         states.peek().renderScreen();
         //Gdx.app.setLogLevel(Application.LOG_DEBUG);
         //Gdx.app.log("#GSM", String.valueOf(states.peek().getScreen()));
-        states.peek().getScreen().render(Gdx.graphics.getDeltaTime());
+        states.peek().getScreen().render(Gdx.graphics.getDeltaTime(), sb);
 
     }
 
