@@ -30,7 +30,6 @@ public class PlayScreen implements Screen2 {
     private Texture gameName;
     private Texture background;
     //private Texture playBtn;
-    private Javelin javelin2;
     private Stage stage;
 
 
@@ -40,11 +39,8 @@ public class PlayScreen implements Screen2 {
         //background = Assets.getTexture(Assets.menuBackground);
         //playBtn = Assets.getTexture(Assets.gameScreenButton);
         font = new BitmapFont();
-        javelin2 = new Javelin();
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        stage.addActor(javelin2);
-        stage.addTouchFocus(new InputListener(), javelin2, javelin2, 1,1);
 
     }
     @Override

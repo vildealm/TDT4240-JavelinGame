@@ -21,7 +21,6 @@ public class MenuScreen implements Screen2 {
 
     private BitmapFont font;
     private Stage stage;
-    private Javelin javelin;
     private TextButton playButton;
     private TextButton.TextButtonStyle playButtonStyle;
     private Skin skin;
@@ -31,15 +30,12 @@ public class MenuScreen implements Screen2 {
     public MenuScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
-        javelin = new Javelin();
         stage = new Stage(new ScreenViewport());
         font = new BitmapFont();
-        skin = new Skin();
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
         Gdx.input.setInputProcessor(stage);
         playButtonStyle = new TextButton.TextButtonStyle();
         playButtonStyle.font = font;
-        stage.addActor(javelin);
-        stage.addTouchFocus(new InputListener(), javelin, javelin, 1,1);
         font = new BitmapFont();
         TextButton playButton = new TextButton("PLAY", playButtonStyle);
         playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
