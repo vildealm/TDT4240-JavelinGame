@@ -2,6 +2,7 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 
 public class Assets {
@@ -9,7 +10,7 @@ public class Assets {
     private static AssetManager assetManager;
     //Backgrounds
     public static String setupBackground = "textures/backgrounds/mainBackground.png";
-    public Texture textureBackground = new Texture(setupBackground);
+    public static Texture textureBackground = new Texture(setupBackground);
 
 
     /*public static String characterBackground = "";
@@ -57,7 +58,5 @@ public class Assets {
     public static Texture getTexture(String string){
         return assetManager.get(string, Texture.class);
     }
-
-
 
 }

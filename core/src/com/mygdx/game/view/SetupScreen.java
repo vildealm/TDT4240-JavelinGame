@@ -39,15 +39,12 @@ public class SetupScreen implements Screen2{
 
     public SetupScreen(GameStateManager gsm){
         super();
-        //Assets.load();
         ScreenViewport viewport = new ScreenViewport();
         this.gsm = gsm;
         this.stage = new Stage(viewport);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("#SetupSceen", String.valueOf(Assets.getTexture(Assets.setupBackground)));
         setupSprite = new Sprite(Assets.getTexture(Assets.setupBackground));
-        //setupBackground =  new Texture("textures/backgrounds/mainBackground.png");
-        //sprite = new Sprite(setupBackground);
         javelin = new Javelin();
         Gdx.input.setInputProcessor(stage);
         stage.addActor(javelin);
@@ -63,7 +60,6 @@ public class SetupScreen implements Screen2{
         sb.begin();
         font.draw(sb, "SETUP", 70, 100);
         sb.draw(setupSprite, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
