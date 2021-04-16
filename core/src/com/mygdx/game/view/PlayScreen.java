@@ -37,6 +37,7 @@ import java.util.Random;
 public class PlayScreen implements Screen2 {
 
     private BitmapFont font;
+    private GameStateManager gsm;
     //private Stage stage;
     private JavelinGame game;
     private Texture gameName;
@@ -68,7 +69,9 @@ public class PlayScreen implements Screen2 {
 
     public PlayScreen(GameStateManager gsm){
         super();
-        this.game = game;
+        this.gsm = gsm;
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
@@ -118,8 +121,6 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void show() {
-        //stage = new Stage(new ScreenViewport());
-        //Gdx.input.setInputProcessor(stage);
     }
 
     @Override

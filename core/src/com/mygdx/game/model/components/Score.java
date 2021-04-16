@@ -1,14 +1,18 @@
 package com.mygdx.game.model.components;
 
-public class Score {
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.game.model.Assets;
+
+public class Score extends Actor {
 
     private String username;
     private Double score;
     private String country;
+    private Texture texture;
+    private Sprite sprite;
 
-    public Score(){
-
-    }
 
     public String getUsername() {
         return username;
@@ -38,5 +42,6 @@ public class Score {
         this.username = username;
         this.score = score;
         this.country = country;
+        sprite =  new Sprite(Assets.getTexture(Assets.player));
     }
 }
