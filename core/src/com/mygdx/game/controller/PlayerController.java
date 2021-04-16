@@ -1,8 +1,7 @@
 package com.mygdx.game.controller;
-
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.mygdx.game.model.Assets;
+import com.badlogic.gdx.Gdx;
 import com.mygdx.game.model.components.Player;
+import java.util.Random;
 
 public class PlayerController {
 

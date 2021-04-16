@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.components.Player;
 
 import java.util.ArrayList;
