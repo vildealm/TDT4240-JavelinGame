@@ -10,6 +10,8 @@ public class Assets {
     //Backgrounds
     public static String setupBackground = "textures/backgrounds/mainBackground.png";
     public Texture textureBackground = new Texture(setupBackground);
+    public static String playBackground = "textures/backgrounds/playBackground.png";
+    public Texture texturePlayBackground = new Texture(playBackground);
 
 
     /*public static String characterBackground = "";
@@ -44,6 +46,7 @@ public class Assets {
 
     public static void load(){
         assetManager.load(setupBackground, Texture.class);
+        assetManager.load(playBackground, Texture.class);
     }
 
     public static boolean update(){
