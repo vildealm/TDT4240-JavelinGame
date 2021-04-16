@@ -54,15 +54,23 @@ public class PlayScreen implements Screen2 {
     private double attempt;
     private int counter;
     private int random;
-    private Texture javelin;
+    private double deltaTime = 0.2f;
 
+    private boolean check = false;
 
-    Animation javelin1;
-    private Javelin javelin2;
     private Stage stage;
 
-    private Vector2 javelinPosition = new Vector2();
-    private Vector2 javelinVelocity = new Vector2();
+    private Texture javelinTexture = new Texture("javelin.png");
+    private Sprite javelinSprite = new Sprite(javelinTexture);
+
+    private double velocity = -10.0;
+
+    private boolean luup = true;
+
+    private Vector2 javelinPosition = new Vector2(550, 50);
+    private Vector2 javelinVelocityX = new Vector2();
+    private Vector2 javelinVelocityY = new Vector2();
+
     private float javelinStateTime = 0;
     private Vector2 javelinGravity = new Vector2();
 
@@ -111,9 +119,25 @@ public class PlayScreen implements Screen2 {
             }
         }
         posX += Gdx.graphics.getDeltaTime() * speedX;
-        if(posX > 400){
+        if(posX > 420){
+            luup = false;
+          //  elapsedTime = 0f;
             currentAnim = throwingMan;
+
+
         }
+    }
+
+    public Vector2 updateJavelinPosition(){
+        javelinPosition.x = (float) (javelinPosition.x - (velocity * deltaTime));
+        javelinPosition.y = (float) (javelinPosition.y - (velocity * deltaTime));
+        if(javelinPosition.x > 700) {
+            javelinPosition.y = (float) (javelinPosition.y - (-velocity * deltaTime));
+        }
+        if(javelinPosition.x > 900){
+            javelinPosition.y = (float) (javelinPosition.y - (-velocity * deltaTime));
+        }
+        return javelinPosition;
     }
 
     @Override
@@ -124,6 +148,7 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void render(float delta, SpriteBatch sb) {
+
         elapsedTime += Gdx.graphics.getDeltaTime();
         //Gdx.app.setLogLevel(Application.LOG_DEBUG);
         //Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
@@ -131,14 +156,22 @@ public class PlayScreen implements Screen2 {
         //Player
         if(posX<545){
             runningControls();
+
         }
+
         else{
             attempt = (double)Math.round(calculatePoints(speedX, random) * 100d) / 100d;
+            check = true;
         }
 
         sb.begin();
-        sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
-        font.draw(sb, "Speed: "+ speedX + " Dist:"+random+" Score: "+attempt, 500, 600);
+        if(check==true){
+            javelinSprite.setPosition(updateJavelinPosition().x , updateJavelinPosition().y);
+            javelinSprite.draw(sb);
+
+        }
+        sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, luup), posX, 20);
+        font.draw(sb, "Speed: "+ speedX + " Dist:"+random+" Score: "+ attempt, 500, 600);
         //batch.draw(javelin, 580,40);
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //font.draw(sb, "PlayScreen!", 70, 180);
@@ -160,7 +193,6 @@ public class PlayScreen implements Screen2 {
     public double calculatePoints(double speed, double dist){
         return (5*(speed/10)*(15-dist))/15;
     }
-
 
     @Override
     public void resize(int width, int height) {
