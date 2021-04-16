@@ -46,7 +46,7 @@ public class Player extends Actor {
     }
 
     //Player
-    public void runningControls(){
+   /* public void runningControls(){
         if(speedX > 30){
             speedX--;
         }
@@ -59,10 +59,10 @@ public class Player extends Actor {
         if(posX > 400){
             currentAnim = throwingMan;
         }
-    }
+    }*/
 
     //Player
-    if(posX< 545){
+    /*if(posX< 545){
         runningControls();
     }else{
         attempt = (double)Math.round(setScore(speedX, random) * 100d) / 100d;
@@ -73,6 +73,6 @@ public class Player extends Actor {
         this.country = country;
     }
 
-
+*/
 
 }

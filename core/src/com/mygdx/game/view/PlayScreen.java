@@ -34,6 +34,7 @@ public class PlayScreen implements Screen2 {
     private Animation currentAnim;
     private ShapeRenderer shapeRenderer;
     private double attempt;
+    private int random;
 
 
 
