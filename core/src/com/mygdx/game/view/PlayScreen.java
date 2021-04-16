@@ -11,11 +11,16 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.components.Javelin;
+import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.MenuState;
 
 
 import java.util.Random;
@@ -34,6 +39,12 @@ public class PlayScreen implements Screen2 {
     private Animation currentAnim;
     private ShapeRenderer shapeRenderer;
     private double attempt;
+    private int random = 1;
+    private TextButton tapArea;
+    private TextButton.TextButtonStyle tapAreaStyle;
+    private BitmapFont tapAreafont;
+
+
 
 
 
@@ -46,7 +57,7 @@ public class PlayScreen implements Screen2 {
     private float javelinStateTime = 0;
     private Vector2 javelinGravity = new Vector2();
 
-    public PlayScreen(GameStateManager gsm){
+    public PlayScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
         stage = new Stage(new ScreenViewport());
@@ -56,6 +67,21 @@ public class PlayScreen implements Screen2 {
         font.getData().setScale(3);
         shapeRenderer = new ShapeRenderer();
 
+        //tapArea
+        tapAreafont = new BitmapFont();
+        tapAreafont.setColor(Color.BLACK);
+        tapAreafont.getData().setScale(3);
+        tapAreaStyle = new TextButton.TextButtonStyle();
+        tapAreaStyle.font = tapAreafont;
+
+        TextButton tapArea = new TextButton("", tapAreaStyle);
+        tapArea.setPosition(0,0);
+        tapArea.setWidth((Gdx.graphics.getWidth()*2)/3);
+        tapArea.setHeight(Gdx.graphics.getHeight());
+        tapArea.getLabel().setFontScale(5, 5);
+        stage.addActor(tapArea);
+
+
         //Player
         man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
         throwMan = new TextureAtlas(Gdx.files.internal("Throwsprites/throw.atlas"));
@@ -64,9 +90,15 @@ public class PlayScreen implements Screen2 {
         currentAnim = runningMan;
 
 
-        //fra Setting_Screen
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+
+        tapArea.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                if(speedX<400){
+                    speedX = speedX + 20;
+                }
+            }
+        });
 
     }
 
@@ -78,8 +110,7 @@ public class PlayScreen implements Screen2 {
     @Override
     public void render(float delta, SpriteBatch sb) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        //Gdx.app.log("#Playscreen", String.valueOf("Playscreen"));
+        posX += Gdx.graphics.getDeltaTime() * speedX;
 
         sb.begin();
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
@@ -87,11 +118,13 @@ public class PlayScreen implements Screen2 {
         sb.end();
 
         //Makes line, showing where to throw
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        /*shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         Gdx.gl.glLineWidth(1);
         shapeRenderer.setColor(0, 0, 0, 1);
         shapeRenderer.line(600, 0, 600, 100);
         shapeRenderer.end();
+
+         */
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
@@ -118,6 +151,6 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }

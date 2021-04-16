@@ -48,6 +48,7 @@ public class MenuScreen implements Screen2 {
         TextButton playButton = new TextButton("PLAY", playButtonStyle);
         playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         playButton.getLabel().setFontScale(5, 5);
+
         stage.addActor(playButton);
 
         Gdx.app.setLogLevel(Application.LOG_DEBUG);

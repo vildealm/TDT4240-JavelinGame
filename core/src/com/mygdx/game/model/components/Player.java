@@ -20,9 +20,7 @@ public class Player extends Actor {
 
     public Player(){
         //Score
-        Random rand = new Random();
-        int upperbound = 10;
-        random = rand.nextInt(upperbound);
+
     }
 
     public String getUsername(){
@@ -42,31 +40,20 @@ public class Player extends Actor {
     }
 
     public void setScore(double speed, double dist) {
-        this.score = (5*(speed/10)*(15-dist))/15;
+        this.score = (double)Math.round(((5*(speed/10)*(15-dist))/15) * 100d) / 100d;
     }
 
     //Player
-    public void runningControls(){
-        if(speedX > 30){
-            speedX--;
-        }
-        if(Gdx.input.justTouched()){
-            if(speedX<400){
-                speedX = speedX + 20;
-            }
-        }
-        posX += Gdx.graphics.getDeltaTime() * speedX;
-        if(posX > 400){
-            currentAnim = throwingMan;
-        }
-    }
+
 
     //Player
-    if(posX< 545){
+    /*if(posX< 545){
         runningControls();
     }else{
         attempt = (double)Math.round(setScore(speedX, random) * 100d) / 100d;
     }
+
+     */
 
 
     public void setCountry(String country) {
