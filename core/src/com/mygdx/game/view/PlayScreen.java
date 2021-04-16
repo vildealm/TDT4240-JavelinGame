@@ -67,6 +67,7 @@ public class PlayScreen implements Screen2 {
 
     private boolean luup = true;
 
+
     private Vector2 javelinPosition = new Vector2(550, 50);
 
 
@@ -90,7 +91,7 @@ public class PlayScreen implements Screen2 {
         man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
         throwMan = new TextureAtlas(Gdx.files.internal("Throwsprites/throw.atlas"));
         runningMan = new Animation(5f/ 20f, man.getRegions());
-        throwingMan = new Animation(5f/20f, throwMan.getRegions());
+        throwingMan = new Animation( 0.4f, throwMan.getRegions());
         currentAnim = runningMan;
 
         //Score
@@ -122,10 +123,11 @@ public class PlayScreen implements Screen2 {
             }
         }
         posX += Gdx.graphics.getDeltaTime() * speedX;
-        if(posX > 420){
+        if(posX > 300){
             luup = false;
-          //  elapsedTime = 0f;
+            elapsedTime =1;
             currentAnim = throwingMan;
+
 
         }
     }
@@ -163,7 +165,6 @@ public class PlayScreen implements Screen2 {
         //Player
         if(posX<545){
             runningControls();
-
         }
 
         else{
