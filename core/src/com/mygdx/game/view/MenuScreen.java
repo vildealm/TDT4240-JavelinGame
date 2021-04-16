@@ -55,14 +55,12 @@ public class MenuScreen implements Screen2 {
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-               gsm.set(new GameState(gsm));
+               gsm.set(new SetupState(gsm));
             }
         });
     }
 
-    public void show() {
-
-    }
+    public void show() { }
 
     public void render(float delta, SpriteBatch sb) {
         sb.begin();

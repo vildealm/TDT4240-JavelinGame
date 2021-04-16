@@ -38,14 +38,14 @@ public class LoadingScreen implements Screen2 {
     @Override
     public void render(float delta, SpriteBatch sb) {
         sb.begin();
-        font.draw(sb, "LOADING...", 70, 100);
+        font.draw(sb, "LOADING...", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        font.getData().setScale(4.0f);
         sb.end();
         progress = MathUtils.lerp(progress, Assets.getProgress(), .1f);
         if (Assets.update() && progress >= Assets.getProgress() - 0.001f) {
             dispose();
             gsm.set(new MenuState(gsm));
         }
-        Gdx.gl.glClearColor(187.0f/255.0f, 231.0f/255.0f, 255.0f/255.0f, 1.0f);
         stage.draw();
     }
 
