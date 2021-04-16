@@ -13,10 +13,7 @@ public class Player extends Actor {
     private String username;
     private Double score;
     private String country;
-    private int random;
-    private int posX = 20;
-    private int speedX = 0;
-    private double attempt;
+
 
     public Player(){
         //Score
@@ -42,18 +39,6 @@ public class Player extends Actor {
     public void setScore(double speed, double dist) {
         this.score = (double)Math.round(((5*(speed/10)*(15-dist))/15) * 100d) / 100d;
     }
-
-    //Player
-
-
-    //Player
-    /*if(posX< 545){
-        runningControls();
-    }else{
-        attempt = (double)Math.round(setScore(speedX, random) * 100d) / 100d;
-    }
-
-     */
 
 
     public void setCountry(String country) {

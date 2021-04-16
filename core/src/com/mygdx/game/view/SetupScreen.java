@@ -32,8 +32,9 @@ public class SetupScreen implements Screen2{
         playerSprite = new Sprite(Assets.getTexture(Assets.player));
         font = new BitmapFont();
         Gdx.input.setInputProcessor(stage);
-        stage.addActor(javelin);
-        stage.addTouchFocus(new InputListener(), javelin, javelin, 1,1); }
+        //stage.addActor(playerSprite);
+        //stage.addTouchFocus(new InputListener(), javelin, javelin, 1,1);
+    }
 
     public void show() {}
 
