@@ -11,4 +11,32 @@ public class Player extends Actor {
     private Double score;
     private String country;
 
+    public String getUsername(){
+        return this.username;
+    }
+
+    public Double getScore(){
+        return this.score;
+    }
+
+    public String getCountry() {
+        return this.country;
+    }
+
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+
+
 }
