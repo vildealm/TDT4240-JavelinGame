@@ -1,7 +1,6 @@
 package com.mygdx.game.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,10 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
-import com.mygdx.game.model.components.Score;
 import com.mygdx.game.model.states.GameStateManager;
-
-
 
 public class SetupScreen implements Screen2{
 
@@ -22,8 +18,6 @@ public class SetupScreen implements Screen2{
     private Stage stage;
     private BitmapFont font;
     private Javelin javelin;
-
-
 
     //Background
     Sprite setupSprite;
