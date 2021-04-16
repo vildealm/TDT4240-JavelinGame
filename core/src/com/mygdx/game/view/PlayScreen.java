@@ -91,7 +91,7 @@ public class PlayScreen implements Screen2 {
         man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
         throwMan = new TextureAtlas(Gdx.files.internal("Throwsprites/throw.atlas"));
         runningMan = new Animation(5f/ 20f, man.getRegions());
-        throwingMan = new Animation( 0.4f, throwMan.getRegions());
+        throwingMan = new Animation( 0.41f, throwMan.getRegions());
         currentAnim = runningMan;
 
         //Score
@@ -130,6 +130,13 @@ public class PlayScreen implements Screen2 {
 
 
         }
+    }
+
+    public boolean landedJavelin(){
+        if (javelinPosition.y < 12 && javelinPosition.x > 800 ){
+            velocity = 0;
+        }
+        return true;
     }
 
     public Vector2 updateJavelinPosition(){
@@ -179,8 +186,10 @@ public class PlayScreen implements Screen2 {
 
         }
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, luup), posX, 20);
-        font.draw(sb, "Speed: "+ speedX + " Dist:"+random+" Score: "+ attempt, 500, 600);
-        //batch.draw(javelin, 580,40);
+        if(javelinPosition.y < 10){
+            font.draw(sb, "Speed: "+ speedX + " Dist:"+random+" Score: "+ attempt, 500, 600);
+        }
+        landedJavelin();
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //font.draw(sb, "PlayScreen!", 70, 180);
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
