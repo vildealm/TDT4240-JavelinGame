@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mygdx.game.controller.FirebaseInterface;
-import com.mygdx.game.model.components.Score;
+import com.mygdx.game.model.components.Player;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -26,7 +26,7 @@ public class AndroidInterfaceClass implements FirebaseInterface {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private UUID id;
-    private ArrayList<Score> highscores= new ArrayList<>();
+    private ArrayList<Player> highscores= new ArrayList<>();
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance();
@@ -44,13 +44,13 @@ public class AndroidInterfaceClass implements FirebaseInterface {
     //Collects the data from the database.
     //Query sorts the data, and collects the 10 last objects (the ones who have thrown the longest)
     @Override
-    public ArrayList<Score> getDataFromDb() {
+    public ArrayList<Player> getDataFromDb() {
         Query sortedData = myRef.orderByChild("score").limitToLast(10);
         sortedData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    Score score = postSnapshot.getValue(Score.class);
+                    Player score = postSnapshot.getValue(Player.class);
                     highscores.add(score);
                 }
             }

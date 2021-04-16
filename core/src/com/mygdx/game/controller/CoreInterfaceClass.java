@@ -1,6 +1,6 @@
 package com.mygdx.game.controller;
 
-import com.mygdx.game.model.components.Score;
+import com.mygdx.game.model.components.Player;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class CoreInterfaceClass implements FirebaseInterface {
     }
 
     @Override
-    public ArrayList<Score> getDataFromDb() {
+    public ArrayList<Player> getDataFromDb() {
         return null;
     }
 

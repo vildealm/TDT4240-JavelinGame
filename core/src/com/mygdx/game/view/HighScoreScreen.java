@@ -8,14 +8,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.controller.FirebaseInterface;
-import com.mygdx.game.model.components.Score;
+import com.mygdx.game.model.components.Player;
 
 import java.util.ArrayList;
 
 public class HighScoreScreen extends ApplicationAdapter {
     private SpriteBatch batch;
     private FirebaseInterface _FBIC;
-    private ArrayList<Score> highscores;
+    private ArrayList<Player> highscores;
     private int pos;
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;

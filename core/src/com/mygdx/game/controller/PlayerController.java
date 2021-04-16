@@ -8,6 +8,7 @@ public class PlayerController {
     private String username, country;
     private double score;
     private Sprite sprite;
+    private Player player;
 
     public PlayerController(){
         this.username = username;
@@ -38,5 +39,9 @@ public class PlayerController {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public void getPlayer(){
+        return this.player;
     }
 }

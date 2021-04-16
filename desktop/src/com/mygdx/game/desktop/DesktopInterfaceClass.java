@@ -1,7 +1,7 @@
 package com.mygdx.game.desktop;
 
 import com.mygdx.game.controller.FirebaseInterface;
-import com.mygdx.game.model.components.Score;
+import com.mygdx.game.model.components.Player;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class DesktopInterfaceClass implements FirebaseInterface {
     }
 
     @Override
-    public ArrayList<Score> getDataFromDb() {
+    public ArrayList<Player> getDataFromDb() {
         return null;
     }
 
