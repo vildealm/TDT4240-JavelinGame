@@ -68,6 +68,8 @@ public class PlayScreen implements Screen2 {
     private boolean luup = true;
 
     private Vector2 javelinPosition = new Vector2(550, 50);
+
+
     private Vector2 javelinVelocityX = new Vector2();
     private Vector2 javelinVelocityY = new Vector2();
 
@@ -96,6 +98,7 @@ public class PlayScreen implements Screen2 {
         int upperbound = 10;
         random = rand.nextInt(upperbound);
 
+        javelinSprite.setRotation(20);
 
         //fra Setting_Screen
         //background = Assets.getTexture(Assets.menuBackground);
@@ -124,19 +127,23 @@ public class PlayScreen implements Screen2 {
           //  elapsedTime = 0f;
             currentAnim = throwingMan;
 
-
         }
     }
 
     public Vector2 updateJavelinPosition(){
         javelinPosition.x = (float) (javelinPosition.x - (velocity * deltaTime));
         javelinPosition.y = (float) (javelinPosition.y - (velocity * deltaTime));
+
         if(javelinPosition.x > 700) {
+            javelinSprite.setRotation(0);
             javelinPosition.y = (float) (javelinPosition.y - (-velocity * deltaTime));
         }
         if(javelinPosition.x > 900){
             javelinPosition.y = (float) (javelinPosition.y - (-velocity * deltaTime));
+            javelinSprite.setRotation(-20);
+
         }
+
         return javelinPosition;
     }
 
