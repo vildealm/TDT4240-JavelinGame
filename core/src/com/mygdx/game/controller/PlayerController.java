@@ -5,6 +5,17 @@ import com.mygdx.game.model.Assets;
 
 public class PlayerController {
 
+    private String username, country;
+    private double score;
+    private Sprite sprite;
+
+    public PlayerController(){
+        this.username = username;
+        this.score = score;
+        this.country = country;
+        sprite =  new Sprite(Assets.getTexture(Assets.player));
+    }
+
     public String getUsername() {
         return username;
     }
@@ -27,12 +38,5 @@ public class PlayerController {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public Score(String username, Double score, String country){
-        this.username = username;
-        this.score = score;
-        this.country = country;
-        sprite =  new Sprite(Assets.getTexture(Assets.player));
     }
 }
