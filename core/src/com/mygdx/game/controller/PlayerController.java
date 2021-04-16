@@ -2,6 +2,7 @@ package com.mygdx.game.controller;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.model.Assets;
+import com.mygdx.game.model.components.Player;
 
 public class PlayerController {
 
@@ -14,6 +15,7 @@ public class PlayerController {
         this.username = username;
         this.score = score;
         this.country = country;
+        this.player = player;
         sprite =  new Sprite(Assets.getTexture(Assets.player));
     }
 
@@ -41,7 +43,10 @@ public class PlayerController {
         this.country = country;
     }
 
-    public void getPlayer(){
-        return this.player;
+    public Player getPlayer(){
+        return player;
+    }
+    public void setPlayer(){
+        this.player = player;
     }
 }
