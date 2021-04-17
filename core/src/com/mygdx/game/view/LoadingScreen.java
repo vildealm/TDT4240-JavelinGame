@@ -48,7 +48,7 @@ public class LoadingScreen implements Screen2 {
             dispose();
             gsm.set(new MenuState(gsm));
         }
-        Gdx.gl.glClearColor(40.0f/255.0f, 110.0f/255.0f, 40.0f/255.0f, 1.0f);
+        Gdx.gl.glClearColor(165.0f/255.0f, 214.0f/255.0f, 244.0f/255.0f, 1.0f);
         stage.draw();
     }
 

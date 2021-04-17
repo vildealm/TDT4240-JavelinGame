@@ -43,7 +43,8 @@ public class PlayScreen implements Screen2 {
     private OrthographicCamera camera;
     private ScreenViewport viewport;
     public Vector3 vector;
-    private Texture buttonImage;
+    private Texture throwButtonImage;
+    private Texture pauseButtonImage;
 
 
     public PlayScreen(final GameStateManager gsm){
@@ -73,14 +74,22 @@ public class PlayScreen implements Screen2 {
         //stage.addActor(playBackground);
         //vector.x+=100.0f * Gdx.graphics.getDeltaTime();
         //vector.y+=100.0f * Gdx.graphics.getDeltaTime();
-        buttonImage = new Texture("button.png");
-        Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-        playButton.setHeight(200);
-        playButton.setWidth(500);
-        stage.addActor(playButton);
+        throwButtonImage = new Texture("throwButton.png");
+        Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
+        throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
+        //throwButton.setHeight(200);
+        //throwButton.setWidth(500);
 
-        playButton.addListener(new ChangeListener(){
+        pauseButtonImage = new Texture("pauseButton.png");
+        Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
+        pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
+        pauseButton.setHeight(100);
+        pauseButton.setWidth(100);
+
+        stage.addActor(throwButton);
+        stage.addActor(pauseButton);
+
+        throwButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 camera.translate(10f, 0f);
@@ -88,6 +97,15 @@ public class PlayScreen implements Screen2 {
                 Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
                 Gdx.app.setLogLevel(Application.LOG_DEBUG);
                 Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));
+            }
+        });
+
+        pauseButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                //sett state til pauseState
+                Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                Gdx.app.log("#PlayScreen", String.valueOf("pause"));
             }
         });
 

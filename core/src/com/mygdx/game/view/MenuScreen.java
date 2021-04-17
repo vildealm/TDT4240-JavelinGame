@@ -42,7 +42,7 @@ public class MenuScreen implements Screen2 {
         super();
         this.gsm = gsm;
         stage = new Stage(new ScreenViewport());
-        buttonImage = new Texture("button.png");
+        buttonImage = new Texture("playButton.png");
         font = new BitmapFont();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
         //skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -54,9 +54,9 @@ public class MenuScreen implements Screen2 {
         //playButtonStyle.down = skin.getDrawable("down-button");
         //playButtonStyle.checked = skin.getDrawable("checked-button");
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-        playButton.setHeight(200);
-        playButton.setWidth(500);
+        playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), (Gdx.graphics.getHeight()/2)-(playButton.getHeight())/2);
+        //playButton.setHeight(200);
+        //playButton.setWidth(500);
         stage.addActor(playButton);
 
 
