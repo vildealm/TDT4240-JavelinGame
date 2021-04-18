@@ -117,11 +117,11 @@ public class PlayScreen implements Screen2 {
         camera = new OrthographicCamera(1184, 768);
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
 
-        throwButtonImage = new Texture("throwButton.png");
+        throwButtonImage = Assets.getTexture(Assets.throwButton);
         Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
         throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
 
-        pauseButtonImage = new Texture("pauseButton.png");
+        pauseButtonImage = Assets.getTexture(Assets.pauseButton);
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
         pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
         pauseButton.setHeight(100);

@@ -15,6 +15,14 @@ public class Assets {
     public Texture texturePlayBackground = new Texture(playBackground);
     public static String txtfieldBackground = "textures/backgrounds/txtfield.png";
 
+    //Buttons
+    public static String playButton = "buttons/playButton.png";
+    public static String throwButton = "buttons/throwButton.png";
+    public static String pauseButton = "buttons/pauseButton.png";
+    public static String settingsButton = "buttons/settingButton.png";
+
+
+
 
     //Player
     public static String player = "textures/run/running-1.png";
@@ -37,6 +45,11 @@ public class Assets {
         assetManager.load(playBackground, Texture.class);
         assetManager.load(player, Texture.class);
         assetManager.load(txtfieldBackground, Texture.class);
+        assetManager.load(playButton, Texture.class);
+        assetManager.load(throwButton, Texture.class);
+        assetManager.load(pauseButton, Texture.class);
+        assetManager.load(settingsButton, Texture.class);
+
     }
 
     public static boolean update(){
