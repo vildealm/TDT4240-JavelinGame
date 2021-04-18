@@ -131,8 +131,8 @@ public class PlayScreen implements Screen2 {
         throwArea.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                random=(600-(posX+40));
-                player.setScore(playerController.getSpeed(), (600-(posX+40)));
+                random=(600-(posX+50));
+                player.setScore(playerController.getSpeed(), (600-(posX+50)));
             }
         });
 

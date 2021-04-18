@@ -41,7 +41,7 @@ public class Player extends Actor {
             this.score = 0.0;
         }
         else{
-            this.score = (double)Math.round(((5*(speed/10)*(30-dist))/30) * 100d) / 100d;
+            this.score = (double)Math.round(((5*(speed/10)*(450-dist))/450) * 100d) / 100d;
         }
 
     }
