@@ -63,6 +63,7 @@ public class PlayScreen implements Screen2 {
     private TextButton.TextButtonStyle runAreaStyle;
     private BitmapFont runAreafont;
     private boolean thrown;
+    private int cameraLimit;
 
     //PLayerController
     private PlayerController playerController;
@@ -83,7 +84,7 @@ public class PlayScreen implements Screen2 {
     private Vector2 javelinVelocity = new Vector2();
     private float javelinStateTime = 0;
     private Vector2 javelinGravity = new Vector2();
-    private int cameraLimit;
+
 
     public PlayScreen(final GameStateManager gsm){
         super();
@@ -114,7 +115,7 @@ public class PlayScreen implements Screen2 {
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
 
         throwButtonImage = Assets.getTexture(Assets.throwButton);
-        Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
+        final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
         throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
@@ -157,9 +158,11 @@ public class PlayScreen implements Screen2 {
         throwButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                score=(610-(posX+50));
-                player.setScore(playerController.getSpeed(), (610-(posX+50)));
+                score=(680-(posX+50));
+                player.setScore(playerController.getSpeed(), (680-(posX+50)));
                 thrown = true;
+                playerController.setSpeed(0);
+                throwButton.remove();
             }
         });
 
@@ -187,12 +190,13 @@ public class PlayScreen implements Screen2 {
         
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );*/
         if(thrown){
-            cameraLimit = (int) (player.getScore()*10);
+            cameraLimit = (int) (player.getScore()*30);
+            if(cameraLimit > 10500){ //Max length of background
+                cameraLimit = 10500;
+            }
             if(camera.position.x < cameraLimit ){
                 camera.translate(10f, 0f);
             }
-
-
         }
 
         camera.update();
@@ -202,9 +206,9 @@ public class PlayScreen implements Screen2 {
 
         sb.begin();
         sb.setProjectionMatrix(camera.combined);
-        sb.draw(playBackground, 0,0, 2500, 1000);
+        sb.draw(playBackground, 0,0, 11000, 1000);
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
-        font.draw(sb, "Speed: "+ playerController.getSpeed() + " Dist:"+score+" Score: "+player.getScore() + " CamX: " +camera.position.x + " Limit: "+ cameraLimit, 0, 600);
+        font.draw(sb, "Speed: "+ playerController.getSpeed() + " Dist:"+score+" Score: "+player.getScore() + " Limit: "+ cameraLimit, camera.position.x-300, 600);
         sb.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
