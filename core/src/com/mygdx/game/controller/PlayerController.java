@@ -35,14 +35,12 @@ public class PlayerController {
         if(speed > 30){
             speed--;
         }
-
     }
 
     public void increaseSpeed(){
             if(speed<400){
                 speed = speed + 20;
             }
-
     }
 
     /*
