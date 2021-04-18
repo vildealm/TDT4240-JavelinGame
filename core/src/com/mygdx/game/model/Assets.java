@@ -10,7 +10,11 @@ public class Assets {
     private static AssetManager assetManager;
     //Backgrounds
     public static String setupBackground = "textures/backgrounds/mainBackground.png";
+    public Texture textureBackground = new Texture(setupBackground);
+    public static String playBackground = "textures/backgrounds/playBackground.png";
+    public Texture texturePlayBackground = new Texture(playBackground);
     public static String txtfieldBackground = "textures/backgrounds/txtfield.png";
+
 
     //Player
     public static String player = "textures/run/running-1.png";
@@ -30,6 +34,7 @@ public class Assets {
 
     public static void load(){
         assetManager.load(setupBackground, Texture.class);
+        assetManager.load(playBackground, Texture.class);
         assetManager.load(player, Texture.class);
         assetManager.load(txtfieldBackground, Texture.class);
     }

@@ -22,8 +22,8 @@ public class JavelinGame extends ApplicationAdapter {
 	public JavelinGame(FirebaseInterface FBIC){_FBIC = FBIC; }
 	private GameStateManager gsm;
 	private Assets assets;
-	public static final int WIDTH = 480;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 480;
 	public static final String TITLE = "Javelin Game";
 	public ScreenFactory screenFactory;
 	protected Screen2 screen;
