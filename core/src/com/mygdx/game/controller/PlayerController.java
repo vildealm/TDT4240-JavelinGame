@@ -6,30 +6,46 @@ import java.util.Random;
 public class PlayerController {
 
     private Player player;
+    private int speed;
+    private int dist;
 
     public PlayerController(){
         this.player = new Player();
-
-
+        speed = 0;
+        dist = 0;
     }
-/*
-    public void movement(){
-        if(speedX > 30){
-            speedX--;
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getDist() {
+        return dist;
+    }
+
+    public void setDist(int dist) {
+        this.dist = dist;
+    }
+
+    public void reduceSpeed(){
+        if(speed > 30){
+            speed--;
         }
 
     }
 
-    public void runningControls(){
-
-            if(speedX<400){
-                speedX = speedX + 20;
+    public void increaseSpeed(){
+            if(speed<400){
+                speed = speed + 20;
             }
-
-        posX += Gdx.graphics.getDeltaTime() * speedX;
 
     }
 
+    /*
     public void kast(){
             currentAnim = throwingMan;
 
