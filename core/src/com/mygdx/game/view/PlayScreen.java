@@ -1,6 +1,7 @@
 package com.mygdx.game.view;
 
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -67,17 +68,12 @@ public class PlayScreen implements Screen2 {
     private TextButton runArea;
     private TextButton.TextButtonStyle runAreaStyle;
     private BitmapFont runAreafont;
-    private TextButton throwArea;
-    private TextButton.TextButtonStyle throwAreaStyle;
-    private BitmapFont throwAreafont;
 
     //PLayerController
     private PlayerController playerController;
 
     //Player
     private Player player;
-
-
 
     Animation javelin1;
     private Javelin javelin2;
@@ -96,64 +92,15 @@ public class PlayScreen implements Screen2 {
 
     public PlayScreen(final GameStateManager gsm){
         super();
-        this.game = game;
-        //background = Assets.getTexture(Assets.menuBackground);
-        //playBtn = Assets.getTexture(Assets.gameScreenButton);
+        this.gsm = gsm;
         font = new BitmapFont();
         viewport = new ScreenViewport();
         stage = new Stage(viewport);
-        //viewport.setScreenSize(800, 480);
         Gdx.input.setInputProcessor(stage);
         playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
         playBackground.setPosition(0,0);
         playBackground.setSize(800, 500);
-        //playBackground.setSize(800, 480);
-        //playBackground.setBounds(0, 0, 2500, 400);
-        //playBackground.setBounds(0,0, playBackground.getWidth(), playBackground.getHeight());
 
-
-        //float aspectRatio = (float)Gdx.graphics.getHeight()/(float)Gdx.graphics.getWidth();
-        camera = new OrthographicCamera(1184, 768);
-        //camera.setToOrtho(false, 800, 480);
-
-        camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
-        vector = new Vector3();
-        //stage.addActor(playBackground);
-        //vector.x+=100.0f * Gdx.graphics.getDeltaTime();
-        //vector.y+=100.0f * Gdx.graphics.getDeltaTime();
-        throwButtonImage = new Texture("throwButton.png");
-        Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
-        throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
-        //throwButton.setHeight(200);
-        //throwButton.setWidth(500);
-
-        pauseButtonImage = new Texture("pauseButton.png");
-        Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
-        pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
-        pauseButton.setHeight(100);
-        pauseButton.setWidth(100);
-
-        stage.addActor(throwButton);
-        stage.addActor(pauseButton);
-
-        throwButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                camera.translate(10f, 0f);
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));
-            }
-        });
-
-        pauseButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                //sett state til pauseState
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen", String.valueOf("pause"));
-        this.gsm = gsm;
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
@@ -166,6 +113,22 @@ public class PlayScreen implements Screen2 {
 
         player = new Player();
         player.setScore(0,0);
+
+        camera = new OrthographicCamera(1184, 768);
+        camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
+
+        throwButtonImage = new Texture("throwButton.png");
+        Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
+        throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
+
+        pauseButtonImage = new Texture("pauseButton.png");
+        Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
+        pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
+        pauseButton.setHeight(100);
+        pauseButton.setWidth(100);
+
+        stage.addActor(throwButton);
+        stage.addActor(pauseButton);
 
         //runArea
         runAreafont = new BitmapFont();
@@ -181,30 +144,12 @@ public class PlayScreen implements Screen2 {
         runArea.getLabel().setFontScale(5, 5);
         stage.addActor(runArea);
 
-        //throwArea
-        throwAreafont = new BitmapFont();
-        throwAreafont.setColor(Color.BLACK);
-        throwAreafont.getData().setScale(3);
-        throwAreaStyle = new TextButton.TextButtonStyle();
-        throwAreaStyle.font = runAreafont;
-
-        TextButton throwArea = new TextButton("", runAreaStyle);
-        throwArea.setPosition((Gdx.graphics.getWidth()*2)/3,0);
-        throwArea.setWidth((Gdx.graphics.getWidth())/3);
-        throwArea.setHeight(Gdx.graphics.getHeight());
-        throwArea.getLabel().setFontScale(5, 5);
-        stage.addActor(throwArea);
-
-
-
         //Animations
         man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
         throwMan = new TextureAtlas(Gdx.files.internal("Throwsprites/throw.atlas"));
         runningMan = new Animation(5f/ 20f, man.getRegions());
         throwingMan = new Animation(5f/20f, throwMan.getRegions());
         currentAnim = runningMan;
-
-
 
         runArea.addListener(new ChangeListener(){
             @Override
@@ -213,11 +158,25 @@ public class PlayScreen implements Screen2 {
             }
         });
 
-        throwArea.addListener(new ChangeListener(){
+        throwButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                camera.translate(10f, 0f);
+                /*Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
+                Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));*/
                 random=(600-(posX+50));
                 player.setScore(playerController.getSpeed(), (600-(posX+50)));
+            }
+        });
+
+        pauseButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                //sett state til pauseState
+                Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                Gdx.app.log("#PlayScreen", String.valueOf("pause"));
             }
         });
 
@@ -236,6 +195,7 @@ public class PlayScreen implements Screen2 {
         font.draw(sb, "PlayScreen!", 70, 180);
         
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );*/
+        camera.update();
         elapsedTime += Gdx.graphics.getDeltaTime();
         posX += Gdx.graphics.getDeltaTime() * playerController.getSpeed();
         playerController.reduceSpeed();

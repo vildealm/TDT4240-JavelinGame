@@ -99,7 +99,7 @@ public class MenuScreen implements Screen2 {
         sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        sb.draw(setupSprite, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //sb.draw(setupSprite, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
