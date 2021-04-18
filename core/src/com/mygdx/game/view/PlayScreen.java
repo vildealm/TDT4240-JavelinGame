@@ -151,7 +151,7 @@ public class PlayScreen implements Screen2 {
 
         sb.begin();
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
-        font.draw(sb, "Speed: "+ playerController.getSpeed() + " Dist:"+random+" Score: "+player.getScore(), 300, 600);
+        font.draw(sb, "Speed: "+ playerController.getSpeed() + " Dist:"+random+" Score: "+player.getScore(), 310, 600);
         sb.end();
 
         //Makes line, showing where to throw
