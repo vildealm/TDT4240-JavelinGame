@@ -211,8 +211,9 @@ public class PlayScreen implements Screen2 {
     }*/
 
     public boolean landedJavelin(){
-        if (javelinPosition.y < 12 && javelinPosition.x > 800 ){
+        if (javelinPosition.y < 12 && javelinPosition.x > camera.position.x-800 ){
             velocity = 0;
+
         }
 
         return true;
