@@ -99,7 +99,7 @@ public class PlayScreen implements Screen2 {
         Gdx.input.setInputProcessor(stage);
         playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
         playBackground.setPosition(0,0);
-        playBackground.setSize(800, 500);
+        playBackground.setSize(7000, 500);
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
