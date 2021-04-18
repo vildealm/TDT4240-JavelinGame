@@ -15,8 +15,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -43,8 +41,6 @@ import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
 
 
-import java.util.Random;
-
 public class PlayScreen implements Screen2 {
 
     private BitmapFont font;
@@ -62,12 +58,11 @@ public class PlayScreen implements Screen2 {
     private int posX = 20;
     private int speedX = 0;
     private Animation currentAnim;
-    private ShapeRenderer shapeRenderer;
-    private double attempt;
-    private int random = 1;
+    private int score = 1;
     private TextButton runArea;
     private TextButton.TextButtonStyle runAreaStyle;
     private BitmapFont runAreafont;
+    private boolean thrown;
 
     //PLayerController
     private PlayerController playerController;
@@ -81,7 +76,6 @@ public class PlayScreen implements Screen2 {
     private Sprite playBackground;
     private OrthographicCamera camera;
     private ScreenViewport viewport;
-    public Vector3 vector;
     private Texture throwButtonImage;
     private Texture pauseButtonImage;
 
@@ -89,6 +83,7 @@ public class PlayScreen implements Screen2 {
     private Vector2 javelinVelocity = new Vector2();
     private float javelinStateTime = 0;
     private Vector2 javelinGravity = new Vector2();
+    private int cameraLimit;
 
     public PlayScreen(final GameStateManager gsm){
         super();
@@ -100,13 +95,14 @@ public class PlayScreen implements Screen2 {
         playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
         playBackground.setPosition(0,0);
         playBackground.setSize(800, 500);
+        thrown = false;
+        cameraLimit = 0;
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
-        shapeRenderer = new ShapeRenderer();
 
         playerController = new PlayerController();
         playerController.setSpeed(speedX);
@@ -127,9 +123,6 @@ public class PlayScreen implements Screen2 {
         pauseButton.setHeight(100);
         pauseButton.setWidth(100);
 
-        stage.addActor(throwButton);
-        stage.addActor(pauseButton);
-
         //runArea
         runAreafont = new BitmapFont();
         runAreafont.setColor(Color.BLACK);
@@ -142,6 +135,9 @@ public class PlayScreen implements Screen2 {
         runArea.setWidth((Gdx.graphics.getWidth()*2)/3);
         runArea.setHeight(Gdx.graphics.getHeight());
         runArea.getLabel().setFontScale(5, 5);
+
+        stage.addActor(throwButton);
+        stage.addActor(pauseButton);
         stage.addActor(runArea);
 
         //Animations
@@ -161,13 +157,9 @@ public class PlayScreen implements Screen2 {
         throwButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                camera.translate(10f, 0f);
-                /*Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));*/
-                random=(600-(posX+50));
-                player.setScore(playerController.getSpeed(), (600-(posX+50)));
+                score=(610-(posX+50));
+                player.setScore(playerController.getSpeed(), (610-(posX+50)));
+                thrown = true;
             }
         });
 
@@ -179,7 +171,6 @@ public class PlayScreen implements Screen2 {
                 Gdx.app.log("#PlayScreen", String.valueOf("pause"));
             }
         });
-
     }
 
 
@@ -195,6 +186,15 @@ public class PlayScreen implements Screen2 {
         font.draw(sb, "PlayScreen!", 70, 180);
         
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );*/
+        if(thrown){
+            cameraLimit = (int) (player.getScore()*10);
+            if(camera.position.x < cameraLimit ){
+                camera.translate(10f, 0f);
+            }
+
+
+        }
+
         camera.update();
         elapsedTime += Gdx.graphics.getDeltaTime();
         posX += Gdx.graphics.getDeltaTime() * playerController.getSpeed();
@@ -204,16 +204,8 @@ public class PlayScreen implements Screen2 {
         sb.setProjectionMatrix(camera.combined);
         sb.draw(playBackground, 0,0, 2500, 1000);
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, true),posX, 20);
-        font.draw(sb, "Speed: "+ playerController.getSpeed() + " Dist:"+random+" Score: "+player.getScore(), 310, 600);
+        font.draw(sb, "Speed: "+ playerController.getSpeed() + " Dist:"+score+" Score: "+player.getScore() + " CamX: " +camera.position.x + " Limit: "+ cameraLimit, 0, 600);
         sb.end();
-
-        //Makes line, showing where to throw
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        Gdx.gl.glLineWidth(1);
-        shapeRenderer.setColor(0, 0, 0, 1);
-        shapeRenderer.line(600, 0, 600, 100);
-        shapeRenderer.end();
-
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
@@ -243,6 +235,5 @@ public class PlayScreen implements Screen2 {
     public void dispose() {
         stage.dispose();
         font.dispose();
-        shapeRenderer.dispose();
     }
 }
