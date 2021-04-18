@@ -20,6 +20,7 @@ public class ScreenFactory {
     private static Assets assets;
 
 
+
     public ScreenFactory(GameStateManager gsm, Assets assets){
         this.gsm = gsm;
         this.assets = assets;
@@ -38,7 +39,7 @@ public class ScreenFactory {
             case "PLAY":
                 return new PlayScreen(gsm);
             case "SETTING":
-                return new SetupScreen(gsm);
+                return new SetupScreen(gsm,3);
             default:
                 return null;
         }
