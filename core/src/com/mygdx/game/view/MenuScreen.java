@@ -41,7 +41,7 @@ public class MenuScreen implements Screen2 {
         super();
         this.gsm = gsm;
         stage = new Stage(new ScreenViewport());
-        buttonImage = new Texture("playButton.png");
+        buttonImage = Assets.getTexture(Assets.playButton);
         font = new BitmapFont();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
         //skin = new Skin(Gdx.files.internal("uiskin.json"));
