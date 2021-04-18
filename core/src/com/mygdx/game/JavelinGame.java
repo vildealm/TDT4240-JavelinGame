@@ -5,6 +5,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.controller.FirebaseInterface;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.model.Assets;
@@ -16,6 +17,9 @@ import com.mygdx.game.view.Screen2;
 
 public class JavelinGame extends ApplicationAdapter {
 	private SpriteBatch batch;
+	private FirebaseInterface _FBIC;
+
+	public JavelinGame(FirebaseInterface FBIC){_FBIC = FBIC; }
 	private GameStateManager gsm;
 	private Assets assets;
 	public static final int WIDTH = 800;
@@ -27,9 +31,7 @@ public class JavelinGame extends ApplicationAdapter {
 
 	public static final JavelinGame INSTANCE = new JavelinGame();
 
-	public JavelinGame(){
-
-	}
+	public JavelinGame(){}
 
 	@Override
 	public void create () {
@@ -41,7 +43,7 @@ public class JavelinGame extends ApplicationAdapter {
 		screenFactory = new ScreenFactory(gsm,assets);
 		gsm.push(new LoadingState(gsm));
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		Gdx.app.log("JavelinGamegsm", String.valueOf(gsm));
+		//Gdx.app.log("JavelinGamegsm", String.valueOf(gsm));
 	}
 
 
@@ -64,7 +66,16 @@ public class JavelinGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+		/*if (screen!= null) {
+			screen.render(Gdx.graphics.getDeltaTime(),batch);
+		}*/
+		//gsm.renderBatch(batch);
+		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		//Gdx.gl.glClearColor(1, 0, 0, 1);
+		//gsm.renderScreen(batch);
 
+		Gdx.gl.glClearColor(187.0f/255.0f, 231.0f/255.0f, 255.0f/255.0f, 1.0f);
+		//Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());
 		if(screen!=null){

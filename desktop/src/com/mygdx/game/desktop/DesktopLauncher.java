@@ -10,8 +10,6 @@ public class DesktopLauncher {
 		config.width = JavelinGame.WIDTH;
 		config.height = JavelinGame.HEIGHT;
 		config.title = JavelinGame.TITLE;
-
-
-		new LwjglApplication(new JavelinGame(), config);
+    new LwjglApplication(new JavelinGame(new DesktopInterfaceClass()), config);
 	}
 }
