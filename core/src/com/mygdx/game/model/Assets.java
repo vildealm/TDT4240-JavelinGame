@@ -15,6 +15,13 @@ public class Assets {
     public Texture texturePlayBackground = new Texture(playBackground);
     public static String txtfieldBackground = "textures/backgrounds/txtfield.png";
 
+    public static String onePlayerButton = "onePlayerButton.png";
+    public static String twoPlayerButton = "twoPlayerButton.png";
+    public static String threePlayerButton = "threePlayerButton.png";
+    public static String fourPlayerButton = "fourPlayerButton.png";
+
+
+
 
     //Player
     public static String player = "textures/run/running-1.png";
@@ -37,6 +44,12 @@ public class Assets {
         assetManager.load(playBackground, Texture.class);
         assetManager.load(player, Texture.class);
         assetManager.load(txtfieldBackground, Texture.class);
+
+        //MultiplayerSelection buttons
+        assetManager.load(onePlayerButton, Texture.class);
+        assetManager.load(twoPlayerButton, Texture.class);
+        assetManager.load(threePlayerButton, Texture.class);
+        assetManager.load(fourPlayerButton, Texture.class);
     }
 
     public static boolean update(){

@@ -21,43 +21,58 @@ import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
-import com.mygdx.game.model.states.MultiplayerSelectionState;
 import com.mygdx.game.model.states.SetupState;
 
 
-public class MenuScreen implements Screen2 {
+public class MultiplayerSelectionScreen implements Screen2 {
 
     private BitmapFont font;
     private Stage stage;
-    private Button playButton;
-    //private TextButton.TextButtonStyle playButtonStyle;
-    //private Skin skin;
     private GameStateManager gsm;
     private TextureAtlas buttonAtlas;
-    private Texture buttonImage;
-    private Sprite background;
-    Sprite setupSprite;
+    private Button onePlayerButton;
+    private Button twoPlayerButton;
+    private Button threePlayerButton;
+    private Button fourPlayerButton;
 
-    public MenuScreen(final GameStateManager gsm){
+    private Texture onePlayerButtonImage;
+    private Texture twoPlayerButtonImage;
+    private Texture threePlayerButtonImage;
+    private Texture fourPlayerButtonImage;
+
+    private Sprite background;
+
+
+    public MultiplayerSelectionScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
         stage = new Stage(new ScreenViewport());
-        buttonImage = new Texture("playButton.png");
+
+        onePlayerButtonImage = Assets.getTexture(Assets.onePlayerButton);
+        twoPlayerButtonImage = Assets.getTexture(Assets.twoPlayerButton);
+        threePlayerButtonImage = Assets.getTexture(Assets.threePlayerButton);
+        fourPlayerButtonImage = Assets.getTexture(Assets.fourPlayerButton);
+
         font = new BitmapFont();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
-        //skin = new Skin(Gdx.files.internal("uiskin.json"));
-        //buttonAtlas = new TextureAtlas(Gdx.files.internal("uiskin.atlas"));
-        //skin.addRegions(buttonAtlas);
-        //playButtonStyle = new TextButton.TextButtonStyle();
-        //playButtonStyle.font = font;
-        //playButtonStyle.up = skin.getDrawable("up-button");
-        //playButtonStyle.down = skin.getDrawable("down-button");
-        //playButtonStyle.checked = skin.getDrawable("checked-button");
-        Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), (Gdx.graphics.getHeight()/2)-(playButton.getHeight())/2);
-        //playButton.setHeight(200);
-        //playButton.setWidth(500);
-        stage.addActor(playButton);
+
+
+        //Multiplayer buttons
+        onePlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(onePlayerButtonImage)));
+        twoPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(twoPlayerButtonImage)));
+        threePlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(threePlayerButtonImage)));
+        fourPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(fourPlayerButtonImage)));
+
+        onePlayerButton.setPosition(300,350);
+        twoPlayerButton.setPosition(700,350);
+        threePlayerButton.setPosition(1100,350);
+        fourPlayerButton.setPosition(1500,350);
+
+
+        stage.addActor(onePlayerButton);
+        stage.addActor(twoPlayerButton);
+        stage.addActor(threePlayerButton);
+        stage.addActor(fourPlayerButton);
 
 
 
@@ -84,12 +99,34 @@ public class MenuScreen implements Screen2 {
         Gdx.app.log("ButtonGameState", String.valueOf(gsm));
 
 
-        playButton.addListener(new ChangeListener(){
+        onePlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-               gsm.set(new MultiplayerSelectionState(gsm)); //skal være SetupState
+                gsm.set(new GameState(gsm)); //skal være SetupState
             }
         });
+
+        twoPlayerButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new GameState(gsm)); //skal være SetupState
+            }
+        });
+
+        threePlayerButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new GameState(gsm)); //skal være SetupState
+            }
+        });
+
+        fourPlayerButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new GameState(gsm)); //skal være SetupState
+            }
+        });
+
     }
 
     public void show() { }
@@ -133,3 +170,4 @@ public class MenuScreen implements Screen2 {
 
     }
 }
+
