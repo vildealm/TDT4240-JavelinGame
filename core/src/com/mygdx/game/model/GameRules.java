@@ -14,15 +14,12 @@ public class GameRules {
 
     public GameRules(ArrayList<Player> players){
         players = new ArrayList<Player>();
-        /*for(int i = 0; i< players;i++){
-            name = "player" + i;
-            Player name = new Player();
-            playerList.add(name);
-        }*/
     }
 
     public void playGame(){
+        for (Player player : players ){
 
+        }
     }
 
 
