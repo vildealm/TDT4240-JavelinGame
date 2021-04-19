@@ -21,6 +21,9 @@ public class Assets {
     public static String pauseButton = "buttons/pauseButton.png";
     public static String settingsButton = "buttons/settingButton.png";
     public static String HighscoreButton = "buttons/HighscoreButton.png";
+    public static String QuitButton = "buttons/quitButton.png";
+
+
 
 
 
@@ -51,6 +54,8 @@ public class Assets {
         assetManager.load(pauseButton, Texture.class);
         assetManager.load(settingsButton, Texture.class);
         assetManager.load(HighscoreButton, Texture.class);
+        assetManager.load(QuitButton, Texture.class);
+
 
     }
 

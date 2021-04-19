@@ -35,6 +35,7 @@ public class HighScoreScreen implements Screen2 {
     private GameStateManager gsm;
     private Stage stage;
     Texture buttonImage;
+    Texture quitButton;
 
 
     public HighScoreScreen(FirebaseInterface FBIC, final GameStateManager gsm){
@@ -52,6 +53,7 @@ public class HighScoreScreen implements Screen2 {
 
         stage = new Stage(new ScreenViewport());
         buttonImage = Assets.getTexture(Assets.settingsButton);
+        quitButton = Assets.getTexture(Assets.QuitButton);
 
 
         Button settingButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
@@ -60,6 +62,11 @@ public class HighScoreScreen implements Screen2 {
         settingButton.setWidth(100);
         stage.addActor(settingButton);
 
+        Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
+        stage.addActor(quitButton1);
+        quitButton1.setPosition(900, 500);
+        quitButton1.setHeight(100);
+        quitButton1.setWidth(300);
         Gdx.input.setInputProcessor(stage);
 
         settingButton.addListener(new ChangeListener(){
