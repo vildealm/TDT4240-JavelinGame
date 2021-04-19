@@ -195,8 +195,6 @@ public class PlayScreen implements Screen2 {
                 if (posX < 300) {
                     normalThrow = false;
                 }
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("PlayscreenMan", String.valueOf(normalThrow));
                 throwButton.remove();
             }
         });
@@ -220,8 +218,6 @@ public class PlayScreen implements Screen2 {
     public boolean landedJavelin(){
         if (javelinPosition.y < 12 && javelinPosition.x > camera.position.x-600  ){
             velocity = 0;
-            Gdx.app.setLogLevel(Application.LOG_DEBUG);
-            Gdx.app.log("PlayscreenJavelin", String.valueOf(javelinPosition.x));
 
         }
 
@@ -232,9 +228,6 @@ public class PlayScreen implements Screen2 {
         int upLimit;
         cameraLimit = (int) (player.getScore()*30);
         int downLimit;
-        int screenWidth = Gdx.graphics.getWidth();
-        int velocityTwo = -10;
-        cameraLimit = (int) (player.getScore()*30);
 
         if (normalThrow) {
             upLimit = 800;
