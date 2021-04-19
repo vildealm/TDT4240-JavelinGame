@@ -4,13 +4,23 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.controller.FirebaseInterface;
 import com.mygdx.game.controller.PlayerController;
+import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.components.Score;
+import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 
 import java.util.ArrayList;
@@ -23,8 +33,11 @@ public class HighScoreScreen implements Screen2 {
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;
     private GameStateManager gsm;
+    private Stage stage;
+    Texture buttonImage;
 
-    public HighScoreScreen(FirebaseInterface FBIC, GameStateManager gsm){
+
+    public HighScoreScreen(FirebaseInterface FBIC, final GameStateManager gsm){
         _FBIC = FBIC;
         this.gsm = gsm;
         shapeRenderer = new ShapeRenderer();
@@ -35,22 +48,29 @@ public class HighScoreScreen implements Screen2 {
         //_FBIC.setValueInDb("AndyTorky", 70.0, "NOR");
         highscores = _FBIC.getDataFromDb();
         //pos = _FBIC.getUserPos();
+
+
+        stage = new Stage(new ScreenViewport());
+        buttonImage = Assets.getTexture(Assets.settingsButton);
+
+
+        Button settingButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
+        settingButton.setPosition(1150, 650);
+        settingButton.setHeight(100);
+        settingButton.setWidth(100);
+        stage.addActor(settingButton);
+
+        Gdx.input.setInputProcessor(stage);
+
+        settingButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new GameState(gsm)); //skal være SetupState
+            }
+        });
+
+
     }
-
-/*
-    public void create () {
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        font = new BitmapFont();
-        font.setColor(Color.BLACK);
-        font.getData().setScale(3);
-        _FBIC.initUser();
-        //_FBIC.setValueInDb("AndyTorky", 70.0, "NOR");
-        highscores = _FBIC.getDataFromDb();
-        //pos = _FBIC.getUserPos();
-    }*/
-
-
 
     @Override
     public void show() {
@@ -72,6 +92,7 @@ public class HighScoreScreen implements Screen2 {
         shapeRenderer.end();
         int counter = 1;
         sb.begin();
+
         for(int i=highscores.size()-1; i>= 0; i--){
             font.draw(sb, (counter)+". "+ highscores.get(i).getUsername(), 250, 50+(i*75));
             font.draw(sb, highscores.get(i).getScore().toString(), 650, 50+(i*75));
@@ -79,9 +100,9 @@ public class HighScoreScreen implements Screen2 {
             counter++;
         }
         sb.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
-
-
 
     @Override
     public void resize(int width, int height) {
@@ -107,5 +128,6 @@ public class HighScoreScreen implements Screen2 {
     public void dispose () {
         font.dispose();
         shapeRenderer.dispose();
+        stage.dispose();
     }
 }
