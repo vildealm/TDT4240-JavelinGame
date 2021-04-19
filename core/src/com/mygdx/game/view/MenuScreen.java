@@ -23,9 +23,7 @@ public class MenuScreen implements Screen2 {
     private BitmapFont font;
     private Stage stage;
     private Javelin javelin;
-    private TextButton playButton;
     private TextButton.TextButtonStyle playButtonStyle;
-    private Skin skin;
     private GameStateManager gsm;
     Sprite setupSprite;
 
@@ -36,7 +34,6 @@ public class MenuScreen implements Screen2 {
         javelin = new Javelin();
         stage = new Stage(new ScreenViewport());
         font = new BitmapFont();
-        skin = new Skin();
         setupSprite = new Sprite(Assets.getTexture(Assets.setupBackground));
         Gdx.input.setInputProcessor(stage);
         playButtonStyle = new TextButton.TextButtonStyle();
@@ -55,7 +52,7 @@ public class MenuScreen implements Screen2 {
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-               gsm.set(new GameState(gsm));
+               gsm.set(new SetupState(gsm));
             }
         });
     }

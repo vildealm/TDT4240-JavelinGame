@@ -38,7 +38,7 @@ public class LoadingScreen implements Screen2 {
     @Override
     public void render(float delta, SpriteBatch sb) {
         sb.begin();
-        font.draw(sb, "LOADING...", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        font.draw(sb, "LOADING...", Gdx.graphics.getWidth()/2-100, Gdx.graphics.getHeight()/2);
         font.getData().setScale(4.0f);
         sb.end();
         progress = MathUtils.lerp(progress, Assets.getProgress(), .1f);
