@@ -36,7 +36,7 @@ public class Player extends Actor {
         this.username = username;
     }
 
-    public void setScore(double speed, double dist) {
+    public void calculateScore(double speed, double dist) {
         if(dist<0){
             this.score = 0.0;
         }
@@ -44,6 +44,10 @@ public class Player extends Actor {
             this.score = (double)Math.round(((5*(speed/10)*(500-dist))/500) * 100d) / 100d;
         }
 
+    }
+
+    public void setScore(double score){
+        this.score = score;
     }
 
 

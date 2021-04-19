@@ -43,6 +43,7 @@ import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
 
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayScreen implements Screen2 {
@@ -62,7 +63,7 @@ public class PlayScreen implements Screen2 {
     private int posX = 20;
     private int speedX = 0;
     private Animation currentAnim;
-    private int score = 1;
+    private int distance = 1;
     private TextButton runArea;
     private TextButton.TextButtonStyle runAreaStyle;
     private BitmapFont runAreafont;
@@ -76,6 +77,7 @@ public class PlayScreen implements Screen2 {
 
     //Player
     private Player player;
+    private int round;
 
     Animation javelin1;
     private Javelin javelin2;
@@ -103,6 +105,11 @@ public class PlayScreen implements Screen2 {
     private float javelinStateTime = 0;
     private Vector2 javelinGravity = new Vector2();
 
+    final ArrayList<Player> players = new ArrayList<>();
+    final Player player1 = new Player();
+    final Player player2 = new Player();
+
+
 
     public PlayScreen(final GameStateManager gsm){
         super();
@@ -116,6 +123,7 @@ public class PlayScreen implements Screen2 {
         playBackground.setSize(800, 500);
         thrown = false;
         cameraLimit = 0;
+        round = 1;
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -126,12 +134,41 @@ public class PlayScreen implements Screen2 {
         playerController = new PlayerController();
         playerController.setSpeed(speedX);
 
-        player = new Player();
-        player.setScore(0,0);
+        player1.setUsername("Ed");
+        player1.setCountry("NOR");
+        player2.setUsername("Boe");
+        player2.setCountry("NOR");
+        if(players.isEmpty()){
+            players.add(player1);
+            players.add(player2);
+        }
+
+        player = players.get(round-1);
+
+        //this.player = player;
+        //this.player.setScore(0,0);
 
         camera = new OrthographicCamera(1184, 768);
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
 
+        addButtons();
+
+        //Animations
+        man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
+        throwMan = new TextureAtlas(Gdx.files.internal("Throwsprites/throw.atlas"));
+        runningMan = new Animation(5f/ 20f, man.getRegions());
+        throwingMan = new Animation( 0.41f, throwMan.getRegions());
+        currentAnim = runningMan;
+
+    }
+
+      /*  public void javelinControl(){
+
+        posX += Gdx.graphics.getDeltaTime() * speedX;
+
+    }*/
+
+    public void addButtons(){
         throwButtonImage = Assets.getTexture(Assets.throwButton);
         final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
         throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
@@ -159,13 +196,6 @@ public class PlayScreen implements Screen2 {
         stage.addActor(pauseButton);
         stage.addActor(runArea);
 
-        //Animations
-        man = new TextureAtlas(Gdx.files.internal("Runsprites/run.atlas"));
-        throwMan = new TextureAtlas(Gdx.files.internal("Throwsprites/throw.atlas"));
-        runningMan = new Animation(5f/ 20f, man.getRegions());
-        throwingMan = new Animation( 0.41f, throwMan.getRegions());
-        currentAnim = runningMan;
-
         runArea.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -181,16 +211,12 @@ public class PlayScreen implements Screen2 {
                 currentAnim = throwingMan;
                 luup = false;
                 posX += Gdx.graphics.getDeltaTime() * speedX;
-                /*Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));*/
-                player.setScore(playerController.getSpeed(), (600-(posX+50)));
-                score=(680-(posX+50));
-                player.setScore(playerController.getSpeed(), (680-(posX+50)));
+                player.calculateScore(playerController.getSpeed(), (600-(posX+50)));
+                distance=(680-(posX+50));
                 thrown = true;
                 playerController.setSpeed(0);
                 throwButton.remove();
+                reset();
             }
         });
 
@@ -204,16 +230,9 @@ public class PlayScreen implements Screen2 {
         });
     }
 
-      /*  public void javelinControl(){
-
-        posX += Gdx.graphics.getDeltaTime() * speedX;
-
-    }*/
-
     public boolean landedJavelin(){
         if (javelinPosition.y < 12 && javelinPosition.x > camera.position.x-800 ){
             velocity = 0;
-
         }
 
         return true;
@@ -231,7 +250,6 @@ public class PlayScreen implements Screen2 {
         if(javelinPosition.x > 900){
             javelinPosition.y = (float) (javelinPosition.y - (-velocity * deltaTime));
             javelinSprite.setRotation(-20);
-
         }
 
         return javelinPosition;
@@ -278,11 +296,26 @@ public class PlayScreen implements Screen2 {
 
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, luup), posX, 20);
         landedJavelin();
-        font.draw(sb, "Speed: "+ playerController.getSpeed() + " Dist:"+score+" Score: "+player.getScore() + " Limit: "+ cameraLimit, camera.position.x-300, 600);
+        font.draw(sb, "Player: "+ player.getUsername() + " Dist:"+distance+" Score: "+player.getScore()+" Round: "+round, camera.position.x-300, 600);
         sb.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+    }
+
+    public void reset(){
+        players.set(round-1, player);
+        this.posX = 20;
+        this.speedX = 0;
+        currentAnim = runningMan;
+        throwIt = false;
+        luup = true;
+        thrown = false;
+        addButtons();
+        camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
+        round++;
+        
+        player = players.get(round-1);
     }
 
     @Override

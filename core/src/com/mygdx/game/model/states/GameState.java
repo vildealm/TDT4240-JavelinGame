@@ -18,7 +18,6 @@ public class GameState extends State{
         super(gsm);
         font = new BitmapFont();
         currentScreen = ScreenFactory.getScreen("PLAY");
-
     }
 
     @Override
