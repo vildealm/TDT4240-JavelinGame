@@ -37,7 +37,7 @@ public class SetupScreen implements Screen2{
     private Player player;
     private int xPosition = 350;
     //Sprites
-    Sprite player1Sprite,player2Sprite,player3Sprite,player4Sprite;
+    Sprite player1Sprite;
     //Components
     private ArrayList<Player> players;
     private ArrayList<inputPlayer> elements;
@@ -55,10 +55,6 @@ public class SetupScreen implements Screen2{
        //Components
         elements = new ArrayList<>();
         players = new ArrayList<>();
-        player1Sprite = new Sprite(Assets.getTexture(Assets.player1));
-        player2Sprite = new Sprite(Assets.getTexture(Assets.player2));
-        player3Sprite = new Sprite(Assets.getTexture(Assets.player3));
-        player4Sprite = new Sprite(Assets.getTexture(Assets.player4));
 
         //Button
         font = new BitmapFont();
@@ -100,12 +96,6 @@ public class SetupScreen implements Screen2{
     public void show() {}
 
     public void render(float delta, SpriteBatch sb) {
-        sb.begin();
-        sb.draw(player1Sprite, 50,250, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        sb.draw(player2Sprite, 470,250, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        sb.draw(player3Sprite, 880,250, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        sb.draw(player4Sprite, 1280,250, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

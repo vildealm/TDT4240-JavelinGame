@@ -39,7 +39,7 @@ public class ScreenFactory {
             case "PLAY":
                 return new PlayScreen(gsm);
             case "SETTING":
-                return new SetupScreen(gsm,4);
+                return new SetupScreen(gsm,2);
             default:
                 return null;
         }
