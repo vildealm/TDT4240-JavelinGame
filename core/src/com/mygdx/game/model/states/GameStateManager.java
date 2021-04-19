@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
+import com.mygdx.game.model.GameRules;
+import com.mygdx.game.model.components.Player;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class GameStateManager {
@@ -12,11 +15,13 @@ public class GameStateManager {
     private Stack<State> states;
     public JavelinGame game;
     private SpriteBatch sb;
+    private GameRules gameRules;
 
     public GameStateManager(JavelinGame game)
     {
         states = new Stack<State>();
         this.game = game;
+        this.gameRules = new GameRules();
     }
 
     public void push(State state){
@@ -54,5 +59,13 @@ public class GameStateManager {
 
     public Stack getStates() {
         return states;
+    }
+
+    public GameRules getGameRules() {
+        return this.gameRules;
+    }
+
+    public void setGameRules(ArrayList<Player> players) {
+        this.gameRules.setPlayers(players);
     }
 }

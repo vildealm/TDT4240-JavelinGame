@@ -2,11 +2,17 @@ package com.mygdx.game.model.states;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.view.Screen2;
 
 public class HighscoreState extends State{
-    public HighscoreState(GameStateManager gsm) {
+
+    Screen2 currentScreen;
+
+    public HighscoreState(GameStateManager gsm){
         super(gsm);
+        currentScreen = ScreenFactory.getScreen("HIGHSCORE");
+        renderScreen();
     }
 
     @Override
@@ -23,6 +29,8 @@ public class HighscoreState extends State{
     @Override
     public void renderScreen() {
 
+        gsm.game.setScreen(currentScreen);
+
     }
 
     @Override
@@ -32,6 +40,6 @@ public class HighscoreState extends State{
 
     @Override
     public Screen2 getScreen() {
-        return null;
+        return currentScreen;
     }
 }

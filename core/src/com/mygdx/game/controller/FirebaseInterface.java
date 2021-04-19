@@ -1,6 +1,7 @@
 package com.mygdx.game.controller;
 
 import com.mygdx.game.model.components.Player;
+import com.mygdx.game.model.components.Score;
 
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ public interface FirebaseInterface {
 
     public void initUser();
 
-    public ArrayList<Player> getDataFromDb();
+    public ArrayList<Score> getDataFromDb();
 
     public void setOnValueChangedListener();
 

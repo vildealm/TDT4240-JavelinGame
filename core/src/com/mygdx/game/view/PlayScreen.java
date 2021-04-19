@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
+import com.mygdx.game.model.states.EndState;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.sun.org.apache.xpath.internal.operations.Or;
@@ -77,7 +78,6 @@ public class PlayScreen implements Screen2 {
     //Player
     private Player player;
 
-    Animation javelin1;
     private Javelin javelin2;
     private Stage stage;
     private Sprite playBackground;
@@ -93,16 +93,13 @@ public class PlayScreen implements Screen2 {
 
     private boolean luup = true;
 
-
     private Vector2 javelinPosition = new Vector2(550, 50);
-
 
     private Vector2 javelinVelocityX = new Vector2();
     private Vector2 javelinVelocityY = new Vector2();
 
     private float javelinStateTime = 0;
     private Vector2 javelinGravity = new Vector2();
-
 
     public PlayScreen(final GameStateManager gsm){
         super();
@@ -197,7 +194,7 @@ public class PlayScreen implements Screen2 {
         pauseButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //sett state til pauseState
+                gsm.set(new EndState(gsm));//sett state til pauseState
                 Gdx.app.setLogLevel(Application.LOG_DEBUG);
                 Gdx.app.log("#PlayScreen", String.valueOf("pause"));
             }
@@ -233,6 +230,7 @@ public class PlayScreen implements Screen2 {
             javelinSprite.setRotation(-20);
 
         }
+
 
         return javelinPosition;
     }

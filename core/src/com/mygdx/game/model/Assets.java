@@ -20,6 +20,7 @@ public class Assets {
     public static String throwButton = "buttons/throwButton.png";
     public static String pauseButton = "buttons/pauseButton.png";
     public static String settingsButton = "buttons/settingButton.png";
+    public static String HighscoreButton = "buttons/HighscoreButton.png";
 
 
 
@@ -49,6 +50,7 @@ public class Assets {
         assetManager.load(throwButton, Texture.class);
         assetManager.load(pauseButton, Texture.class);
         assetManager.load(settingsButton, Texture.class);
+        assetManager.load(HighscoreButton, Texture.class);
 
     }
 
