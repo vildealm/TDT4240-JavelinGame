@@ -27,7 +27,6 @@ public class ScreenFactory {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ScreenFactorygsm", String.valueOf(gsm.getStates()));
     }
-    //public static Engine engine = new Engine();
 
 
     public static Screen2 getScreen(String screenType){
@@ -44,8 +43,4 @@ public class ScreenFactory {
                 return null;
         }
     }
-
-    /*public void setEngine(Engine engine){
-        this.engine = engine;
-    }*/
 }
