@@ -72,6 +72,7 @@ public class HighScoreScreen implements Screen2 {
         settingButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                dispose();
                 gsm.set(new GameState(gsm)); //skal være SetupState
             }
         });
