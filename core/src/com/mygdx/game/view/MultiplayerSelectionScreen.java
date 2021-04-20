@@ -102,28 +102,28 @@ public class MultiplayerSelectionScreen implements Screen2 {
         onePlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                gsm.set(new GameState(gsm)); //skal være SetupState
+                gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
 
         twoPlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                gsm.set(new GameState(gsm)); //skal være SetupState
+                gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
 
         threePlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                gsm.set(new GameState(gsm)); //skal være SetupState
+                gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
 
         fourPlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                gsm.set(new GameState(gsm)); //skal være SetupState
+                gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
 
