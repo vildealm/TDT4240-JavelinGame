@@ -51,6 +51,4 @@ public class Player extends Actor {
         this.country = country;
     }
 
-
-
 }

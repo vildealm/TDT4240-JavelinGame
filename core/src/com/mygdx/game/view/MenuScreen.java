@@ -37,6 +37,7 @@ public class MenuScreen implements Screen2 {
     private Sprite background;
     Sprite setupSprite;
 
+
     public MenuScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
@@ -66,8 +67,6 @@ public class MenuScreen implements Screen2 {
 
 
         font = new BitmapFont();
-
-        /*skin = new Skin();
         setupSprite = new Sprite(Assets.getTexture(Assets.setupBackground));
         Gdx.input.setInputProcessor(stage);
         playButtonStyle = new TextButton.TextButtonStyle();
@@ -77,7 +76,7 @@ public class MenuScreen implements Screen2 {
         playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         playButton.getLabel().setFontScale(5, 5);
 
-        stage.addActor(playButton);*/
+        stage.addActor(playButton);
 
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ButtonGameState", String.valueOf(gsm));
@@ -100,6 +99,8 @@ public class MenuScreen implements Screen2 {
         //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
         //sb.draw(setupSprite, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        sb.draw(setupSprite, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

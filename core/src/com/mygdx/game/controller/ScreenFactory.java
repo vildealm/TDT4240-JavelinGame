@@ -30,7 +30,6 @@ public class ScreenFactory {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ScreenFactorygsm", String.valueOf(gsm.getStates()));
     }
-    //public static Engine engine = new Engine();
 
 
     public static Screen2 getScreen(String screenType){
@@ -42,7 +41,7 @@ public class ScreenFactory {
             case "PLAY":
                 return new PlayScreen(gsm);
             case "SETTING":
-                return new SetupScreen(gsm);
+                return new SetupScreen(gsm,2);
             case "END":
                 return new EndScreen(gsm);
             case "HIGHSCORE":
@@ -51,8 +50,4 @@ public class ScreenFactory {
                 return null;
         }
     }
-
-    /*public void setEngine(Engine engine){
-        this.engine = engine;
-    }*/
 }
