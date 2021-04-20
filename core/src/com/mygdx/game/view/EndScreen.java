@@ -24,6 +24,9 @@ import com.mygdx.game.model.states.HighscoreState;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class EndScreen implements Screen2 {
     private Texture HSbuttonTexture;
@@ -36,7 +39,6 @@ public class EndScreen implements Screen2 {
     private Stage stage;
     private Viewport viewport;
     private Texture highscoreImage;
-
     private BitmapFont font;
 
     public EndScreen(final GameStateManager gsm) {
@@ -49,6 +51,8 @@ public class EndScreen implements Screen2 {
 
         highscoreImage = Assets.getTexture(Assets.HighscoreButton);
         font = new BitmapFont();
+        font.setColor(Color.BLACK);
+        font.getData().setScale(3);
 
         Button highscoreButton = new Button(new TextureRegionDrawable(new TextureRegion(highscoreImage)));
         highscoreButton.setPosition(950, 650);
@@ -58,7 +62,6 @@ public class EndScreen implements Screen2 {
         stage.addActor(highscoreButton);
         Gdx.input.setInputProcessor(stage);
 
-
         highscoreButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -66,15 +69,30 @@ public class EndScreen implements Screen2 {
             }
         });
 
+        players = gsm.getGameRules().getPlayers();
+
+
     }
     @Override
     public void show() {
+
     }
 
     @Override
     public void render(float delta, SpriteBatch sb) {
 
         sb.begin();
+        font.draw(sb,  "SCORES: ", Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight()/2 +200 );
+        Collections.sort(players, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return p1.getScore().compareTo(p2.getScore());
+            }
+        });
+        for (int i = 0; i< players.size(); i++){
+            font.draw(sb, players.get(i).getUsername() + ": " + players.get(i).getScore(), Gdx.graphics.getWidth()/2 -100, 100 + (i*100));
+        }
+
 
         sb.end();
         stage.act(Gdx.graphics.getDeltaTime());

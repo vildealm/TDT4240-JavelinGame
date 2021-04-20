@@ -250,6 +250,8 @@ public class PlayScreen implements Screen2 {
             public void changed(ChangeEvent event, Actor actor){
                 reset();
                 nextThrowButton.remove();
+
+                gsm.getGameRules().setPlayers(players);
             }
         });
 
@@ -413,6 +415,8 @@ public class PlayScreen implements Screen2 {
     public void hide() {
 
     }
+
+
 
     @Override
     public void dispose() {
