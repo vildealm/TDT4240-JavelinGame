@@ -23,20 +23,14 @@ public class Assets {
     public static String HighscoreButton = "buttons/HighscoreButton.png";
     public static String QuitButton = "buttons/quitButton.png";
 
-
-
-
-
     public static String onePlayerButton = "onePlayerButton.png";
     public static String twoPlayerButton = "twoPlayerButton.png";
     public static String threePlayerButton = "threePlayerButton.png";
     public static String fourPlayerButton = "fourPlayerButton.png";
 
-
-
-
-    //Player
+    //Sprite
     public static String player = "textures/run/running-1.png";
+    public static String javelin = "textures/sprites/javelin.png";
 
 
     public Assets(){
@@ -56,6 +50,7 @@ public class Assets {
         assetManager.load(playBackground, Texture.class);
         assetManager.load(player, Texture.class);
         assetManager.load(txtfieldBackground, Texture.class);
+        assetManager.load(javelin, Texture.class);
 
         //MultiplayerSelection buttons
         assetManager.load(onePlayerButton, Texture.class);
