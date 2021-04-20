@@ -93,11 +93,10 @@ public class PlayScreen implements Screen2 {
     private Sprite javelinSprite = new Sprite(Assets.getTexture(Assets.javelin));
 
     private double velocity = -17.0;
-
-    private boolean luup = true;
-
+    private boolean loop = true;
 
     private Vector2 javelinPosition = new Vector2(550, 55);
+
 
 
     private Vector2 javelinVelocityX = new Vector2();
@@ -215,10 +214,11 @@ public class PlayScreen implements Screen2 {
                 camera.translate(10f, 0f);
                 throwIt = true;
                 currentAnim = throwingMan;
-                luup = false;
+                loop = false;
                 posX += Gdx.graphics.getDeltaTime() * speedX;
                 javelinPosition.x = posX;
                 throwIt = true;
+
 
 
 
@@ -237,6 +237,9 @@ public class PlayScreen implements Screen2 {
                 }*/
                 distance=(680-(posX+50));
                 thrown = true;
+                System.out.println("javeling pos x : " + javelinPosition.x);
+                System.out.println("is javelin thrown?" +thrown);
+
                 playerController.setSpeed(0);
                 if (posX < 300) {
                     normalThrow = false;
@@ -344,12 +347,12 @@ public class PlayScreen implements Screen2 {
         sb.draw(playBackground, 0,0, 11000, 1000);
 
         if(throwIt) {
-            javelinSprite.setPosition(updateJavelinPosition().x, updateJavelinPosition().y);
+            javelinSprite.setPosition(updateJavelinPosition(normalThrow).x, updateJavelinPosition(normalThrow).y);
             javelinSprite.draw(sb);
         }
 
 
-        sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, luup), posX, 20);
+        sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
         landedJavelin();
         font.draw(sb, "Player: "+ player.getUsername() + " Dist:"+distance+" Score: "+player.getScore()+" Round: "+round, camera.position.x-300, 600);
         sb.end();
@@ -383,10 +386,15 @@ public class PlayScreen implements Screen2 {
         this.speedX = 0;
         currentAnim = runningMan;
         throwIt = false;
-        luup = true;
+        loop = true;
         thrown = false;
+        normalThrow = true;
+        velocity = -17.0;
+        javelinSprite.setRotation(30);
+        javelinPosition.x = posX;
         addButtons();
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
+
 
     }
 
