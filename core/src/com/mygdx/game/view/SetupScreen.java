@@ -41,16 +41,18 @@ public class SetupScreen implements Screen2{
     private ArrayList<inputPlayer> elements;
     private inputPlayer inputPlayer;
     private Sprite background;
+    private int numberOfPlayers;
     //Button
     private TextButton.TextButtonStyle playButtonStyle;
 
 
-    public SetupScreen(final GameStateManager gsm, int numberOfPlayers){
+    public SetupScreen(final GameStateManager gsm){
         super();
         ScreenViewport viewport = new ScreenViewport();
         this.gsm = gsm;
         this.stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
+        this.numberOfPlayers = gsm.getGameRules().getNumberOfPlayers();
 
        //Components
         elements = new ArrayList<>();
@@ -65,7 +67,7 @@ public class SetupScreen implements Screen2{
         playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         playButton.getLabel().setFontScale(5, 5);
         stage.addActor(playButton);
-        for(int i=0; i<numberOfPlayers; i++) {
+        for(int i=0; i<this.numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition);
             player = new Player();
             players.add(player);
@@ -85,6 +87,7 @@ public class SetupScreen implements Screen2{
                         players.get(i).setUsername(elements.get(i).getUsername());
                         players.get(i).setCountry(elements.get(i).getCountry());
                     }
+                    gsm.getGameRules().setPlayers(players);
                     gsm.set(new GameState(gsm));
                 }else{
                     stage.addActor(inputPlayer.getErrorMsg());

@@ -19,9 +19,12 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
+import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.SetupState;
+
+import java.util.ArrayList;
 
 
 public class MultiplayerSelectionScreen implements Screen2 {
@@ -40,6 +43,10 @@ public class MultiplayerSelectionScreen implements Screen2 {
     private Texture threePlayerButtonImage;
     private Texture fourPlayerButtonImage;
 
+    private int xPos;
+
+    private ArrayList<Button> playerButtons;
+
     private Sprite background;
 
 
@@ -54,6 +61,7 @@ public class MultiplayerSelectionScreen implements Screen2 {
         fourPlayerButtonImage = Assets.getTexture(Assets.fourPlayerButton);
 
         font = new BitmapFont();
+        playerButtons = new ArrayList<>();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
 
 
@@ -63,29 +71,21 @@ public class MultiplayerSelectionScreen implements Screen2 {
         threePlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(threePlayerButtonImage)));
         fourPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(fourPlayerButtonImage)));
 
-        onePlayerButton.setPosition(100,275);
-        twoPlayerButton.setPosition(350,275);
-        threePlayerButton.setPosition(600,275);
-        fourPlayerButton.setPosition(850,275);
+        playerButtons.add(onePlayerButton);
+        playerButtons.add(twoPlayerButton);
+        playerButtons.add(threePlayerButton);
+        playerButtons.add(fourPlayerButton);
 
-        onePlayerButton.setTransform(true);
-        onePlayerButton.setScale(0.75f);
+        xPos = 100;
 
-        twoPlayerButton.setTransform(true);
-        twoPlayerButton.setScale(0.75f);
+        for(Button i : playerButtons){
+            i.setPosition(xPos,275);
+            xPos += 250;
+            i.setTransform(true);
+            i.setScale(0.75f);
+            stage.addActor(i);
+        }
 
-        threePlayerButton.setTransform(true);
-        threePlayerButton.setScale(0.75f);
-
-        fourPlayerButton.setTransform(true);
-        fourPlayerButton.setScale(0.75f);
-
-
-
-        stage.addActor(onePlayerButton);
-        stage.addActor(twoPlayerButton);
-        stage.addActor(threePlayerButton);
-        stage.addActor(fourPlayerButton);
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
 
@@ -96,6 +96,7 @@ public class MultiplayerSelectionScreen implements Screen2 {
         onePlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                gsm.getGameRules().setNumberOfPlayers(1);
                 gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
@@ -103,6 +104,7 @@ public class MultiplayerSelectionScreen implements Screen2 {
         twoPlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                gsm.getGameRules().setNumberOfPlayers(2);
                 gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
@@ -110,6 +112,7 @@ public class MultiplayerSelectionScreen implements Screen2 {
         threePlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                gsm.getGameRules().setNumberOfPlayers(3);
                 gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
@@ -117,6 +120,7 @@ public class MultiplayerSelectionScreen implements Screen2 {
         fourPlayerButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                gsm.getGameRules().setNumberOfPlayers(4);
                 gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
