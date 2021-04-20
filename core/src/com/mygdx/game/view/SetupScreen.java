@@ -6,8 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -18,7 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.components.inputPlayer;
@@ -44,6 +49,10 @@ public class SetupScreen implements Screen2{
     private int numberOfPlayers;
     //Button
     private TextButton.TextButtonStyle playButtonStyle;
+    private Texture buttonImage;
+    private Texture playerBox;
+    private TextureRegion region;
+    private Image box;
 
 
     public SetupScreen(final GameStateManager gsm){
@@ -53,20 +62,21 @@ public class SetupScreen implements Screen2{
         this.stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
         this.numberOfPlayers = gsm.getGameRules().getNumberOfPlayers();
-
        //Components
         elements = new ArrayList<>();
         players = new ArrayList<>();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
-
+        playerBox = Assets.getTexture(Assets.playerBackground);
+        region = new TextureRegion(playerBox,50,60,400, 400);
+        box = new Image(region);
         //Button
         font = new BitmapFont();
-        playButtonStyle = new TextButton.TextButtonStyle();
-        playButtonStyle.font = font;
-        TextButton playButton = new TextButton("PLAY", playButtonStyle);
-        playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-        playButton.getLabel().setFontScale(5, 5);
+        buttonImage = Assets.getTexture(Assets.playButton);
+        Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
+        playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), 100);
         stage.addActor(playButton);
+        stage.addActor(box);
+
         for(int i=0; i<this.numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition);
             player = new Player();

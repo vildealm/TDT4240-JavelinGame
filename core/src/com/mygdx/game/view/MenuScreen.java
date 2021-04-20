@@ -46,10 +46,6 @@ public class MenuScreen implements Screen2 {
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
         playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), (Gdx.graphics.getHeight()/2)-(playButton.getHeight())/2);
         stage.addActor(playButton);
-        font = new BitmapFont();
-
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("ButtonGameState", String.valueOf(gsm));
 
         playButton.addListener(new ChangeListener(){
             @Override
@@ -63,7 +59,6 @@ public class MenuScreen implements Screen2 {
 
     public void render(float delta, SpriteBatch sb) {
         sb.begin();
-        font.draw(sb, "MENU", 70, 100);
         sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         sb.end();
         stage.act(Gdx.graphics.getDeltaTime());

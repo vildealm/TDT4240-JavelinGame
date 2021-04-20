@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -18,14 +20,12 @@ import com.mygdx.game.model.Assets;
 
 public class inputPlayer extends Actor {
 
-    Label username;
-    Label country;
-    Label errorMsg;
-    TextField textfield;
-    SelectBox sb;
+    private Label username, country, errorMsg;
+    private TextField textfield;
+    private SelectBox sb;
 
-    //Sprite
-    Texture txtSprite = Assets.getTexture(Assets.txtfieldBackground);
+    private Texture txtSprite = Assets.getTexture(Assets.txtfieldBackground);
+
     BitmapFont font = new BitmapFont();
 
 
@@ -34,7 +34,7 @@ public class inputPlayer extends Actor {
         this.textfield = makeInputField(xPosition + 150);
         this.country = makeLabel("Choose Country",Color.BLACK, xPosition, 300);
         this.username = makeUsernameLabel(Color.BLACK, xPosition, 350);
-        this.errorMsg = makeLabel("Unvalid Inputs",Color.BLACK, 900, 500);
+        this.errorMsg = makeLabel("Invalid Inputs",Color.BLACK, 900, 500);
     }
 
     public TextField getTextfield(){
