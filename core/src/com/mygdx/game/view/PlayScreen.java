@@ -391,7 +391,6 @@ public class PlayScreen implements Screen2 {
         addButtons();
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
 
-
     }
 
     @Override
