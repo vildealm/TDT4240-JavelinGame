@@ -101,10 +101,6 @@ public class MultiplayerSelectionScreen implements Screen2 {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ButtonGameState", String.valueOf(gsm));
 
-
-
-
-
     }
 
     public void show() { }
