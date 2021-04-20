@@ -388,6 +388,7 @@ public class PlayScreen implements Screen2 {
         velocity = -17.0;
         javelinSprite.setRotation(30);
         javelinPosition.x = posX;
+        javelinPosition.y = 55;
         addButtons();
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
 
