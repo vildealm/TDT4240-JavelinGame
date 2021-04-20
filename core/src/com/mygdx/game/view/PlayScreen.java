@@ -87,8 +87,7 @@ public class PlayScreen implements Screen2 {
     private Texture throwButtonImage;
     private Texture pauseButtonImage;
 
-    private Texture javelinTexture = new Texture("javelin.png");
-    private Sprite javelinSprite = new Sprite(javelinTexture);
+    private Sprite javelinSprite = new Sprite(Assets.getTexture(Assets.javelin));
 
     private double velocity = -17.0;
 
