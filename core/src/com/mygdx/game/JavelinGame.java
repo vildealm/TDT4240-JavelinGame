@@ -55,6 +55,10 @@ public class JavelinGame extends ApplicationAdapter {
 		return batch;
 	}
 
+	public FirebaseInterface getFirebaseInterface(){
+		return _FBIC;
+	}
+
 	public void setScreen (Screen2 screen) {
 		if (this.screen != null) this.screen.hide();
 		this.screen = screen;

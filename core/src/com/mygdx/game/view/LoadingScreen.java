@@ -27,7 +27,6 @@ public class LoadingScreen implements Screen2 {
         this.assets = assets;
         stage = new Stage(new ScreenViewport());
         font = new BitmapFont();
-        font.getData().setScale(4,4);
         this.progress = 0f;
     }
 
@@ -39,8 +38,7 @@ public class LoadingScreen implements Screen2 {
     @Override
     public void render(float delta, SpriteBatch sb) {
         sb.begin();
-        font.draw(sb, "LOADING...", (Gdx.graphics.getWidth()/2)-160, (Gdx.graphics.getHeight()/2));
-        //font.draw(sb, "LOADING...", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        font.draw(sb, "LOADING...", Gdx.graphics.getWidth()/2-100, Gdx.graphics.getHeight()/2);
         font.getData().setScale(4.0f);
         sb.end();
         progress = MathUtils.lerp(progress, Assets.getProgress(), .1f);
@@ -48,7 +46,6 @@ public class LoadingScreen implements Screen2 {
             dispose();
             gsm.set(new MenuState(gsm));
         }
-        Gdx.gl.glClearColor(165.0f/255.0f, 214.0f/255.0f, 244.0f/255.0f, 1.0f);
         stage.draw();
     }
 

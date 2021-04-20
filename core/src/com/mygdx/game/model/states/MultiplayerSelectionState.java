@@ -1,28 +1,34 @@
 package com.mygdx.game.model.states;
-
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.view.Screen2;
 
-public class EndState extends State {
+public class MultiplayerSelectionState extends State {
+    private BitmapFont font;
     private Screen2 currentScreen;
 
-    public EndState(GameStateManager gsm) {
+    public MultiplayerSelectionState(GameStateManager gsm){
         super(gsm);
-        currentScreen = ScreenFactory.getScreen("END");
+
+        font = new BitmapFont();
+        currentScreen = ScreenFactory.getScreen("MULTIPLAYER");
         renderScreen();
     }
 
     @Override
     public void handleInput() {
 
+
+
     }
 
     @Override
     public void update(float dt) {
-
+        //handleInput();
     }
+
 
 
     @Override
@@ -30,8 +36,7 @@ public class EndState extends State {
         gsm.game.setScreen(currentScreen);
     }
 
-    @Override
-    public void dispose() {
+    public void dispose(){
 
     }
 
@@ -40,3 +45,4 @@ public class EndState extends State {
         return currentScreen;
     }
 }
+

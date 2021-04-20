@@ -41,7 +41,7 @@ public class Player extends Actor {
             this.score = 0.0;
         }
         else{
-            this.score = (double)Math.round(((5*(speed/10)*(500-dist))/500) * 100d) / 100d;
+            this.score = (double)Math.round(((5*(speed/10)*(650-dist))/650) * 100d) / 100d;
         }
 
     }
@@ -54,7 +54,5 @@ public class Player extends Actor {
     public void setCountry(String country) {
         this.country = country;
     }
-
-
 
 }

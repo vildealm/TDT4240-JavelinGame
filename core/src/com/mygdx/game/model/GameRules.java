@@ -10,18 +10,35 @@ import java.util.ArrayList;
 
 public class GameRules {
 
-    private GameStateManager gsm;
+    private int numberOfPlayers;
     private String name;
     private ArrayList<Player> players;
-    double tempScore;
+    private Player player1;
 
-    public GameRules(GameStateManager gsm, ArrayList<Player> players){
-        this.gsm = gsm;
+    public GameRules(){
+        this.player1 = new Player();
+        players = new ArrayList<Player>();
+        players.add(player1);
+        /*for(int i = 0; i< players;i++){
+            name = "player" + i;
+            Player name = new Player();
+            playerList.add(name);
+        }*/
+    }
+
+
+    public void playGame(){
+        for (Player player : players ){
+
+        }
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 
-    public void playGame(){
-
+    public ArrayList<Player> getPlayers() {
+        return this.players;
     }
 
 

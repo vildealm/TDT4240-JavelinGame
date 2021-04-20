@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
+import com.mygdx.game.model.states.EndState;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.sun.org.apache.xpath.internal.operations.Or;
@@ -72,6 +73,7 @@ public class PlayScreen implements Screen2 {
     private double deltaTime = 0.3f;
 
     private boolean throwIt = false;
+    private boolean normalThrow = true;
     //PLayerController
     private PlayerController playerController;
 
@@ -79,7 +81,6 @@ public class PlayScreen implements Screen2 {
     private Player player;
     private int round;
 
-    Animation javelin1;
     private Javelin javelin2;
     private Stage stage;
     private Sprite playBackground;
@@ -89,14 +90,14 @@ public class PlayScreen implements Screen2 {
     private Texture nextThrowImage;
     private Texture pauseButtonImage;
 
-    private Texture javelinTexture = new Texture("javelin.png");
-    private Sprite javelinSprite = new Sprite(javelinTexture);
+    private Sprite javelinSprite = new Sprite(Assets.getTexture(Assets.javelin));
 
-    private double velocity = -10.0;
+    private double velocity = -17.0;
 
     private boolean luup = true;
 
-    private Vector2 javelinPosition = new Vector2(550, 50);
+
+    private Vector2 javelinPosition = new Vector2(550, 55);
 
 
     private Vector2 javelinVelocityX = new Vector2();
@@ -216,6 +217,19 @@ public class PlayScreen implements Screen2 {
                 currentAnim = throwingMan;
                 luup = false;
                 posX += Gdx.graphics.getDeltaTime() * speedX;
+                javelinPosition.x = posX;
+                throwIt = true;
+
+
+
+
+                /*Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
+                Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));*/
+                //player.setScore(playerController.getSpeed(), (600-(posX+50)));
+                distance=(680-(posX+50));
+                //player.setScore(playerController.getSpeed(), (680-(posX+50)));
                 //double score = player.getScore();
                 player.calculateScore(playerController.getSpeed(), (680-(posX+50)));
                 /*if(score > player.getScore()){
@@ -224,6 +238,9 @@ public class PlayScreen implements Screen2 {
                 distance=(680-(posX+50));
                 thrown = true;
                 playerController.setSpeed(0);
+                if (posX < 300) {
+                    normalThrow = false;
+                }
                 throwButton.remove();
                 stage.addActor(nextThrowButton);
             }
@@ -240,7 +257,7 @@ public class PlayScreen implements Screen2 {
         pauseButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //sett state til pauseState
+                gsm.set(new EndState(gsm));//sett state til pauseState
                 Gdx.app.setLogLevel(Application.LOG_DEBUG);
                 Gdx.app.log("#PlayScreen", String.valueOf("pause"));
             }
@@ -248,25 +265,45 @@ public class PlayScreen implements Screen2 {
     }
 
     public boolean landedJavelin(){
-        if (javelinPosition.y < 12 && javelinPosition.x > camera.position.x-800 ){
+        if (javelinPosition.y < 12 && javelinPosition.x > camera.position.x-600  ){
             velocity = 0;
 
         }
+
         return true;
     }
 
-    public Vector2 updateJavelinPosition(){
+    public Vector2 updateJavelinPosition(boolean normalThrow){
+        int upLimit;
+        cameraLimit = (int) (player.getScore()*30);
+        int downLimit;
+
+        if (normalThrow) {
+            upLimit = 800;
+            downLimit = cameraLimit - 500;
+        }
+        else {
+            if (posX == 20) {
+                upLimit = posX + 240;
+                downLimit = posX + 310;
+            }
+            else {
+                upLimit = posX + 300;
+                downLimit = posX + 350;
+            }
+
+        }
 
         javelinPosition.x = (float) (javelinPosition.x - (velocity * deltaTime));
         javelinPosition.y = (float) (javelinPosition.y - (velocity * deltaTime));
 
-        if(javelinPosition.x > 700) {
+        if (javelinPosition.x > upLimit) {
             javelinSprite.setRotation(0);
             javelinPosition.y = (float) (javelinPosition.y - (-velocity * deltaTime));
         }
-        if(javelinPosition.x > 900){
+        if ((javelinPosition.x > downLimit) ) {
             javelinPosition.y = (float) (javelinPosition.y - (-velocity * deltaTime));
-            javelinSprite.setRotation(-20);
+            javelinSprite.setRotation(-30);
         }
 
         return javelinPosition;
@@ -278,7 +315,7 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void render(float delta, SpriteBatch sb) {
-        javelinSprite.setRotation(20);
+        javelinSprite.setRotation(30);
 
         /*camera.update();
         sb.begin();
@@ -310,6 +347,7 @@ public class PlayScreen implements Screen2 {
             javelinSprite.setPosition(updateJavelinPosition().x, updateJavelinPosition().y);
             javelinSprite.draw(sb);
         }
+
 
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, luup), posX, 20);
         landedJavelin();
