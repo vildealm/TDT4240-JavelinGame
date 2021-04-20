@@ -31,7 +31,6 @@ public class ScreenFactory {
         Gdx.app.log("ScreenFactorygsm", String.valueOf(gsm.getStates()));
     }
 
-
     public static Screen2 getScreen(String screenType){
         switch (screenType){
             case "LOADING":
@@ -41,7 +40,7 @@ public class ScreenFactory {
             case "PLAY":
                 return new PlayScreen(gsm);
             case "SETTING":
-                return new SetupScreen(gsm,2);
+                return new SetupScreen(gsm,4);
             case "END":
                 return new EndScreen(gsm);
             case "HIGHSCORE":

@@ -24,18 +24,17 @@ public class inputPlayer extends Actor {
     TextField textfield;
     SelectBox sb;
 
-
     //Sprite
     Texture txtSprite = Assets.getTexture(Assets.txtfieldBackground);
     BitmapFont font = new BitmapFont();
-    int xPosition = 450;
+
 
     public inputPlayer(int xPosition){
         this.sb = makeDropdown(xPosition + 150);
         this.textfield = makeInputField(xPosition + 150);
-        this.country = makeLabel("Choose Country",Color.BLACK, xPosition, 750);
-        this.username = makeUsernameLabel(Color.BLACK, xPosition, 800);
-        this.errorMsg = makeLabel("Unvalid Inputs",Color.BLACK, 900, 950);
+        this.country = makeLabel("Choose Country",Color.BLACK, xPosition, 300);
+        this.username = makeUsernameLabel(Color.BLACK, xPosition, 350);
+        this.errorMsg = makeLabel("Unvalid Inputs",Color.BLACK, 900, 500);
     }
 
     public TextField getTextfield(){
@@ -76,7 +75,7 @@ public class inputPlayer extends Actor {
         TextField.TextFieldStyle style = new TextField.TextFieldStyle(new BitmapFont(), Color.BLACK,null,null,s);
         TextField tf = new TextField("", style);
         tf.setSize(Gdx.graphics.getWidth()/20f, Gdx.graphics.getHeight()/28f);
-        tf.setPosition(xPos,800);
+        tf.setPosition(xPos,350);
         return tf;
     }
 
@@ -94,7 +93,6 @@ public class inputPlayer extends Actor {
         username.setPosition(xPos,yPos);
         username.setFontScale(1.3f);
         return username;
-
     }
 
     private SelectBox makeDropdown(int xPos){
@@ -102,11 +100,10 @@ public class inputPlayer extends Actor {
         ScrollPane.ScrollPaneStyle sp = new ScrollPane.ScrollPaneStyle();
         List.ListStyle ls = new List.ListStyle(font, Color.WHITE, Color.BLACK, s1);
         SelectBox.SelectBoxStyle boxStyle = new SelectBox.SelectBoxStyle(font, Color.BLACK, s1, sp, ls);
-
         SelectBox<String> selectBox = new SelectBox<>(boxStyle);
         String[] countries = new String[]{"---","NOR","SVE","DAN","FIN"};
         selectBox.setItems(countries);
-        selectBox.setPosition(xPos, 750);
+        selectBox.setPosition(xPos, 300);
         selectBox.setSize(110, 37);
         return selectBox;
     }
@@ -119,19 +116,5 @@ public class inputPlayer extends Actor {
         this.country.draw(batch,1);
     }
 }
-
-    /*
-            usernameInput = makeInputField(xPosition+150);
-            Label username = makeLabel("Username:",Color.BLACK,xPosition, 400);
-            Label country = makeLabel("Choose country:",Color.BLACK, xPosition, 350);
-            SelectBox sb = makeDropdown(xPosition+150);
-            players.get(i).setUsername(usernameInput.getText());
-            players.get(i).setCountry(sb.getSelected().toString());
-            stage.addActor(sb);
-            stage.addActor(username);
-            stage.addActor(country);
-            stage.addActor(usernameInput);*/
-
-
 
 

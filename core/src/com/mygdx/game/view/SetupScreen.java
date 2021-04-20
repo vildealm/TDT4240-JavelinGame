@@ -30,18 +30,20 @@ import java.util.ArrayList;
 
 public class SetupScreen implements Screen2{
 
-    //Stage ;
+    //Stage
     private GameStateManager gsm;
     private Stage stage;
     private BitmapFont font;
     private Player player;
-    private int xPosition = 350;
+    private int xPosition = 50;
     //Components
     private ArrayList<Player> players;
     private ArrayList<inputPlayer> elements;
     private inputPlayer inputPlayer;
+    private Sprite background;
     //Button
     private TextButton.TextButtonStyle playButtonStyle;
+
 
     public SetupScreen(final GameStateManager gsm, int numberOfPlayers){
         super();
@@ -53,6 +55,7 @@ public class SetupScreen implements Screen2{
        //Components
         elements = new ArrayList<>();
         players = new ArrayList<>();
+        background = new Sprite(Assets.getTexture(Assets.setupBackground));
 
         //Button
         font = new BitmapFont();
@@ -62,20 +65,18 @@ public class SetupScreen implements Screen2{
         playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         playButton.getLabel().setFontScale(5, 5);
         stage.addActor(playButton);
-
         for(int i=0; i<numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition);
             player = new Player();
             players.add(player);
             elements.add(inputPlayer);
-            xPosition += 400;
+            xPosition += 300;
         }
         for(int i=0; i<elements.size(); i++){
             stage.addActor(elements.get(i).getTextfield());
             stage.addActor(elements.get(i).getSelectbox());
             stage.addActor(elements.get(i));
         }
-
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -94,6 +95,9 @@ public class SetupScreen implements Screen2{
     public void show() {}
 
     public void render(float delta, SpriteBatch sb) {
+        sb.begin();
+        sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

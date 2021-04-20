@@ -10,12 +10,10 @@ import com.mygdx.game.view.Screen2;
 
 public class SetupState extends State {
 
-    private BitmapFont font;
     private Screen2 currentScreen;
 
     public SetupState(GameStateManager gsm){
         super(gsm);
-        font = new BitmapFont();
         currentScreen = ScreenFactory.getScreen("SETTING");
         renderScreen();
         //Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -23,18 +21,10 @@ public class SetupState extends State {
     }
 
     @Override
-    public void handleInput() {
-    /*if(Gdx.input.justTouched()) {
-        gsm.set(new GameState(gsm));
-        currentScreen = ScreenFactory.getScreen("PLAY");
-        renderScreen();
-        dispose();
-    }*/
-    }
-
+    public void handleInput(){ }
 
     @Override
-    public void update(float dt) {/*handleInput();*/}//handleInput();}
+    public void update(float dt) {}
 
     @Override
     public void renderScreen() {

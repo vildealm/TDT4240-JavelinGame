@@ -29,54 +29,23 @@ public class MenuScreen implements Screen2 {
     private BitmapFont font;
     private Stage stage;
     private Button playButton;
-    //private TextButton.TextButtonStyle playButtonStyle;
-    //private Skin skin;
     private GameStateManager gsm;
     private TextureAtlas buttonAtlas;
     private Texture buttonImage;
     private Sprite background;
-    Sprite setupSprite;
-
 
     public MenuScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
         stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
         buttonImage = Assets.getTexture(Assets.playButton);
         font = new BitmapFont();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
-        //skin = new Skin(Gdx.files.internal("uiskin.json"));
-        //buttonAtlas = new TextureAtlas(Gdx.files.internal("uiskin.atlas"));
-        //skin.addRegions(buttonAtlas);
-        //playButtonStyle = new TextButton.TextButtonStyle();
-        //playButtonStyle.font = font;
-        //playButtonStyle.up = skin.getDrawable("up-button");
-        //playButtonStyle.down = skin.getDrawable("down-button");
-        //playButtonStyle.checked = skin.getDrawable("checked-button");
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
         playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), (Gdx.graphics.getHeight()/2)-(playButton.getHeight())/2);
-        //playButton.setHeight(200);
-        //playButton.setWidth(500);
         stage.addActor(playButton);
-
-
-
-        Gdx.input.setInputProcessor(stage);
-
-
-
-
         font = new BitmapFont();
-        setupSprite = new Sprite(Assets.getTexture(Assets.setupBackground));
-        Gdx.input.setInputProcessor(stage);
-        playButtonStyle = new TextButton.TextButtonStyle();
-        playButtonStyle.font = font;
-        font = new BitmapFont();
-        TextButton playButton = new TextButton("PLAY", playButtonStyle);
-        playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-        playButton.getLabel().setFontScale(5, 5);
-
-        stage.addActor(playButton);
 
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ButtonGameState", String.valueOf(gsm));
@@ -85,7 +54,7 @@ public class MenuScreen implements Screen2 {
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-               gsm.set(new GameState(gsm)); //skal være SetupState
+               gsm.set(new SetupState(gsm)); //skal være SetupState
             }
         });
     }
@@ -96,11 +65,6 @@ public class MenuScreen implements Screen2 {
         sb.begin();
         font.draw(sb, "MENU", 70, 100);
         sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        //sb.draw(setupSprite, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        sb.draw(setupSprite, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
