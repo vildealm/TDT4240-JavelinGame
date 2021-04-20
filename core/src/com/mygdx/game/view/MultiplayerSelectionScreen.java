@@ -63,10 +63,23 @@ public class MultiplayerSelectionScreen implements Screen2 {
         threePlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(threePlayerButtonImage)));
         fourPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(fourPlayerButtonImage)));
 
-        onePlayerButton.setPosition(50,200);
-        twoPlayerButton.setPosition(250,200);
-        threePlayerButton.setPosition(450,200);
-        fourPlayerButton.setPosition(650,200);
+        onePlayerButton.setPosition(100,275);
+        twoPlayerButton.setPosition(350,275);
+        threePlayerButton.setPosition(600,275);
+        fourPlayerButton.setPosition(850,275);
+
+        onePlayerButton.setTransform(true);
+        onePlayerButton.setScale(0.75f);
+
+        twoPlayerButton.setTransform(true);
+        twoPlayerButton.setScale(0.75f);
+
+        threePlayerButton.setTransform(true);
+        threePlayerButton.setScale(0.75f);
+
+        fourPlayerButton.setTransform(true);
+        fourPlayerButton.setScale(0.75f);
+
 
 
         stage.addActor(onePlayerButton);
