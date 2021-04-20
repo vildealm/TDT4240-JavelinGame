@@ -36,8 +36,6 @@ public class SetupScreen implements Screen2{
     private BitmapFont font;
     private Player player;
     private int xPosition = 350;
-    //Sprites
-    Sprite player1Sprite;
     //Components
     private ArrayList<Player> players;
     private ArrayList<inputPlayer> elements;
