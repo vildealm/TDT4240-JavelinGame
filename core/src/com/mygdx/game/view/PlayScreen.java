@@ -174,7 +174,7 @@ public class PlayScreen implements Screen2 {
         final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
         throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
 
-        nextThrowImage = Assets.getTexture(Assets.throwButton);
+        nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
         final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
         nextThrowButton.setPosition(700, Gdx.graphics.getHeight()/2);
 

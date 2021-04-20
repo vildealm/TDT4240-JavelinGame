@@ -69,7 +69,6 @@ public class EndScreen implements Screen2 {
     }
     @Override
     public void show() {
-
     }
 
     @Override
