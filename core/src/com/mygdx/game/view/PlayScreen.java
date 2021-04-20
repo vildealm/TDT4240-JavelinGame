@@ -138,18 +138,18 @@ public class PlayScreen implements Screen2 {
         player2.setCountry("NOR");
         player3.setUsername("Mat");
         player3.setCountry("NOR");
-        if(players.isEmpty()){
-            //player1.setScore(0);
-            //player2.setScore(0);
+        if(gsm.getGameRules().getPlayers().isEmpty()){
             players.add(player1);
             players.add(player2);
             players.add(player3);
         }
+        else{
+            for (Player player : gsm.getGameRules().getPlayers()){
+                players.add(player);
+            }
+        }
 
         player = players.get(round-1);
-
-        //this.player = player;
-        //this.player.setScore(0,0);
 
         camera = new OrthographicCamera(1184, 768);
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
@@ -214,19 +214,7 @@ public class PlayScreen implements Screen2 {
                 posX += Gdx.graphics.getDeltaTime() * speedX;
                 javelinPosition.x = posX;
                 throwIt = true;
-
-
-
-
-
-                /*Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));*/
-                //player.setScore(playerController.getSpeed(), (600-(posX+50)));
                 distance=(680-(posX+50));
-                //player.setScore(playerController.getSpeed(), (680-(posX+50)));
-                //double score = player.getScore();
                 player.calculateScore(playerController.getSpeed(), (680-(posX+50)));
                 /*if(score > player.getScore()){
                     player.setScore(score);
@@ -352,7 +340,7 @@ public class PlayScreen implements Screen2 {
 
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
         landedJavelin();
-        font.draw(sb, "Player: "+ player.getUsername() + " Dist:"+distance+" Score: "+player.getScore()+" Round: "+round, camera.position.x-300, 600);
+        font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Round: "+round, camera.position.x-300, 600);
         sb.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
