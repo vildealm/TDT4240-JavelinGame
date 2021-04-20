@@ -78,12 +78,21 @@ public class MultiplayerSelectionScreen implements Screen2 {
 
         xPos = 100;
 
-        for(Button i : playerButtons){
+        for(final Button i : playerButtons){
             i.setPosition(xPos,275);
             xPos += 250;
             i.setTransform(true);
             i.setScale(0.75f);
             stage.addActor(i);
+            i.addListener(new ChangeListener(){
+                @Override
+                public void changed(ChangeEvent event, Actor actor){
+                    gsm.getGameRules().setNumberOfPlayers(playerButtons.indexOf(i)+1);
+                    gsm.set(new SetupState(gsm));
+                    Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                    Gdx.app.log("SEND PLAYER NUMBER", String.valueOf(gsm.getGameRules().getNumberOfPlayers()));
+                }
+            });
         }
 
         Gdx.input.setInputProcessor(stage);
@@ -93,37 +102,8 @@ public class MultiplayerSelectionScreen implements Screen2 {
         Gdx.app.log("ButtonGameState", String.valueOf(gsm));
 
 
-        onePlayerButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                gsm.getGameRules().setNumberOfPlayers(1);
-                gsm.set(new SetupState(gsm)); //skal være SetupState
-            }
-        });
 
-        twoPlayerButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                gsm.getGameRules().setNumberOfPlayers(2);
-                gsm.set(new SetupState(gsm)); //skal være SetupState
-            }
-        });
 
-        threePlayerButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                gsm.getGameRules().setNumberOfPlayers(3);
-                gsm.set(new SetupState(gsm)); //skal være SetupState
-            }
-        });
-
-        fourPlayerButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                gsm.getGameRules().setNumberOfPlayers(4);
-                gsm.set(new SetupState(gsm)); //skal være SetupState
-            }
-        });
 
     }
 
