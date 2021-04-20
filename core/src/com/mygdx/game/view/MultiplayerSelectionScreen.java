@@ -73,27 +73,8 @@ public class MultiplayerSelectionScreen implements Screen2 {
         stage.addActor(twoPlayerButton);
         stage.addActor(threePlayerButton);
         stage.addActor(fourPlayerButton);
-
-
-
         Gdx.input.setInputProcessor(stage);
-
-
-
-
         font = new BitmapFont();
-
-        /*skin = new Skin();
-        setupSprite = new Sprite(Assets.getTexture(Assets.setupBackground));
-        Gdx.input.setInputProcessor(stage);
-        playButtonStyle = new TextButton.TextButtonStyle();
-        playButtonStyle.font = font;
-        font = new BitmapFont();
-        TextButton playButton = new TextButton("PLAY", playButtonStyle);
-        playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-        playButton.getLabel().setFontScale(5, 5);
-
-        stage.addActor(playButton);*/
 
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ButtonGameState", String.valueOf(gsm));
@@ -135,9 +116,6 @@ public class MultiplayerSelectionScreen implements Screen2 {
         sb.begin();
         font.draw(sb, "MENU", 70, 100);
         sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        //game.getBatch().draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        //game.getBatch().draw(playBtn, Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()/2 );
-        //sb.draw(setupSprite, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

@@ -54,7 +54,7 @@ public class MenuScreen implements Screen2 {
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-               gsm.set(new MultiplayerSelectionState(gsm)); //skal være SetupState
+               gsm.set(new MultiplayerSelectionState(gsm));
             }
         });
     }
