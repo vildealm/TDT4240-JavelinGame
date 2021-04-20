@@ -13,6 +13,7 @@ import com.mygdx.game.JavelinGame;
 //import com.mygdx.game.view.LoadingScreen;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.view.MenuScreen;
+import com.mygdx.game.view.MultiplayerSelectionScreen;
 import com.mygdx.game.view.PlayScreen;
 import com.mygdx.game.view.Screen2;
 import com.mygdx.game.view.SetupScreen;
@@ -45,8 +46,12 @@ public class ScreenFactory {
                 return new EndScreen(gsm);
             case "HIGHSCORE":
                 return new HighScoreScreen(gsm.game.getFirebaseInterface(), gsm);
+            case "MULTIPLAYER":
+                return new MultiplayerSelectionScreen(gsm);
             default:
                 return null;
+
+
         }
     }
 }

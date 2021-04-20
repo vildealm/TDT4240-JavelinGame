@@ -21,6 +21,7 @@ import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.MultiplayerSelectionState;
 import com.mygdx.game.model.states.SetupState;
 
 
@@ -54,7 +55,7 @@ public class MenuScreen implements Screen2 {
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-               gsm.set(new SetupState(gsm)); //skal være SetupState
+               gsm.set(new MultiplayerSelectionState(gsm)); //skal være SetupState
             }
         });
     }
