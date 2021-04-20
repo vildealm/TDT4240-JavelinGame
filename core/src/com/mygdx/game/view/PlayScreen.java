@@ -1,5 +1,6 @@
 package com.mygdx.game.view;
 
+
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -96,8 +97,6 @@ public class PlayScreen implements Screen2 {
 
     private Vector2 javelinPosition = new Vector2(550, 55);
 
-
-
     private Vector2 javelinVelocityX = new Vector2();
     private Vector2 javelinVelocityY = new Vector2();
 
@@ -108,8 +107,6 @@ public class PlayScreen implements Screen2 {
     final Player player1 = new Player();
     final Player player2 = new Player();
     final Player player3 = new Player();
-
-
 
     public PlayScreen(final GameStateManager gsm){
         super();
@@ -173,7 +170,7 @@ public class PlayScreen implements Screen2 {
         final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
         throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
 
-        nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
+        nextThrowImage = Assets.getTexture(Assets.throwButton);
         final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
         nextThrowButton.setPosition(700, Gdx.graphics.getHeight()/2);
 
@@ -212,11 +209,21 @@ public class PlayScreen implements Screen2 {
             public void changed(ChangeEvent event, Actor actor){
                 camera.translate(10f, 0f);
                 throwIt = true;
-                thrown = true;
                 currentAnim = throwingMan;
                 loop = false;
                 posX += Gdx.graphics.getDeltaTime() * speedX;
                 javelinPosition.x = posX;
+                throwIt = true;
+
+
+
+
+
+                /*Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
+                Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));*/
+                //player.setScore(playerController.getSpeed(), (600-(posX+50)));
                 distance=(680-(posX+50));
                 //player.setScore(playerController.getSpeed(), (680-(posX+50)));
                 //double score = player.getScore();
@@ -224,6 +231,10 @@ public class PlayScreen implements Screen2 {
                 /*if(score > player.getScore()){
                     player.setScore(score);
                 }*/
+                distance=(680-(posX+50));
+                thrown = true;
+                System.out.println("javeling pos x : " + javelinPosition.x);
+                System.out.println("is javelin thrown?" +thrown);
 
                 playerController.setSpeed(0);
                 if (posX < 300) {
@@ -377,7 +388,6 @@ public class PlayScreen implements Screen2 {
         velocity = -17.0;
         javelinSprite.setRotation(30);
         javelinPosition.x = posX;
-        javelinPosition.y = 55;
         addButtons();
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
 
