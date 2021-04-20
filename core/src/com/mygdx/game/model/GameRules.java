@@ -26,7 +26,9 @@ public class GameRules {
 
 
     public void playGame(){
+        for (Player player : players ){
 
+        }
     }
 
     public void setPlayers(ArrayList<Player> players) {
