@@ -212,21 +212,11 @@ public class PlayScreen implements Screen2 {
             public void changed(ChangeEvent event, Actor actor){
                 camera.translate(10f, 0f);
                 throwIt = true;
+                thrown = true;
                 currentAnim = throwingMan;
                 loop = false;
                 posX += Gdx.graphics.getDeltaTime() * speedX;
                 javelinPosition.x = posX;
-                throwIt = true;
-
-
-
-
-
-                /*Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen", String.valueOf(Gdx.graphics.getHeight()));
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen2", String.valueOf(camera.position));*/
-                //player.setScore(playerController.getSpeed(), (600-(posX+50)));
                 distance=(680-(posX+50));
                 //player.setScore(playerController.getSpeed(), (680-(posX+50)));
                 //double score = player.getScore();
@@ -234,10 +224,6 @@ public class PlayScreen implements Screen2 {
                 /*if(score > player.getScore()){
                     player.setScore(score);
                 }*/
-                distance=(680-(posX+50));
-                thrown = true;
-                System.out.println("javeling pos x : " + javelinPosition.x);
-                System.out.println("is javelin thrown?" +thrown);
 
                 playerController.setSpeed(0);
                 if (posX < 300) {
@@ -391,6 +377,7 @@ public class PlayScreen implements Screen2 {
         velocity = -17.0;
         javelinSprite.setRotation(30);
         javelinPosition.x = posX;
+        javelinPosition.y = 55;
         addButtons();
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
 
