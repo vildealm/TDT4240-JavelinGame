@@ -79,7 +79,6 @@ public class PlayScreen implements Screen2 {
     //Player
     private Player player;
 
-    private Javelin javelin2;
     private Stage stage;
     private Sprite playBackground;
     private OrthographicCamera camera;

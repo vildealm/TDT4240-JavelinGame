@@ -49,6 +49,8 @@ public class EndScreen implements Screen2 {
 
         highscoreImage = Assets.getTexture(Assets.HighscoreButton);
         font = new BitmapFont();
+        font.setColor(Color.BLACK);
+        font.getData().setScale(3);
 
         Button highscoreButton = new Button(new TextureRegionDrawable(new TextureRegion(highscoreImage)));
         highscoreButton.setPosition(950, 650);
@@ -57,7 +59,6 @@ public class EndScreen implements Screen2 {
 
         stage.addActor(highscoreButton);
         Gdx.input.setInputProcessor(stage);
-
 
         highscoreButton.addListener(new ChangeListener(){
             @Override
@@ -76,7 +77,7 @@ public class EndScreen implements Screen2 {
     public void render(float delta, SpriteBatch sb) {
 
         sb.begin();
-
+        font.draw(sb,  "Your scores: ", Gdx.graphics.getWidth()/2 - 90, Gdx.graphics.getHeight()/2 );
         sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
