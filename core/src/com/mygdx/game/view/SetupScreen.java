@@ -85,7 +85,7 @@ public class SetupScreen implements Screen2{
                         players.get(i).setUsername(elements.get(i).getUsername());
                         players.get(i).setCountry(elements.get(i).getCountry());
                     }
-                    gsm.set(new MenuState(gsm));
+                    gsm.set(new GameState(gsm));
                 }else{
                     stage.addActor(inputPlayer.getErrorMsg());
                 }
