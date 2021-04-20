@@ -67,8 +67,6 @@ public class Assets {
         assetManager.load(QuitButton, Texture.class);
         assetManager.load(newxtThrowButton, Texture.class);
 
-
-
     }
 
     public static boolean update(){
