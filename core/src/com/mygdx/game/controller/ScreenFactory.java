@@ -23,7 +23,6 @@ public class ScreenFactory {
     private static Assets assets;
     private JavelinGame game;
 
-
     public ScreenFactory(GameStateManager gsm, Assets assets){
         this.gsm = gsm;
         this.assets = assets;
@@ -41,7 +40,7 @@ public class ScreenFactory {
             case "PLAY":
                 return new PlayScreen(gsm);
             case "SETTING":
-                return new SetupScreen(gsm,4);
+                return new SetupScreen(gsm,1);
             case "END":
                 return new EndScreen(gsm);
             case "HIGHSCORE":

@@ -51,7 +51,6 @@ public class MenuScreen implements Screen2 {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ButtonGameState", String.valueOf(gsm));
 
-
         playButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){

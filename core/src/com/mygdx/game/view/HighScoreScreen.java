@@ -76,7 +76,6 @@ public class HighScoreScreen implements Screen2 {
             }
         });
 
-
     }
 
     @Override
