@@ -1,6 +1,5 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -16,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.controller.FirebaseInterface;
-import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.components.Score;
@@ -26,10 +24,8 @@ import com.mygdx.game.model.states.GameStateManager;
 import java.util.ArrayList;
 
 public class HighScoreScreen implements Screen2 {
-    private SpriteBatch batch;
     private FirebaseInterface _FBIC;
     private ArrayList<Score> highscores;
-    private int pos;
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;
     private GameStateManager gsm;
@@ -48,13 +44,10 @@ public class HighScoreScreen implements Screen2 {
         _FBIC.initUser();
         //_FBIC.setValueInDb("AndyTorky", 70.0, "NOR");
         highscores = _FBIC.getDataFromDb();
-        //pos = _FBIC.getUserPos();
-
 
         stage = new Stage(new ScreenViewport());
         buttonImage = Assets.getTexture(Assets.settingsButton);
         quitButton = Assets.getTexture(Assets.QuitButton);
-
 
         Button settingButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
         settingButton.setPosition(1150, 650);
@@ -72,10 +65,10 @@ public class HighScoreScreen implements Screen2 {
         settingButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                highscores.clear();
                 gsm.set(new GameState(gsm)); //skal være SetupState
             }
         });
-
     }
 
     @Override
@@ -98,7 +91,6 @@ public class HighScoreScreen implements Screen2 {
         shapeRenderer.end();
         int counter = 1;
         sb.begin();
-
         for(int i=highscores.size()-1; i>= 0; i--){
             font.draw(sb, (counter)+". "+ highscores.get(i).getUsername(), 250, 50+(i*75));
             font.draw(sb, highscores.get(i).getScore().toString(), 650, 50+(i*75));

@@ -18,11 +18,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.model.Assets;
+import com.mygdx.game.model.GameRules;
 import com.mygdx.game.model.components.Javelin;
+import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MultiplayerSelectionState;
 import com.mygdx.game.model.states.SetupState;
+
+import java.util.ArrayList;
 
 
 public class MenuScreen implements Screen2 {
