@@ -1,6 +1,5 @@
 package com.mygdx.game.view;
 
-
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -63,6 +62,7 @@ public class PlayScreen implements Screen2 {
     private double prevScore;
     //PLayerController
     private PlayerController playerController;
+    private boolean showScore;
 
     private FirebaseInterface _FBIC;
 
@@ -156,19 +156,18 @@ public class PlayScreen implements Screen2 {
         currentAnim = runningMan;
 
     }
-
     public void addButtons(){
         throwButtonImage = Assets.getTexture(Assets.throwButton);
         final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
-        throwButton.setPosition(Gdx.graphics.getWidth()-throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
+        throwButton.setPosition(Gdx.graphics.getWidth() -throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
 
         nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
         final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
-        nextThrowButton.setPosition(700, Gdx.graphics.getHeight()/2);
+        nextThrowButton.setPosition(Gdx.graphics.getWidth() -550, 30);
 
-        finishGameImage = Assets.getTexture(Assets.newxtThrowButton);
+        finishGameImage = Assets.getTexture(Assets.goToScoreButton);
         final Button finishGameButton = new Button(new TextureRegionDrawable(new TextureRegion(finishGameImage)));
-        finishGameButton.setPosition(200, Gdx.graphics.getHeight()/2);
+        finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
@@ -222,9 +221,12 @@ public class PlayScreen implements Screen2 {
                 }
                 throwButton.remove();
                 if(round == (players.size()*2)){
-                    stage.addActor(finishGameButton);
+                    if(showScore = true) {
+                        stage.addActor(finishGameButton);
+                    }
                 }
                 else{
+
                     stage.addActor(nextThrowButton);
                 }
 
@@ -265,6 +267,7 @@ public class PlayScreen implements Screen2 {
     public void landedJavelin(){
         if (javelinPosition.y < 12 && javelinPosition.x > camera.position.x-600  ){
             velocity = 0;
+            showScore = true;
         }
     }
 
