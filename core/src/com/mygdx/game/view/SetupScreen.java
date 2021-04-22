@@ -53,7 +53,7 @@ public class SetupScreen implements Screen2{
         this.stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
         this.numberOfPlayers = gsm.getGameRules().getNumberOfPlayers();
-       //Components
+        //Components
         elements = new ArrayList<>();
         players = new ArrayList<>();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
@@ -63,7 +63,6 @@ public class SetupScreen implements Screen2{
         if(numberOfPlayers==4){
             this.posChange = 275;
         }
-
         if (numberOfPlayers==3) {
             xPosition+=137.5;
         }
@@ -73,15 +72,12 @@ public class SetupScreen implements Screen2{
         if(numberOfPlayers==1){
             xPosition+=412.5;
         }
-
         //Button
         font = new BitmapFont();
         buttonImage = Assets.getTexture(Assets.playButton);
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
         playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), 100);
         stage.addActor(playButton);
-
-
         for(int i=0; i<this.numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition, i+1);
             player = new Player();
@@ -96,9 +92,8 @@ public class SetupScreen implements Screen2{
             currentPlayer = elements.get(i);
             stage.addActor(currentPlayer.getTextfield());
             stage.addActor(currentPlayer.getSelectbox());
-            stage.addActor(currentPlayer);
             stage.addActor(currentPlayer.getIdTxt());
-
+            stage.addActor(currentPlayer);
         }
         playButton.addListener(new ChangeListener(){
             @Override

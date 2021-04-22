@@ -31,9 +31,7 @@ public class LoadingScreen implements Screen2 {
     }
 
     @Override
-    public void show() {
-
-    }
+    public void show() { }
 
     @Override
     public void render(float delta, SpriteBatch sb) {

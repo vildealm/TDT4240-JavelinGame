@@ -42,8 +42,6 @@ public class JavelinGame extends ApplicationAdapter {
 		//Gdx.gl.glClearColor(1, 0, 0, 1);
 		screenFactory = new ScreenFactory(gsm,assets);
 		gsm.push(new LoadingState(gsm));
-		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		//Gdx.app.log("JavelinGamegsm", String.valueOf(gsm));
 	}
 
 
