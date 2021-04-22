@@ -35,7 +35,7 @@ public class inputPlayer extends Actor {
         this.textfield = makeInputField(xPosition + 150);
         this.country = makeLabel("Choose Country",Color.BLACK, xPosition, 390);
         this.username = makeLabel("Username", Color.BLACK, xPosition, 440);
-        this.idTxt = makeLabel("Player "+ id, Color.BLACK, xPosition+80, 510);
+        this.idTxt = makeLabel("Player " + id, Color.BLACK, xPosition+80, 510);
         this.errorMsg = makeLabel("Invalid Inputs",Color.BLACK, 900, 500);
     }
 
@@ -58,9 +58,6 @@ public class inputPlayer extends Actor {
     }
     public Label getIdTxt(){
         return idTxt;
-    }
-    public void setId(String i){
-        this.id = i;
     }
 
     //Checks if username is correctly written
