@@ -21,13 +21,13 @@ import com.mygdx.game.model.components.Score;
 import com.mygdx.game.model.states.EndState;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.LoadingState;
 import com.mygdx.game.model.states.MenuState;
 
 import java.util.ArrayList;
 
 public class HighScoreScreen implements Screen2 {
     private FirebaseInterface _FBIC;
-    private SpriteBatch batch;
     private ArrayList<Score> highscores;
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;
@@ -42,7 +42,6 @@ public class HighScoreScreen implements Screen2 {
         this.gsm = gsm;
         shapeRenderer = new ShapeRenderer();
         font = new BitmapFont();
-        batch = new SpriteBatch();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
         _FBIC.initUser();
@@ -69,8 +68,6 @@ public class HighScoreScreen implements Screen2 {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 gsm.set(new MenuState(gsm));
-                System.out.println("this screen is rendered Menu state ?" );
-
             }
         });
 
@@ -93,8 +90,8 @@ public class HighScoreScreen implements Screen2 {
         Gdx.gl.glClearColor(165.0f/255.0f, 214.0f/255.0f, 244.0f/255.0f, 1.0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-        shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
+        shapeRenderer.setProjectionMatrix(sb.getProjectionMatrix());
+        shapeRenderer.setTransformMatrix(sb.getTransformMatrix());
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
         for(int j=0; j< highscores.size(); j++){
@@ -102,14 +99,14 @@ public class HighScoreScreen implements Screen2 {
         }
         shapeRenderer.end();
         int counter = 1;
-        batch.begin();
+        sb.begin();
         for(int i=highscores.size()-1; i>= 0; i--){
-            font.draw(batch, (counter)+". "+ highscores.get(i).getUsername(), 250, 50+(i*75));
-            font.draw(batch, highscores.get(i).getScore().toString(), 650, 50+(i*75));
-            font.draw(batch, highscores.get(i).getCountry(), 850, 50+(i*75));
+            font.draw(sb, (counter)+". "+ highscores.get(i).getUsername(), 250, 50+(i*75));
+            font.draw(sb, highscores.get(i).getScore().toString(), 650, 50+(i*75));
+            font.draw(sb, highscores.get(i).getCountry(), 850, 50+(i*75));
             counter++;
         }
-        batch.end();
+        sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

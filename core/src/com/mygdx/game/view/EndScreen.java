@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -42,14 +43,11 @@ public class EndScreen implements Screen2 {
     private Viewport viewport;
     private Texture highscoreImage;
     private BitmapFont font;
-    private SpriteBatch batch;
     private Texture quitButtonImage;
 
     public EndScreen(final GameStateManager gsm) {
-
         super();
         this.gsm = gsm;
-        this.batch = new SpriteBatch();
         viewport = new ScreenViewport();
         stage = new Stage(viewport);
         stage = new Stage(new ScreenViewport());
@@ -101,8 +99,11 @@ public class EndScreen implements Screen2 {
     @Override
     public void render(float delta, SpriteBatch sb) {
 
-        batch.begin();
-        font.draw(batch,  "SCORES: ", Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight()/2 +200 );
+        sb.begin();
+        Matrix4 mat = new Matrix4();
+        mat.setToOrtho2D(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        sb.setProjectionMatrix(mat);
+        font.draw(sb,  "SCORES: ", Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight()/2 +200 );
         Collections.sort(players, new Comparator<Player>() {
             @Override
             public int compare(Player p1, Player p2) {
@@ -112,10 +113,10 @@ public class EndScreen implements Screen2 {
         Collections.reverse(players);
         int counter = 1;
         for (int i=0; i < players.size(); i++){
-            font.draw(batch, counter + ". " + players.get(i).getUsername() + ": " + players.get(i).getScore(), Gdx.graphics.getWidth()/2 -150, 500 - (i*100));
+            font.draw(sb, counter + ". " + players.get(i).getUsername() + ": " + players.get(i).getScore(), Gdx.graphics.getWidth()/2 -150, 500 - (i*100));
             counter++;
         }
-        batch.end();
+        sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
