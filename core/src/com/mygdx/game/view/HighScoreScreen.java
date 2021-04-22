@@ -46,7 +46,6 @@ public class HighScoreScreen implements Screen2 {
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
         _FBIC.initUser();
-        //_FBIC.setValueInDb("AndyTorky", 70.0, "NOR");
         highscores = _FBIC.getDataFromDb();
 
         stage = new Stage(new ScreenViewport());

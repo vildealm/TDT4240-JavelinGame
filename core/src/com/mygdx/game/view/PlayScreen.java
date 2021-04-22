@@ -15,8 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -92,6 +91,8 @@ public class PlayScreen implements Screen2 {
 
     final ArrayList<Player> players = new ArrayList<>();
 
+    private boolean isPaused;
+
     public PlayScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
@@ -107,6 +108,7 @@ public class PlayScreen implements Screen2 {
         thrown = false;
         cameraLimit = 0;
         round = 1;
+        isPaused = false;
 
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
@@ -205,7 +207,6 @@ public class PlayScreen implements Screen2 {
 
                     stage.addActor(nextThrowButton);
                 }
-
             }
         });
 
@@ -234,7 +235,7 @@ public class PlayScreen implements Screen2 {
         pauseButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                pause();
+                
             }
         });
     }
@@ -287,6 +288,9 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void render(float delta, SpriteBatch sb) {
+        if(isPaused){
+            deltaTime = 0;
+        }
         javelinSprite.setRotation(30);
 
         if(thrown){
