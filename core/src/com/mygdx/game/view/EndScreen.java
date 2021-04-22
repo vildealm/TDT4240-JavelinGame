@@ -70,12 +70,10 @@ public class EndScreen implements Screen2 {
         });
 
         players = gsm.getGameRules().getPlayers();
-
-
     }
+
     @Override
     public void show() {
-
     }
 
     @Override
