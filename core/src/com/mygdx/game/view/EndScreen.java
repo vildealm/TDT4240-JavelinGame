@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.controller.FirebaseInterface;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.states.GameState;
@@ -41,7 +40,6 @@ public class EndScreen implements Screen2 {
     private Viewport viewport;
     private Texture highscoreImage;
     private BitmapFont font;
-    private FirebaseInterface _FBIC;
     private SpriteBatch batch;
 
     public EndScreen(final GameStateManager gsm) {
@@ -51,6 +49,7 @@ public class EndScreen implements Screen2 {
         this.batch = new SpriteBatch();
         viewport = new ScreenViewport();
         stage = new Stage(viewport);
+        stage = new Stage(new ScreenViewport());
 
         highscoreImage = Assets.getTexture(Assets.HighscoreButton);
         font = new BitmapFont();
