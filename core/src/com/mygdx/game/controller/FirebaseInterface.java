@@ -11,9 +11,5 @@ public interface FirebaseInterface {
 
     public ArrayList<Score> getDataFromDb();
 
-    public void setOnValueChangedListener();
-
-    public int getUserPos();
-
     public void setValueInDb(String username, Double score, String country);
 }
