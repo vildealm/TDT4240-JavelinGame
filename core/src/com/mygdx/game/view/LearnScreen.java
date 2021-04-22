@@ -31,7 +31,6 @@ public class LearnScreen implements Screen2 {
     private Button backButton;
 
 
-
     public LearnScreen(final GameStateManager gsm){
         this.gsm = gsm;
         learnTexture = (Assets.getTexture(Assets.learnImage));

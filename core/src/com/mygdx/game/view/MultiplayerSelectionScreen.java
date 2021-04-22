@@ -22,6 +22,7 @@ import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.MenuState;
 import com.mygdx.game.model.states.SetupState;
 
 import java.util.ArrayList;
@@ -37,11 +38,12 @@ public class MultiplayerSelectionScreen implements Screen2 {
     private Button twoPlayerButton;
     private Button threePlayerButton;
     private Button fourPlayerButton;
-
+    private Button backButton;
     private Texture onePlayerButtonImage;
     private Texture twoPlayerButtonImage;
     private Texture threePlayerButtonImage;
     private Texture fourPlayerButtonImage;
+    private Texture backButtonTexture;
 
     private int xPos;
 
@@ -59,6 +61,8 @@ public class MultiplayerSelectionScreen implements Screen2 {
         twoPlayerButtonImage = Assets.getTexture(Assets.twoPlayerButton);
         threePlayerButtonImage = Assets.getTexture(Assets.threePlayerButton);
         fourPlayerButtonImage = Assets.getTexture(Assets.fourPlayerButton);
+        backButtonTexture = Assets.getTexture(Assets.backButton);
+
 
         font = new BitmapFont();
         playerButtons = new ArrayList<>();
@@ -70,11 +74,23 @@ public class MultiplayerSelectionScreen implements Screen2 {
         twoPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(twoPlayerButtonImage)));
         threePlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(threePlayerButtonImage)));
         fourPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(fourPlayerButtonImage)));
-
+        backButton = new Button(new TextureRegionDrawable(new TextureRegion(backButtonTexture)));
         playerButtons.add(onePlayerButton);
         playerButtons.add(twoPlayerButton);
         playerButtons.add(threePlayerButton);
         playerButtons.add(fourPlayerButton);
+
+        stage.addActor(backButton);
+        backButton.setHeight(90);
+        backButton.setWidth(350);
+        backButton.setPosition(20, 650);
+
+        backButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new MenuState(gsm));
+            }
+        });
 
         xPos = 100;
 
