@@ -51,7 +51,7 @@ public class MenuScreen implements Screen2 {
         buttonImage = Assets.getTexture(Assets.playButton);
         learnImage = Assets.getTexture(Assets.learnButton);
         learnButton = new Button(new TextureRegionDrawable(new TextureRegion(learnImage)));
-         stage.addActor(learnButton);
+        stage.addActor(learnButton);
         font = new BitmapFont();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
