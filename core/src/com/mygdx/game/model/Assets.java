@@ -13,6 +13,8 @@ public class Assets {
     public static String playBackground = "textures/backgrounds/playBackground.png";
     public static String txtfieldBackground = "textures/backgrounds/txtfield.png";
     public static String playerBackground = "textures/backgrounds/playerBox.png";
+    public static String learnImage = "howToPlay.png";
+
 
     //Buttons
     public static String playButton = "buttons/playButton.png";
@@ -27,11 +29,6 @@ public class Assets {
     public static String learnButton = "buttons/learnButton.png";
 
 
-
-
-
-
-
     public static String onePlayerButton = "onePlayerButton.png";
     public static String twoPlayerButton = "twoPlayerButton.png";
     public static String threePlayerButton = "threePlayerButton.png";
@@ -40,6 +37,7 @@ public class Assets {
     //Sprite
     public static String player = "textures/run/running-1.png";
     public static String javelin = "textures/sprites/javelin.png";
+
 
 
     public Assets(){
@@ -79,6 +77,8 @@ public class Assets {
         assetManager.load(goToScoreButton, Texture.class);
         assetManager.load(backButton, Texture.class);
         assetManager.load(learnButton, Texture.class);
+        assetManager.load(learnImage, Texture.class);
+
 
 
 

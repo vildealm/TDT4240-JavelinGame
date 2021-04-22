@@ -1,7 +1,15 @@
 package com.mygdx.game.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.states.GameStateManager;
 
 
@@ -9,9 +17,20 @@ import com.mygdx.game.model.states.GameStateManager;
 
 public class LearnScreen implements Screen2 {
     private GameStateManager gsm;
+    private Stage stage;
+    private Texture learnTexture;
+    private Sprite learnSprite;
+    private BitmapFont font;
+    private BitmapFont font2;
+
 
     public LearnScreen(final GameStateManager gsm){
         this.gsm = gsm;
+        learnTexture = (Assets.getTexture(Assets.learnImage));
+        learnSprite = new Sprite(Assets.getTexture(Assets.learnImage));
+        stage = new Stage(new ScreenViewport());
+        font = new BitmapFont();
+        font2 = new BitmapFont();
     }
 
 
@@ -21,7 +40,20 @@ public class LearnScreen implements Screen2 {
     }
 
     @Override
-    public void render(float delta, SpriteBatch sb) {
+    public void render(float delta, SpriteBatch sb) {sb.begin();
+        font.setColor(Color.BLACK);
+        font2.setColor(Color.BLACK);
+        sb.draw(learnSprite,(Gdx.graphics.getWidth() /2) - (learnSprite.getWidth()/2) -150,(Gdx.graphics.getHeight()/2) - (learnSprite.getHeight()/2),     900 ,450);
+        font.draw(sb, "Tap in the red area to gain speed", 30, 160);
+        font.draw(sb, "Tap on THROW to throw the javelin" , 640, 170);
+        font2.draw(sb, "If you do not throw before the line, you loose." , (Gdx.graphics.getWidth() /2) - 250, 110);
+        font2.draw(sb, "High speed ->  high score" , (Gdx.graphics.getWidth() /2 ) -150, 70);
+        font2.draw(sb, "Close to the line ->  high score" , (Gdx.graphics.getWidth() /2 ) -2000, 30);
+
+
+        font.getData().setScale(2.5f);
+        font2.getData().setScale(2f);
+        sb.end();
 
     }
 
@@ -47,6 +79,6 @@ public class LearnScreen implements Screen2 {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }
