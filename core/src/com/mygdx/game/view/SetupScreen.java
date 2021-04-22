@@ -30,6 +30,7 @@ import com.mygdx.game.model.components.inputPlayer;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
+import com.mygdx.game.model.states.MultiplayerSelectionState;
 
 import java.util.ArrayList;
 
@@ -55,75 +56,91 @@ public class SetupScreen implements Screen2{
     private TextureRegion region;
     private Image box;
     private Sprite playerBoxSprite;
+    private Texture backImage;
 
 
-    public SetupScreen(final GameStateManager gsm){
+
+    public SetupScreen(final GameStateManager gsm) {
         super();
         ScreenViewport viewport = new ScreenViewport();
         this.gsm = gsm;
         this.stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
         this.numberOfPlayers = gsm.getGameRules().getNumberOfPlayers();
-       //Components
+        //Components
         elements = new ArrayList<>();
         players = new ArrayList<>();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
         playerBox = Assets.getTexture(Assets.playerBackground);
         playerBoxSprite = new Sprite(playerBox);
         region = new TextureRegion(playerBox);
-        if(numberOfPlayers==4){
+        if (numberOfPlayers == 4) {
             this.posChange = 275;
         }
 
-        if (numberOfPlayers==3) {
-            xPosition+=137.5;
+        if (numberOfPlayers == 3) {
+            xPosition += 137.5;
         }
-        if(numberOfPlayers==2){
-            xPosition+=275;
+        if (numberOfPlayers == 2) {
+            xPosition += 275;
         }
-        if(numberOfPlayers==1){
-            xPosition+=412.5;
+        if (numberOfPlayers == 1) {
+            xPosition += 412.5;
         }
 
         //Button
         font = new BitmapFont();
         buttonImage = Assets.getTexture(Assets.playButton);
+        backImage = Assets.getTexture(Assets.backButton);
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), 100);
+        Button backButton = new Button(new TextureRegionDrawable(new TextureRegion(backImage)));
+        backButton.setPosition(190, 500);
+        playButton.setPosition((Gdx.graphics.getWidth() / 2) - (playButton.getWidth() / 2), 100);
         stage.addActor(playButton);
+        stage.addActor(backButton);
 
 
-        for(int i=0; i<this.numberOfPlayers; i++) {
+        for (int i = 0; i < this.numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition);
             player = new Player();
             players.add(player);
             elements.add(inputPlayer);
             box = new Image(region);
-            box.setPosition(xPosition-10,370);
+            box.setPosition(xPosition - 10, 370);
             stage.addActor(box);
             xPosition += posChange;
         }
-        for(int i=0; i<elements.size(); i++){
+        for (int i = 0; i < elements.size(); i++) {
             stage.addActor(elements.get(i).getTextfield());
             stage.addActor(elements.get(i).getSelectbox());
             stage.addActor(elements.get(i));
         }
-        playButton.addListener(new ChangeListener(){
+        playButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
-                if(inputPlayer.checkInputFields()) {
-                    for(int i = 0; i<players.size(); i++){
+            public void changed(ChangeEvent event, Actor actor) {
+                if (inputPlayer.checkInputFields()) {
+                    for (int i = 0; i < players.size(); i++) {
                         players.get(i).setUsername(elements.get(i).getUsername());
                         players.get(i).setCountry(elements.get(i).getCountry());
                     }
                     gsm.getGameRules().setPlayers(players);
                     gsm.set(new GameState(gsm));
-                }else{
+                } else {
                     stage.addActor(inputPlayer.getErrorMsg());
                 }
             }
         });
+
+        backButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new MultiplayerSelectionState(gsm));
+            }
+        });
+
+
     }
+
     public void show() {}
 
     public void render(float delta, SpriteBatch sb) {

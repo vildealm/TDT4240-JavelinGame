@@ -50,13 +50,13 @@ public class HighScoreScreen implements Screen2 {
         highscores = _FBIC.getDataFromDb();
 
         stage = new Stage(new ScreenViewport());
-        buttonImage = Assets.getTexture(Assets.settingsButton);
+        buttonImage = Assets.getTexture(Assets.backButton);
         quitButton = Assets.getTexture(Assets.QuitButton);
 
         Button settingButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        settingButton.setPosition(1000, 650);
+        settingButton.setPosition(190, 650);
         settingButton.setHeight(100);
-        settingButton.setWidth(100);
+        settingButton.setWidth(350);
         stage.addActor(settingButton);
 
         Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
