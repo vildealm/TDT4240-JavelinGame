@@ -1,6 +1,5 @@
 package com.mygdx.game.view;
 
-
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -157,11 +156,10 @@ public class PlayScreen implements Screen2 {
         currentAnim = runningMan;
 
     }
-
     public void addButtons(){
         throwButtonImage = Assets.getTexture(Assets.throwButton);
         final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
-        throwButton.setPosition(Gdx.graphics.getWidth() -550, 30);
+        throwButton.setPosition(Gdx.graphics.getWidth() -throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
 
         nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
         final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
