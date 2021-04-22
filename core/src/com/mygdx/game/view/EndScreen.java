@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.controller.FirebaseInterface;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.states.GameState;
@@ -40,14 +41,16 @@ public class EndScreen implements Screen2 {
     private Viewport viewport;
     private Texture highscoreImage;
     private BitmapFont font;
+    private FirebaseInterface _FBIC;
+    private SpriteBatch batch;
 
     public EndScreen(final GameStateManager gsm) {
 
         super();
         this.gsm = gsm;
+        this.batch = new SpriteBatch();
         viewport = new ScreenViewport();
         stage = new Stage(viewport);
-        stage = new Stage(new ScreenViewport());
 
         highscoreImage = Assets.getTexture(Assets.HighscoreButton);
         font = new BitmapFont();
@@ -62,16 +65,14 @@ public class EndScreen implements Screen2 {
         stage.addActor(highscoreButton);
         Gdx.input.setInputProcessor(stage);
 
+        players = gsm.getGameRules().getPlayers();
+
         highscoreButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 gsm.set(new HighscoreState(gsm));
             }
         });
-
-        players = gsm.getGameRules().getPlayers();
-
-
     }
     @Override
     public void show() {
@@ -81,8 +82,8 @@ public class EndScreen implements Screen2 {
     @Override
     public void render(float delta, SpriteBatch sb) {
 
-        sb.begin();
-        font.draw(sb,  "SCORES: ", Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight()/2 +200 );
+        batch.begin();
+        font.draw(batch,  "SCORES: ", Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight()/2 +200 );
         Collections.sort(players, new Comparator<Player>() {
             @Override
             public int compare(Player p1, Player p2) {
@@ -90,11 +91,9 @@ public class EndScreen implements Screen2 {
             }
         });
         for (int i = 0; i< players.size(); i++){
-            font.draw(sb, players.get(i).getUsername() + ": " + players.get(i).getScore(), Gdx.graphics.getWidth()/2 -100, 100 + (i*100));
+            font.draw(batch, players.get(i).getUsername() + ": " + players.get(i).getScore(), Gdx.graphics.getWidth()/2 -100, 100 + (i*100));
         }
-
-
-        sb.end();
+        batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 

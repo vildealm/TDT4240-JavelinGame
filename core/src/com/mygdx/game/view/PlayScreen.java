@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
+import com.mygdx.game.controller.FirebaseInterface;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.EndState;
@@ -63,6 +64,8 @@ public class PlayScreen implements Screen2 {
     //PLayerController
     private PlayerController playerController;
 
+    private FirebaseInterface _FBIC;
+
     //Player
     private Player player;
     private int round;
@@ -102,6 +105,8 @@ public class PlayScreen implements Screen2 {
         viewport = new ScreenViewport();
         stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
+        this._FBIC = gsm.game.getFirebaseInterface();
+        _FBIC.initUser();
         playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
         playBackground.setPosition(0,0);
         playBackground.setSize(800, 500);
@@ -109,7 +114,6 @@ public class PlayScreen implements Screen2 {
         cameraLimit = 0;
         round = 1;
 
-        stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         font.setColor(Color.BLACK);
@@ -234,15 +238,18 @@ public class PlayScreen implements Screen2 {
             public void changed(ChangeEvent event, Actor actor){
                 reset();
                 nextThrowButton.remove();
-
-                gsm.getGameRules().setPlayers(players);
             }
         });
 
         finishGameButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
                 checkScore();
+                gsm.getGameRules().setPlayers(players);
+                for(Player player : players){
+                    _FBIC.setValueInDb(player.getUsername(), player.getScore(), player.getCountry());
+                }
                 gsm.set(new EndState(gsm));
             }
         });
@@ -250,9 +257,9 @@ public class PlayScreen implements Screen2 {
         pauseButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                gsm.set(new EndState(gsm));//sett state til pauseState
-                Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                Gdx.app.log("#PlayScreen", String.valueOf("pause"));
+                //gsm.set(new EndState(gsm));//sett state til pauseState
+                //Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                //Gdx.app.log("#PlayScreen", String.valueOf("pause"));
             }
         });
     }
