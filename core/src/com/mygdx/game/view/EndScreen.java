@@ -109,9 +109,10 @@ public class EndScreen implements Screen2 {
                 return p1.getScore().compareTo(p2.getScore());
             }
         });
+        Collections.reverse(players);
         int counter = 1;
-        for (int i=players.size()-1; i>= 0; i--){
-            font.draw(batch, counter + ". " + players.get(i).getUsername() + ": " + players.get(i).getScore(), Gdx.graphics.getWidth()/2 -100, 100 + (i*100));
+        for (int i=0; i < players.size(); i++){
+            font.draw(batch, counter + ". " + players.get(i).getUsername() + ": " + players.get(i).getScore(), Gdx.graphics.getWidth()/2 -150, 500 - (i*100));
             counter++;
         }
         batch.end();

@@ -225,7 +225,7 @@ public class PlayScreen implements Screen2 {
                 checkScore();
                 gsm.getGameRules().setPlayers(players);
                 for(Player player : players){
-                    _FBIC.setValueInDb(player.getUsername(), player.getScore(), player.getCountry());
+                    //_FBIC.setValueInDb(player.getUsername(), player.getScore(), player.getCountry());
                 }
                 dispose();
                 gsm.set(new EndState(gsm));
@@ -235,7 +235,7 @@ public class PlayScreen implements Screen2 {
         pauseButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                
+
             }
         });
     }
