@@ -3,49 +3,34 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.EndState;
-import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.JavelinGame;
 import com.mygdx.game.controller.PlayerController;
-import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.components.Player;
-import com.mygdx.game.model.states.GameState;
-import com.mygdx.game.model.states.GameStateManager;
-import com.mygdx.game.model.states.MenuState;
+import com.mygdx.game.model.states.MultiplayerSelectionState;
 
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class PlayScreen implements Screen2 {
 
@@ -74,6 +59,7 @@ public class PlayScreen implements Screen2 {
 
     private boolean throwIt = false;
     private boolean normalThrow = true;
+    private double prevScore;
     //PLayerController
     private PlayerController playerController;
 
@@ -89,6 +75,7 @@ public class PlayScreen implements Screen2 {
     private Texture throwButtonImage;
     private Texture nextThrowImage;
     private Texture pauseButtonImage;
+    private Texture finishGameImage;
 
     private Sprite javelinSprite = new Sprite(Assets.getTexture(Assets.javelin));
 
@@ -146,6 +133,7 @@ public class PlayScreen implements Screen2 {
         else{
             for (Player player : gsm.getGameRules().getPlayers()){
                 players.add(player);
+                player.setScore(0);
             }
         }
 
@@ -173,6 +161,10 @@ public class PlayScreen implements Screen2 {
         nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
         final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
         nextThrowButton.setPosition(700, Gdx.graphics.getHeight()/2);
+
+        finishGameImage = Assets.getTexture(Assets.newxtThrowButton);
+        final Button finishGameButton = new Button(new TextureRegionDrawable(new TextureRegion(finishGameImage)));
+        finishGameButton.setPosition(200, Gdx.graphics.getHeight()/2);
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
@@ -215,10 +207,8 @@ public class PlayScreen implements Screen2 {
                 javelinPosition.x = posX;
                 throwIt = true;
                 distance=(680-(posX+50));
+                prevScore = player.getScore();
                 player.calculateScore(playerController.getSpeed(), (680-(posX+50)));
-                /*if(score > player.getScore()){
-                    player.setScore(score);
-                }*/
                 distance=(680-(posX+50));
                 thrown = true;
                 System.out.println("javeling pos x : " + javelinPosition.x);
@@ -229,7 +219,13 @@ public class PlayScreen implements Screen2 {
                     normalThrow = false;
                 }
                 throwButton.remove();
-                stage.addActor(nextThrowButton);
+                if(round == (players.size()*2)){
+                    stage.addActor(finishGameButton);
+                }
+                else{
+                    stage.addActor(nextThrowButton);
+                }
+
             }
         });
 
@@ -243,6 +239,14 @@ public class PlayScreen implements Screen2 {
             }
         });
 
+        finishGameButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                checkScore();
+                gsm.set(new EndState(gsm));
+            }
+        });
+
         pauseButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -253,13 +257,10 @@ public class PlayScreen implements Screen2 {
         });
     }
 
-    public boolean landedJavelin(){
+    public void landedJavelin(){
         if (javelinPosition.y < 12 && javelinPosition.x > camera.position.x-600  ){
             velocity = 0;
-
         }
-
-        return true;
     }
 
     public Vector2 updateJavelinPosition(boolean normalThrow){
@@ -347,13 +348,15 @@ public class PlayScreen implements Screen2 {
         stage.draw();
     }
 
-    public void gameFinished(){
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("#Finito", String.valueOf("Finito"));
+    public void checkScore(){
+        //Check which score is best
+        if(prevScore > player.getScore()){
+            player.setScore(prevScore);
+        }
     }
 
     public void reset(){
-
+        checkScore();
         if(round <= players.size()){
             players.set(round-1, player);
         }
@@ -367,7 +370,6 @@ public class PlayScreen implements Screen2 {
         else{
             player= players.get((round-1) - players.size());
         }
-
         this.posX = 20;
         this.speedX = 0;
         currentAnim = runningMan;
