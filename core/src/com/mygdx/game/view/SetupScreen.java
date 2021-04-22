@@ -40,7 +40,8 @@ public class SetupScreen implements Screen2{
     private Stage stage;
     private BitmapFont font;
     private Player player;
-    private int xPosition = 40;
+    private int xPosition = 50;
+    private int posChange = 300;
     //Components
     private ArrayList<Player> players;
     private ArrayList<inputPlayer> elements;
@@ -70,6 +71,19 @@ public class SetupScreen implements Screen2{
         playerBox = Assets.getTexture(Assets.playerBackground);
         playerBoxSprite = new Sprite(playerBox);
         region = new TextureRegion(playerBox);
+        if(numberOfPlayers==4){
+            this.posChange = 275;
+        }
+
+        if (numberOfPlayers==3) {
+            xPosition+=137.5;
+        }
+        if(numberOfPlayers==2){
+            xPosition+=275;
+        }
+        if(numberOfPlayers==1){
+            xPosition+=412.5;
+        }
 
         //Button
         font = new BitmapFont();
@@ -87,7 +101,7 @@ public class SetupScreen implements Screen2{
             box = new Image(region);
             box.setPosition(xPosition-10,370);
             stage.addActor(box);
-            xPosition += 275;
+            xPosition += posChange;
         }
         for(int i=0; i<elements.size(); i++){
             stage.addActor(elements.get(i).getTextfield());
