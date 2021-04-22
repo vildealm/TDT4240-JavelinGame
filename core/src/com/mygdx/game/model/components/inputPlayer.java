@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -18,23 +20,21 @@ import com.mygdx.game.model.Assets;
 
 public class inputPlayer extends Actor {
 
-    Label username;
-    Label country;
-    Label errorMsg;
-    TextField textfield;
-    SelectBox sb;
+    private Label username, country, errorMsg, title ;
+    private TextField textfield;
+    private SelectBox sb;
 
-    //Sprite
-    Texture txtSprite = Assets.getTexture(Assets.txtfieldBackground);
+    private Texture txtSprite = Assets.getTexture(Assets.txtfieldBackground);
+
     BitmapFont font = new BitmapFont();
 
 
     public inputPlayer(int xPosition){
         this.sb = makeDropdown(xPosition + 150);
         this.textfield = makeInputField(xPosition + 150);
-        this.country = makeLabel("Choose Country",Color.BLACK, xPosition, 300);
-        this.username = makeUsernameLabel(Color.BLACK, xPosition, 350);
-        this.errorMsg = makeLabel("Unvalid Inputs",Color.BLACK, 900, 500);
+        this.country = makeLabel("Choose Country",Color.BLACK, xPosition, 420);
+        this.username = makeLabel("Username", Color.BLACK, xPosition, 460);
+        this.errorMsg = makeLabel("Invalid Inputs",Color.BLACK, 900, 500);
     }
 
     public TextField getTextfield(){
@@ -75,7 +75,7 @@ public class inputPlayer extends Actor {
         TextField.TextFieldStyle style = new TextField.TextFieldStyle(new BitmapFont(), Color.BLACK,null,null,s);
         TextField tf = new TextField("", style);
         tf.setSize(Gdx.graphics.getWidth()/20f, Gdx.graphics.getHeight()/28f);
-        tf.setPosition(xPos,350);
+        tf.setPosition(xPos,460);
         return tf;
     }
 
@@ -103,7 +103,7 @@ public class inputPlayer extends Actor {
         SelectBox<String> selectBox = new SelectBox<>(boxStyle);
         String[] countries = new String[]{"---","NOR","SVE","DAN","FIN"};
         selectBox.setItems(countries);
-        selectBox.setPosition(xPos, 300);
+        selectBox.setPosition(xPos, 420);
         selectBox.setSize(110, 37);
         return selectBox;
     }

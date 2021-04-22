@@ -37,6 +37,14 @@ public class GameRules {
         this.players = players;
     }
 
+    public void setNumberOfPlayers(int numberOfPlayers){
+        this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public int getNumberOfPlayers(){
+        return this.numberOfPlayers;
+    }
+
     public ArrayList<Player> getPlayers() {
         return this.players;
     }

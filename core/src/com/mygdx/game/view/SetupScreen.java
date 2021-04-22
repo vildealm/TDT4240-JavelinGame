@@ -6,8 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -18,7 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.components.inputPlayer;
@@ -36,41 +41,67 @@ public class SetupScreen implements Screen2{
     private BitmapFont font;
     private Player player;
     private int xPosition = 50;
+    private int posChange = 300;
     //Components
     private ArrayList<Player> players;
     private ArrayList<inputPlayer> elements;
     private inputPlayer inputPlayer;
     private Sprite background;
+    private int numberOfPlayers;
     //Button
     private TextButton.TextButtonStyle playButtonStyle;
+    private Texture buttonImage;
+    private Texture playerBox;
+    private TextureRegion region;
+    private Image box;
+    private Sprite playerBoxSprite;
 
 
-    public SetupScreen(final GameStateManager gsm, int numberOfPlayers){
+    public SetupScreen(final GameStateManager gsm){
         super();
         ScreenViewport viewport = new ScreenViewport();
         this.gsm = gsm;
         this.stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
-
+        this.numberOfPlayers = gsm.getGameRules().getNumberOfPlayers();
        //Components
         elements = new ArrayList<>();
         players = new ArrayList<>();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
+        playerBox = Assets.getTexture(Assets.playerBackground);
+        playerBoxSprite = new Sprite(playerBox);
+        region = new TextureRegion(playerBox);
+        if(numberOfPlayers==4){
+            this.posChange = 275;
+        }
+
+        if (numberOfPlayers==3) {
+            xPosition+=137.5;
+        }
+        if(numberOfPlayers==2){
+            xPosition+=275;
+        }
+        if(numberOfPlayers==1){
+            xPosition+=412.5;
+        }
 
         //Button
         font = new BitmapFont();
-        playButtonStyle = new TextButton.TextButtonStyle();
-        playButtonStyle.font = font;
-        TextButton playButton = new TextButton("PLAY", playButtonStyle);
-        playButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-        playButton.getLabel().setFontScale(5, 5);
+        buttonImage = Assets.getTexture(Assets.playButton);
+        Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
+        playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), 100);
         stage.addActor(playButton);
-        for(int i=0; i<numberOfPlayers; i++) {
+
+
+        for(int i=0; i<this.numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition);
             player = new Player();
             players.add(player);
             elements.add(inputPlayer);
-            xPosition += 300;
+            box = new Image(region);
+            box.setPosition(xPosition-10,370);
+            stage.addActor(box);
+            xPosition += posChange;
         }
         for(int i=0; i<elements.size(); i++){
             stage.addActor(elements.get(i).getTextfield());
@@ -85,6 +116,7 @@ public class SetupScreen implements Screen2{
                         players.get(i).setUsername(elements.get(i).getUsername());
                         players.get(i).setCountry(elements.get(i).getCountry());
                     }
+                    gsm.getGameRules().setPlayers(players);
                     gsm.set(new GameState(gsm));
                 }else{
                     stage.addActor(inputPlayer.getErrorMsg());

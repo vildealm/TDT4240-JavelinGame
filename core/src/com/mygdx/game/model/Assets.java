@@ -10,10 +10,9 @@ public class Assets {
     private static AssetManager assetManager;
     //Backgrounds
     public static String setupBackground = "textures/backgrounds/mainBackground.png";
-    public Texture textureBackground = new Texture(setupBackground);
     public static String playBackground = "textures/backgrounds/playBackground.png";
-    public Texture texturePlayBackground = new Texture(playBackground);
     public static String txtfieldBackground = "textures/backgrounds/txtfield.png";
+    public static String playerBackground = "textures/backgrounds/playerBox.png";
 
     //Buttons
     public static String playButton = "buttons/playButton.png";
@@ -48,17 +47,20 @@ public class Assets {
     }
 
     public static void load(){
+        //Background
         assetManager.load(setupBackground, Texture.class);
         assetManager.load(playBackground, Texture.class);
         assetManager.load(player, Texture.class);
         assetManager.load(txtfieldBackground, Texture.class);
         assetManager.load(javelin, Texture.class);
+        assetManager.load(playerBackground, Texture.class);
 
         //MultiplayerSelection buttons
         assetManager.load(onePlayerButton, Texture.class);
         assetManager.load(twoPlayerButton, Texture.class);
         assetManager.load(threePlayerButton, Texture.class);
         assetManager.load(fourPlayerButton, Texture.class);
+        //Buttons
         assetManager.load(playButton, Texture.class);
         assetManager.load(throwButton, Texture.class);
         assetManager.load(pauseButton, Texture.class);

@@ -19,9 +19,12 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
+import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.SetupState;
+
+import java.util.ArrayList;
 
 
 public class MultiplayerSelectionScreen implements Screen2 {
@@ -40,6 +43,10 @@ public class MultiplayerSelectionScreen implements Screen2 {
     private Texture threePlayerButtonImage;
     private Texture fourPlayerButtonImage;
 
+    private int xPos;
+
+    private ArrayList<Button> playerButtons;
+
     private Sprite background;
 
 
@@ -54,6 +61,7 @@ public class MultiplayerSelectionScreen implements Screen2 {
         fourPlayerButtonImage = Assets.getTexture(Assets.fourPlayerButton);
 
         font = new BitmapFont();
+        playerButtons = new ArrayList<>();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
 
 
@@ -63,50 +71,35 @@ public class MultiplayerSelectionScreen implements Screen2 {
         threePlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(threePlayerButtonImage)));
         fourPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(fourPlayerButtonImage)));
 
-        onePlayerButton.setPosition(300,350);
-        twoPlayerButton.setPosition(700,350);
-        threePlayerButton.setPosition(1100,350);
-        fourPlayerButton.setPosition(1500,350);
+        playerButtons.add(onePlayerButton);
+        playerButtons.add(twoPlayerButton);
+        playerButtons.add(threePlayerButton);
+        playerButtons.add(fourPlayerButton);
 
+        xPos = 100;
 
-        stage.addActor(onePlayerButton);
-        stage.addActor(twoPlayerButton);
-        stage.addActor(threePlayerButton);
-        stage.addActor(fourPlayerButton);
+        for(final Button i : playerButtons){
+            i.setPosition(xPos,275);
+            xPos += 250;
+            i.setTransform(true);
+            i.setScale(0.75f);
+            stage.addActor(i);
+            i.addListener(new ChangeListener(){
+                @Override
+                public void changed(ChangeEvent event, Actor actor){
+                    gsm.getGameRules().setNumberOfPlayers(playerButtons.indexOf(i)+1);
+                    gsm.set(new SetupState(gsm));
+                    Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                    Gdx.app.log("SEND PLAYER NUMBER", String.valueOf(gsm.getGameRules().getNumberOfPlayers()));
+                }
+            });
+        }
+
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
 
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ButtonGameState", String.valueOf(gsm));
-
-
-        onePlayerButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                gsm.set(new SetupState(gsm)); //skal være SetupState
-            }
-        });
-
-        twoPlayerButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                gsm.set(new SetupState(gsm)); //skal være SetupState
-            }
-        });
-
-        threePlayerButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                gsm.set(new SetupState(gsm)); //skal være SetupState
-            }
-        });
-
-        fourPlayerButton.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                gsm.set(new SetupState(gsm)); //skal være SetupState
-            }
-        });
 
     }
 
