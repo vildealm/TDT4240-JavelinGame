@@ -23,6 +23,7 @@ import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.LearnState;
 import com.mygdx.game.model.states.MultiplayerSelectionState;
 import com.mygdx.game.model.states.SetupState;
 
@@ -34,10 +35,13 @@ public class MenuScreen implements Screen2 {
     private BitmapFont font;
     private Stage stage;
     private Button playButton;
+    private Button learnButton;
+
     private GameStateManager gsm;
     private TextureAtlas buttonAtlas;
     private Texture buttonImage;
     private Sprite background;
+    private Texture learnImage;
 
     public MenuScreen(final GameStateManager gsm){
         super();
@@ -45,10 +49,16 @@ public class MenuScreen implements Screen2 {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         buttonImage = Assets.getTexture(Assets.playButton);
+        learnImage = Assets.getTexture(Assets.learnButton);
+        learnButton = new Button(new TextureRegionDrawable(new TextureRegion(learnImage)));
+         stage.addActor(learnButton);
         font = new BitmapFont();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
         playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), (Gdx.graphics.getHeight()/2)-(playButton.getHeight())/2);
+        learnButton.setWidth(300);
+        learnButton.setHeight(80);
+        learnButton.setPosition((Gdx.graphics.getWidth()/2)-(learnButton.getWidth()/2) , (Gdx.graphics.getHeight()/2)-(learnButton.getHeight())/2 -200);
         stage.addActor(playButton);
 
         playButton.addListener(new ChangeListener(){
@@ -57,6 +67,14 @@ public class MenuScreen implements Screen2 {
                gsm.set(new MultiplayerSelectionState(gsm));
             }
         });
+
+        learnButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new LearnState(gsm));
+            }
+        });
+
     }
 
     public void show() { }

@@ -24,6 +24,8 @@ public class Assets {
     public static String newxtThrowButton = "buttons/nextThrowButton.png";
     public static String goToScoreButton = "buttons/goToScore.png";
     public static String backButton = "buttons/backButton.png";
+    public static String learnButton = "buttons/learnButton.png";
+
 
 
 
@@ -76,6 +78,8 @@ public class Assets {
         assetManager.load(newxtThrowButton, Texture.class);
         assetManager.load(goToScoreButton, Texture.class);
         assetManager.load(backButton, Texture.class);
+        assetManager.load(learnButton, Texture.class);
+
 
 
 

@@ -94,7 +94,7 @@ public class SetupScreen implements Screen2{
         backImage = Assets.getTexture(Assets.backButton);
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
         Button backButton = new Button(new TextureRegionDrawable(new TextureRegion(backImage)));
-        backButton.setPosition(190, 500);
+        backButton.setPosition(150, 600);
         playButton.setPosition((Gdx.graphics.getWidth() / 2) - (playButton.getWidth() / 2), 100);
         stage.addActor(playButton);
         stage.addActor(backButton);
@@ -137,8 +137,6 @@ public class SetupScreen implements Screen2{
                 gsm.set(new MultiplayerSelectionState(gsm));
             }
         });
-
-
     }
 
     public void show() {}

@@ -4,6 +4,7 @@ import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.view.EndScreen;
 import com.mygdx.game.view.HighScoreScreen;
+import com.mygdx.game.view.LearnScreen;
 import com.mygdx.game.view.LoadingScreen;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Application;
@@ -47,6 +48,8 @@ public class ScreenFactory {
                 return new HighScoreScreen(gsm.game.getFirebaseInterface(), gsm);
             case "MULTIPLAYER":
                 return new MultiplayerSelectionScreen(gsm);
+            case "LEARN":
+                return new LearnScreen(gsm);
             default:
                 return null;
 
