@@ -15,6 +15,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -49,6 +51,7 @@ public class PlayScreen implements Screen2 {
     private int posX = 20;
     private int speedX = 0;
     private Animation currentAnim;
+    private Skin skin;
     private int distance = 1;
     private TextButton runArea;
     private TextButton.TextButtonStyle runAreaStyle;
@@ -250,6 +253,7 @@ public class PlayScreen implements Screen2 {
                 for(Player player : players){
                     _FBIC.setValueInDb(player.getUsername(), player.getScore(), player.getCountry());
                 }
+                dispose();
                 gsm.set(new EndState(gsm));
             }
         });
@@ -257,9 +261,7 @@ public class PlayScreen implements Screen2 {
         pauseButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //gsm.set(new EndState(gsm));//sett state til pauseState
-                //Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                //Gdx.app.log("#PlayScreen", String.valueOf("pause"));
+                pause();
             }
         });
     }
@@ -401,7 +403,12 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void pause() {
-
+        skin = new Skin();
+        Window pause = new Window("PAUSE", skin);
+        pause.padTop(64);
+        pause.add(new TextButton("continue", skin));
+        pause.pack();
+        stage.addActor(pause);
     }
 
     @Override
