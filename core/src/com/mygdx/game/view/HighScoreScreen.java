@@ -69,6 +69,8 @@ public class HighScoreScreen implements Screen2 {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 gsm.set(new MenuState(gsm));
+                System.out.println("this screen is rendered Menu state ?" );
+
             }
         });
 

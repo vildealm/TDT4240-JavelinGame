@@ -101,7 +101,6 @@ public class SetupScreen implements Screen2{
         stage.addActor(playButton);
         stage.addActor(backButton);
 
-
         for (int i = 0; i < this.numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition);
             player = new Player();
@@ -117,6 +116,7 @@ public class SetupScreen implements Screen2{
             stage.addActor(elements.get(i).getSelectbox());
             stage.addActor(elements.get(i));
         }
+
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
