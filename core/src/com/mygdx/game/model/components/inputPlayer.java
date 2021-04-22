@@ -101,7 +101,7 @@ public class inputPlayer extends Actor {
         List.ListStyle ls = new List.ListStyle(font, Color.WHITE, Color.BLACK, s1);
         SelectBox.SelectBoxStyle boxStyle = new SelectBox.SelectBoxStyle(font, Color.BLACK, s1, sp, ls);
         SelectBox<String> selectBox = new SelectBox<>(boxStyle);
-        String[] countries = new String[]{"---","NOR","SVE","DAN","FIN"};
+        String[] countries = new String[]{"---","NOR","SWE","DAN", "USA", "BRA", "GER", "RUS", "AUS"};
         selectBox.setItems(countries);
         selectBox.setPosition(xPos, 420);
         selectBox.setSize(110, 37);

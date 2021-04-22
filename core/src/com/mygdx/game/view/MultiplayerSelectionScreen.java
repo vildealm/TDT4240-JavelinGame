@@ -105,17 +105,12 @@ public class MultiplayerSelectionScreen implements Screen2 {
                 public void changed(ChangeEvent event, Actor actor){
                     gsm.getGameRules().setNumberOfPlayers(playerButtons.indexOf(i)+1);
                     gsm.set(new SetupState(gsm));
-                    Gdx.app.setLogLevel(Application.LOG_DEBUG);
-                    Gdx.app.log("SEND PLAYER NUMBER", String.valueOf(gsm.getGameRules().getNumberOfPlayers()));
                 }
             });
         }
 
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
-
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.log("ButtonGameState", String.valueOf(gsm));
 
     }
 
