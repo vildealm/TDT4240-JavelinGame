@@ -21,6 +21,7 @@ import com.mygdx.game.model.components.Score;
 import com.mygdx.game.model.states.EndState;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
+import com.mygdx.game.model.states.MenuState;
 
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class HighScoreScreen implements Screen2 {
         quitButton = Assets.getTexture(Assets.QuitButton);
 
         Button settingButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        settingButton.setPosition(1150, 650);
+        settingButton.setPosition(1000, 650);
         settingButton.setHeight(100);
         settingButton.setWidth(100);
         stage.addActor(settingButton);
@@ -64,6 +65,13 @@ public class HighScoreScreen implements Screen2 {
         quitButton1.setHeight(100);
         quitButton1.setWidth(300);
         Gdx.input.setInputProcessor(stage);
+
+        quitButton1.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new MenuState(gsm));
+            }
+        });
 
         settingButton.addListener(new ChangeListener(){
             @Override

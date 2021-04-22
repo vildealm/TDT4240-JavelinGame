@@ -18,9 +18,11 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
+import com.mygdx.game.model.states.EndState;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.HighscoreState;
+import com.mygdx.game.model.states.MenuState;
 
 import java.awt.Font;
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class EndScreen implements Screen2 {
     private Texture highscoreImage;
     private BitmapFont font;
     private SpriteBatch batch;
+    private Texture quitButtonImage;
 
     public EndScreen(final GameStateManager gsm) {
 
@@ -55,13 +58,23 @@ public class EndScreen implements Screen2 {
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
+        quitButtonImage = Assets.getTexture(Assets.QuitButton);
+
 
         Button highscoreButton = new Button(new TextureRegionDrawable(new TextureRegion(highscoreImage)));
-        highscoreButton.setPosition(950, 650);
+        highscoreButton.setPosition(900, 650);
         highscoreButton.setHeight(90);
         highscoreButton.setWidth(300);
 
+        Button quitButton = new Button(new TextureRegionDrawable(new TextureRegion(quitButtonImage)));
+        stage.addActor(quitButton);
+        quitButton.setPosition(900, 500);
+        quitButton.setHeight(100);
+        quitButton.setWidth(300);
+        Gdx.input.setInputProcessor(stage);
+
         stage.addActor(highscoreButton);
+        stage.addActor(quitButton);
         Gdx.input.setInputProcessor(stage);
 
         players = gsm.getGameRules().getPlayers();
@@ -70,6 +83,13 @@ public class EndScreen implements Screen2 {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 gsm.set(new HighscoreState(gsm));
+            }
+        });
+
+        quitButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.set(new MenuState(gsm));
             }
         });
     }
