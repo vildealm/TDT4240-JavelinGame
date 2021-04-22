@@ -216,8 +216,6 @@ public class PlayScreen implements Screen2 {
                 player.calculateScore(playerController.getSpeed(), (680-(posX+50)));
                 distance=(680-(posX+50));
                 thrown = true;
-                System.out.println("javeling pos x : " + javelinPosition.x);
-                System.out.println("is javelin thrown?" +thrown);
 
                 playerController.setSpeed(0);
                 if (posX < 300) {
@@ -353,7 +351,7 @@ public class PlayScreen implements Screen2 {
 
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
         landedJavelin();
-        font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Round: "+round, camera.position.x-300, 600);
+        font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Round: "+round, camera.position.x-500, 600);
         sb.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
