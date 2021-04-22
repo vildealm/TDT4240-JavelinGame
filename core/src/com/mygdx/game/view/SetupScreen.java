@@ -40,7 +40,7 @@ public class SetupScreen implements Screen2{
     private Stage stage;
     private BitmapFont font;
     private Player player;
-    private int xPosition = 50;
+    private int xPosition = 40;
     //Components
     private ArrayList<Player> players;
     private ArrayList<inputPlayer> elements;
@@ -53,6 +53,7 @@ public class SetupScreen implements Screen2{
     private Texture playerBox;
     private TextureRegion region;
     private Image box;
+    private Sprite playerBoxSprite;
 
 
     public SetupScreen(final GameStateManager gsm){
@@ -67,22 +68,26 @@ public class SetupScreen implements Screen2{
         players = new ArrayList<>();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
         playerBox = Assets.getTexture(Assets.playerBackground);
-        region = new TextureRegion(playerBox,50,60,400, 400);
-        box = new Image(region);
+        playerBoxSprite = new Sprite(playerBox);
+        region = new TextureRegion(playerBox);
+
         //Button
         font = new BitmapFont();
         buttonImage = Assets.getTexture(Assets.playButton);
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
         playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), 100);
         stage.addActor(playButton);
-        stage.addActor(box);
+
 
         for(int i=0; i<this.numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition);
             player = new Player();
             players.add(player);
             elements.add(inputPlayer);
-            xPosition += 300;
+            box = new Image(region);
+            box.setPosition(xPosition-10,370);
+            stage.addActor(box);
+            xPosition += 275;
         }
         for(int i=0; i<elements.size(); i++){
             stage.addActor(elements.get(i).getTextfield());
