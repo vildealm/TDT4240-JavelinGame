@@ -3,7 +3,6 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.JavelinGame;
-import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.GameRules;
 import com.mygdx.game.model.components.Player;
 
@@ -37,22 +36,15 @@ public class GameStateManager {
         states.push(state);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("#GSM", String.valueOf(states));
-
     }
-
 
     public void update(float dt){
         states.peek().update(dt);
 
     }
 
-
     public void renderBatch(SpriteBatch sb) {
-        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        //Gdx.app.log("#GSM", String.valueOf(states.peek().getScreen()));
         states.peek().renderScreen();
-        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        //Gdx.app.log("#GSM", String.valueOf(states.peek().getScreen()));
         states.peek().getScreen().render(Gdx.graphics.getDeltaTime(), sb);
 
     }

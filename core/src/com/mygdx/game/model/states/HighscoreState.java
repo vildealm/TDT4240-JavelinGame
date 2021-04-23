@@ -1,7 +1,5 @@
 package com.mygdx.game.model.states;
 
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.view.Screen2;
 
@@ -16,15 +14,9 @@ public class HighscoreState extends State{
     }
 
     @Override
-    public void handleInput() {
-
-    }
-
-    @Override
     public void update(float dt) {
 
     }
-
 
     @Override
     public void renderScreen() {
