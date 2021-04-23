@@ -65,16 +65,7 @@ public class JavelinGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		/*if (screen!= null) {
-			screen.render(Gdx.graphics.getDeltaTime(),batch);
-		}*/
-		//gsm.renderBatch(batch);
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		//Gdx.gl.glClearColor(1, 0, 0, 1);
-		//gsm.renderScreen(batch);
-
 		Gdx.gl.glClearColor(165.0f/255.0f, 214.0f/255.0f, 244.0f/255.0f, 1.0f);
-		//Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());
 		if(screen!=null){
