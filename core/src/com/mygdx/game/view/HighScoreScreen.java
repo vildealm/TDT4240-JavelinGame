@@ -39,6 +39,9 @@ public class HighScoreScreen implements Screen2 {
 
     public HighScoreScreen(FirebaseInterface FBIC, final GameStateManager gsm){
         _FBIC = FBIC;
+        if(highscores!=null){
+            highscores.clear();
+        }
         this.gsm = gsm;
         shapeRenderer = new ShapeRenderer();
         font = new BitmapFont();

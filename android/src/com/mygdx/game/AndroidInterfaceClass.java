@@ -52,6 +52,7 @@ public class AndroidInterfaceClass implements FirebaseInterface {
     //Query sorts the data, and collects the 10 last objects (the ones who have thrown the longest)
     @Override
     public ArrayList<Score> getDataFromDb() {
+        highscores.clear();
         readTrace.start();
         Query sortedData = myRef.orderByChild("score").limitToLast(10);
         sortedData.addValueEventListener(new ValueEventListener() {
