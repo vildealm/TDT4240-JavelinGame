@@ -93,29 +93,24 @@ public class PlayScreen implements Screen2 {
     public PlayScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
-        font = new BitmapFont();
         viewport = new ScreenViewport();
         stage = new Stage(viewport);
-        Gdx.input.setInputProcessor(stage);
-        this._FBIC = gsm.game.getFirebaseInterface();
-        _FBIC.initUser();
-        playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
-        playBackground.setPosition(0,0);
-        playBackground.setSize(Gdx.graphics.getWidth(), (float) (Gdx.graphics.getHeight()));
-        thrown = false;
-        cameraLimit = 0;
-        round = 1;
-        isPaused = false;
-
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
 
-        addButtons();
+        this._FBIC = gsm.game.getFirebaseInterface();
+        _FBIC.initUser();
+        playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
+        playBackground.setPosition(0,0);
+        playBackground.setSize(Gdx.graphics.getWidth(), (float) (Gdx.graphics.getHeight()));
+        cameraLimit = 0;
+        round = 1;
+        thrown = false;
+        isPaused = false;
 
-        playerController = new PlayerController();
-        playerController.setSpeed(speedX);
+        addButtons();
 
         for (Player player : gsm.getGameRules().getPlayers()){
             players.add(player);
@@ -123,6 +118,8 @@ public class PlayScreen implements Screen2 {
         }
 
         player = players.get(round-1);
+        playerController = new PlayerController();
+        playerController.setSpeed(speedX);
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), (float) (Gdx.graphics.getHeight()*0.9));
         camera.position.set((float)((Gdx.graphics.getWidth()/2)), (float) ((Gdx.graphics.getHeight()/2)*0.9), 0 );
@@ -224,7 +221,7 @@ public class PlayScreen implements Screen2 {
                 checkScore();
                 gsm.getGameRules().setPlayers(players);
                 for(Player player : players){
-                    //_FBIC.setValueInDb(player.getUsername(), player.getScore(), player.getCountry());
+                    _FBIC.setValueInDb(player.getUsername(), player.getScore(), player.getCountry());
                 }
                 dispose();
                 gsm.set(new EndState(gsm));
