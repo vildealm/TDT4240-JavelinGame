@@ -76,6 +76,7 @@ public class PlayScreen implements Screen2 {
     private Texture pauseButtonImage;
     private Texture finishGameImage;
     private Texture standingMan;
+    private Texture backgroundPauseImage;
 
     private Sprite javelinSprite = new Sprite(Assets.getTexture(Assets.javelin));
 
@@ -156,6 +157,10 @@ public class PlayScreen implements Screen2 {
         finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
+
+        backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
+
+
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
         pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
         pauseButton.setHeight(100);
