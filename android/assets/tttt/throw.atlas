@@ -1,0 +1,9 @@
+newRunSpritesheet.png
+pixil-frame-4
+  rotate: false
+  xy: 410, 2
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+
