@@ -29,6 +29,7 @@ import com.mygdx.game.model.states.GameStateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.components.Player;
+import com.mygdx.game.model.states.MenuState;
 import com.mygdx.game.model.states.MultiplayerSelectionState;
 
 
@@ -78,6 +79,8 @@ public class PlayScreen implements Screen2 {
     private Texture pauseButtonImage;
     private Texture finishGameImage;
     private Texture standingMan;
+    private Texture backgroundPauseImage;
+    private Texture quitButton;
 
     private Sprite javelinSprite = new Sprite(Assets.getTexture(Assets.javelin));
 
@@ -88,6 +91,8 @@ public class PlayScreen implements Screen2 {
 
     private Vector2 javelinVelocityX = new Vector2();
     private Vector2 javelinVelocityY = new Vector2();
+
+    private Window pause;
 
 
 
@@ -104,23 +109,36 @@ public class PlayScreen implements Screen2 {
         font = new BitmapFont();
 
         viewport = new ScreenViewport();
-
+        backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
-        TextureRegionDrawable pauseDrawable = new TextureRegionDrawable(new TextureRegion(pauseButtonImage));
+        TextureRegionDrawable pauseDrawable = new TextureRegionDrawable(new TextureRegion(backgroundPauseImage));
         Window.WindowStyle windowstyle = new Window.WindowStyle();
         windowstyle.titleFont = font;
         windowstyle.background = pauseDrawable;
 
-
-
-
         stage = new Stage(viewport);
         stage2 = new Stage(viewport);
-        final Window pause = new Window("",windowstyle);
+        this.pause = new Window("",windowstyle);
+
+        quitButton = Assets.getTexture(Assets.QuitButton);
+        Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
+        quitButton1.setPosition(300,300);
+        quitButton1.setHeight(100);
+        quitButton1.setWidth(100);
+        pause.add(quitButton1);
+        quitButton1.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                gsm.getGameRules().clearPlayers();
+                gsm.set(new MenuState(gsm));
+            }
+        });
 
         Button continueButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
+        continueButton.setPosition(300,300);
         continueButton.setHeight(100);
         continueButton.setWidth(100);
+        pause.add(continueButton);
         continueButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -128,15 +146,12 @@ public class PlayScreen implements Screen2 {
             }
         });
 
-
-
         pause.padTop(64);
         pause.setSize(stage.getWidth()/1.5f,stage.getHeight()/1.5f);
         pause.setPosition(stage.getWidth()/2-pause.getWidth()/2, stage.getHeight()/2-pause.getHeight()/2);
-
-
-
         stage.addActor(pause);
+
+
 
         Gdx.input.setInputProcessor(stage);
         this._FBIC = gsm.game.getFirebaseInterface();
@@ -194,6 +209,8 @@ public class PlayScreen implements Screen2 {
         finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
+
+
 
 
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
@@ -279,7 +296,7 @@ public class PlayScreen implements Screen2 {
         pauseButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                stage.addActor(pause);
             }
         });
     }

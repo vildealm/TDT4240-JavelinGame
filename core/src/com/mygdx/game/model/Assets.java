@@ -14,6 +14,9 @@ public class Assets {
     public static String txtfieldBackground = "textures/backgrounds/txtfield.png";
     public static String playerBackground = "textures/backgrounds/playerBox.png";
     public static String learnImage = "howToPlay.png";
+    public static String pauseBackground = "textures/backgrounds/pausedBackground.png";
+
+
 
 
     //Buttons
@@ -78,6 +81,8 @@ public class Assets {
         assetManager.load(backButton, Texture.class);
         assetManager.load(learnButton, Texture.class);
         assetManager.load(learnImage, Texture.class);
+        assetManager.load(pauseBackground, Texture.class);
+
     }
 
     public static boolean update(){
