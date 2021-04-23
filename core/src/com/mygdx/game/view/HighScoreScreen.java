@@ -52,16 +52,16 @@ public class HighScoreScreen implements Screen2 {
         quitButton = Assets.getTexture(Assets.QuitButton);
 
         Button settingButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        settingButton.setPosition(80, 650);
-        settingButton.setHeight(100);
-        settingButton.setWidth(350);
+        settingButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.85));
+        settingButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
+        settingButton.setWidth((float) (Gdx.graphics.getWidth()*0.2));
         stage.addActor(settingButton);
 
         Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
         stage.addActor(quitButton1);
-        quitButton1.setPosition(900, 650);
-        quitButton1.setHeight(100);
-        quitButton1.setWidth(300);
+        quitButton1.setPosition((float) (Gdx.graphics.getWidth()*0.76), (float) (Gdx.graphics.getHeight()*0.85));
+        quitButton1.setHeight((float) (Gdx.graphics.getHeight()*0.1));
+        quitButton1.setWidth((float) (Gdx.graphics.getWidth()*0.22));
         Gdx.input.setInputProcessor(stage);
 
         quitButton1.addListener(new ChangeListener(){
@@ -97,15 +97,15 @@ public class HighScoreScreen implements Screen2 {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
         for(int j=0; j< highscores.size(); j++){
-            shapeRenderer.rect(200, 5+(j*75), 800, 70);
+            shapeRenderer.rect((float) (Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*0.9)), (float) (Gdx.graphics.getHeight()-(Gdx.graphics.getHeight())+j*Gdx.graphics.getHeight()*0.1), (float) (Gdx.graphics.getWidth()*0.8), Gdx.graphics.getHeight()/11);
         }
         shapeRenderer.end();
         int counter = 1;
         sb.begin();
         for(int i=highscores.size()-1; i>= 0; i--){
-            font.draw(sb, (counter)+". "+ highscores.get(i).getUsername(), 250, 50+(i*75));
-            font.draw(sb, highscores.get(i).getScore().toString(), 650, 50+(i*75));
-            font.draw(sb, highscores.get(i).getCountry(), 850, 50+(i*75));
+            font.draw(sb, (counter)+". "+ highscores.get(i).getUsername(), (float) (Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*0.85)), (float) (Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*0.94)+i*Gdx.graphics.getHeight()*0.1)); //5+(j*75)
+            font.draw(sb, highscores.get(i).getScore().toString(), (float) (Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*0.5)), (float) (Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*0.94)+i*Gdx.graphics.getHeight()*0.1));
+            font.draw(sb, highscores.get(i).getCountry(), (float) (Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*0.25)), (float) (Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*0.94)+i*Gdx.graphics.getHeight()*0.1));
             counter++;
         }
         sb.end();
