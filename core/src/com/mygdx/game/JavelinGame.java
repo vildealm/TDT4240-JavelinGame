@@ -11,8 +11,6 @@ import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.LoadingState;
-import com.mygdx.game.model.states.MenuState;
-import com.mygdx.game.model.states.SetupState;
 import com.mygdx.game.view.Screen2;
 
 public class JavelinGame extends ApplicationAdapter {
@@ -39,7 +37,6 @@ public class JavelinGame extends ApplicationAdapter {
 		gsm = new GameStateManager(this);
 		assets = new Assets();
 		assets.load();
-		//Gdx.gl.glClearColor(1, 0, 0, 1);
 		screenFactory = new ScreenFactory(gsm,assets);
 		gsm.push(new LoadingState(gsm));
 	}
