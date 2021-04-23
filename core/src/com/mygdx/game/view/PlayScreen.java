@@ -101,7 +101,7 @@ public class PlayScreen implements Screen2 {
         _FBIC.initUser();
         playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
         playBackground.setPosition(0,0);
-        playBackground.setSize(800, 500);
+        playBackground.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         thrown = false;
         cameraLimit = 0;
         round = 1;
@@ -124,7 +124,7 @@ public class PlayScreen implements Screen2 {
 
         player = players.get(round-1);
 
-        camera = new OrthographicCamera(1184, 768);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
 
         //Animations
