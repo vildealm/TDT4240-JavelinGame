@@ -84,6 +84,7 @@ public class PlayScreen implements Screen2 {
     private Texture standingMan;
     private Texture backgroundPauseImage;
     private Texture quitButton;
+    private Button nextPlayerButtonn;
 
     private Sprite javelinSprite = new Sprite(Assets.getTexture(Assets.javelin));
 
@@ -116,6 +117,7 @@ public class PlayScreen implements Screen2 {
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
         resumeButtonImage = Assets.getTexture(Assets.resumeButton);
         nextPlayerButton = Assets.getTexture(Assets.nextPlayer);
+        nextPlayerButtonn = new Button(new TextureRegionDrawable(new TextureRegion(nextPlayerButton)));
         TextureRegionDrawable pauseDrawable = new TextureRegionDrawable(new TextureRegion(backgroundPauseImage));
         Window.WindowStyle windowstyle = new Window.WindowStyle();
         windowstyle.titleFont = font;
@@ -264,6 +266,10 @@ public class PlayScreen implements Screen2 {
                     }
                 }
                 else{
+                    if(gsm.getGameRules().getPlayers().size() > 1){
+                        stage.addActor(nextPlayerButtonn);
+                        stage.addActor(nextPlayerButtonn);
+                    }
 
                     stage.addActor(nextThrowButton);
                 }
@@ -385,7 +391,6 @@ public class PlayScreen implements Screen2 {
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
     }
 
     public void checkScore(){

@@ -73,8 +73,8 @@ public class LearnScreen implements Screen2 {
         font.draw(sb, "Tap on THROW to throw the javelin" , 600, 200);
         font2.draw(sb, "Each player gets to throw 2 times per game." , (Gdx.graphics.getWidth() /2) - 250, 150);
         font2.draw(sb, "If you do not throw before the line, you get zero points." , (Gdx.graphics.getWidth() /2) - 300, 110);
-        font2.draw(sb, "High speed ->  high score" , (Gdx.graphics.getWidth() /2 ) -150, 70);
-        font2.draw(sb, "Close to the line ->  high score" , (Gdx.graphics.getWidth() /2 ) -180, 30);
+        font2.draw(sb, "High speed ->  higher score" , (Gdx.graphics.getWidth() /2 ) -150, 70);
+        font2.draw(sb, "Close to the line ->  higher score" , (Gdx.graphics.getWidth() /2 ) -180, 30);
 
         font.getData().setScale(2.5f);
         font2.getData().setScale(2f);
