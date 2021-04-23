@@ -79,10 +79,6 @@ public class Assets {
         assetManager.load(learnButton, Texture.class);
         assetManager.load(learnImage, Texture.class);
 
-
-
-
-
     }
 
     public static boolean update(){

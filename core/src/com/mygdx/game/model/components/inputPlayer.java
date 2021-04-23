@@ -20,22 +20,25 @@ import com.mygdx.game.model.Assets;
 
 public class inputPlayer extends Actor {
 
-    private Label username, country, errorMsg, title ;
+    private Label username, country, errorMsg, idTxt;
     private TextField textfield;
     private SelectBox sb;
+    private String id;
 
     private Texture txtSprite = Assets.getTexture(Assets.txtfieldBackground);
 
     BitmapFont font = new BitmapFont();
 
 
-    public inputPlayer(int xPosition){
+    public inputPlayer(int xPosition, int id){
         this.sb = makeDropdown(xPosition + 150);
         this.textfield = makeInputField(xPosition + 150);
-        this.country = makeLabel("Choose Country",Color.BLACK, xPosition, 420);
-        this.username = makeLabel("Username", Color.BLACK, xPosition, 460);
+        this.country = makeLabel("Choose Country",Color.BLACK, xPosition, 390);
+        this.username = makeLabel("Username", Color.BLACK, xPosition, 440);
+        this.idTxt = makeLabel("Player " + id, Color.BLACK, xPosition+80, 510);
         this.errorMsg = makeLabel("Invalid Inputs",Color.BLACK, 900, 500);
     }
+
 
     public TextField getTextfield(){
         return textfield;
@@ -50,12 +53,14 @@ public class inputPlayer extends Actor {
     public String getCountry(){
         return sb.getSelected().toString();
     }
-
     public Label getErrorMsg(){
         return errorMsg;
     }
+    public Label getIdTxt(){
+        return idTxt;
+    }
 
-    //Checks if username is correctly written // HVORDAN SJEKKER MAN LIKE BRUKERNAVN????
+    //Checks if username is correctly written
     public boolean checkInputFields() {
         if (!getUsername().isEmpty() &&
                 !getUsername().contains("æ") &&
@@ -74,25 +79,17 @@ public class inputPlayer extends Actor {
         SpriteDrawable s = new SpriteDrawable(new Sprite(txtSprite));
         TextField.TextFieldStyle style = new TextField.TextFieldStyle(new BitmapFont(), Color.BLACK,null,null,s);
         TextField tf = new TextField("", style);
-        tf.setSize(Gdx.graphics.getWidth()/20f, Gdx.graphics.getHeight()/28f);
-        tf.setPosition(xPos,460);
+        tf.setSize(90, 27);
+        tf.setPosition(xPos,440);
         return tf;
     }
 
-    private Label makeLabel(String txt, Color color, int xPos, int yPos){
+    public Label makeLabel(String txt, Color color, int xPos, int yPos){
         Label.LabelStyle style = new Label.LabelStyle(new BitmapFont(), color);
         Label country = new Label(txt, style);
         country.setPosition(xPos,yPos);
         country.setFontScale(1.3f);
         return country;
-    }
-
-    private Label makeUsernameLabel(Color color, int xPos, int yPos){
-        Label.LabelStyle style = new Label.LabelStyle(new BitmapFont(), color);
-        Label username = new Label("Username: ", style);
-        username.setPosition(xPos,yPos);
-        username.setFontScale(1.3f);
-        return username;
     }
 
     private SelectBox makeDropdown(int xPos){
@@ -103,8 +100,8 @@ public class inputPlayer extends Actor {
         SelectBox<String> selectBox = new SelectBox<>(boxStyle);
         String[] countries = new String[]{"---","NOR","SWE","DAN", "USA", "BRA", "GER", "RUS", "AUS"};
         selectBox.setItems(countries);
-        selectBox.setPosition(xPos, 420);
-        selectBox.setSize(110, 37);
+        selectBox.setPosition(xPos, 385);
+        selectBox.setSize(90, 27);
         return selectBox;
     }
 
@@ -114,6 +111,7 @@ public class inputPlayer extends Actor {
         this.username.draw(batch,1);
         this.textfield.draw(batch, 1);
         this.country.draw(batch,1);
+        this.idTxt.draw(batch, 1);
     }
 }
 

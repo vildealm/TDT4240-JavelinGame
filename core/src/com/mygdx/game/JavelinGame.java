@@ -11,8 +11,6 @@ import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.LoadingState;
-import com.mygdx.game.model.states.MenuState;
-import com.mygdx.game.model.states.SetupState;
 import com.mygdx.game.view.Screen2;
 
 public class JavelinGame extends ApplicationAdapter {
@@ -39,11 +37,8 @@ public class JavelinGame extends ApplicationAdapter {
 		gsm = new GameStateManager(this);
 		assets = new Assets();
 		assets.load();
-		//Gdx.gl.glClearColor(1, 0, 0, 1);
 		screenFactory = new ScreenFactory(gsm,assets);
 		gsm.push(new LoadingState(gsm));
-		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		//Gdx.app.log("JavelinGamegsm", String.valueOf(gsm));
 	}
 
 
@@ -70,16 +65,7 @@ public class JavelinGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		/*if (screen!= null) {
-			screen.render(Gdx.graphics.getDeltaTime(),batch);
-		}*/
-		//gsm.renderBatch(batch);
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		//Gdx.gl.glClearColor(1, 0, 0, 1);
-		//gsm.renderScreen(batch);
-
 		Gdx.gl.glClearColor(165.0f/255.0f, 214.0f/255.0f, 244.0f/255.0f, 1.0f);
-		//Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());
 		if(screen!=null){
