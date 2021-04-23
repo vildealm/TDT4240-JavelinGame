@@ -100,8 +100,6 @@ public class PlayScreen implements Screen2 {
 
     private Window pause;
 
-
-
     private float javelinStateTime = 0;
     private Vector2 javelinGravity = new Vector2();
 
@@ -115,7 +113,7 @@ public class PlayScreen implements Screen2 {
         font = new BitmapFont();
 
 
-        Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
+        nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
 
 
         viewport = new ScreenViewport();
@@ -205,14 +203,14 @@ public class PlayScreen implements Screen2 {
     }
 
     public void addButtons(){
+
+
         throwButtonImage = Assets.getTexture(Assets.throwButton);
         final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
         throwButton.setPosition(Gdx.graphics.getWidth() -throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
 
         nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
-        if(gsm.getGameRules().getPlayers().size()>1){
-            nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextPlayerButton)));
-        }
+
         nextThrowButton.setPosition(Gdx.graphics.getWidth() -550, 30);
 
         finishGameImage = Assets.getTexture(Assets.goToScoreButton);
@@ -221,6 +219,9 @@ public class PlayScreen implements Screen2 {
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
 
+        if(gsm.getGameRules().getPlayers().size()>1){
+            nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextPlayerButton)));
+        }
 
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
         pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
