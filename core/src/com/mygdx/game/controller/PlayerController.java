@@ -38,17 +38,10 @@ public class PlayerController {
     }
 
     public void increaseSpeed(){
-            if(speed<400){
+            if(speed<600){
                 speed = speed + 20;
             }
     }
 
-    /*
-    public void kast(){
-            currentAnim = throwingMan;
-
-    }
-
- */
 
 }

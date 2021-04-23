@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 import com.mygdx.game.controller.FirebaseInterface;
 import com.mygdx.game.model.components.Score;
 
@@ -27,10 +29,15 @@ public class AndroidInterfaceClass implements FirebaseInterface {
     private FirebaseUser user;
     private UUID id;
     private ArrayList<Score> highscores= new ArrayList<>();
+    private Trace readTrace;
+    private Trace writeTrace;
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("highscore");
+        readTrace = FirebasePerformance.getInstance().newTrace("read_trace");
+        writeTrace = FirebasePerformance.getInstance().newTrace("write_trace");
+
     }
 
     //Initializes user by logging in
@@ -45,6 +52,7 @@ public class AndroidInterfaceClass implements FirebaseInterface {
     //Query sorts the data, and collects the 10 last objects (the ones who have thrown the longest)
     @Override
     public ArrayList<Score> getDataFromDb() {
+        readTrace.start();
         Query sortedData = myRef.orderByChild("score").limitToLast(10);
         sortedData.addValueEventListener(new ValueEventListener() {
             @Override
@@ -60,12 +68,14 @@ public class AndroidInterfaceClass implements FirebaseInterface {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+        readTrace.stop();
         return highscores;
     }
 
     //Function for posting data to database
     @Override
     public void setValueInDb(String username, Double score, String country) {
+        writeTrace.start();
         myRef = database.getReference("highscore");
         id = UUID.randomUUID();
         if(mAuth.getCurrentUser()!= null){
@@ -73,5 +83,6 @@ public class AndroidInterfaceClass implements FirebaseInterface {
             myRef.child(id.toString()).child("score").setValue(score);
             myRef.child(id.toString()).child("country").setValue(country);
         }
+        writeTrace.stop();
     }
 }
