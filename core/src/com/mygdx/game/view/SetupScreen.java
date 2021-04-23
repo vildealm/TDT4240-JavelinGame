@@ -1,7 +1,5 @@
 package com.mygdx.game.view;
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,24 +10,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.components.inputPlayer;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
-import com.mygdx.game.model.states.MenuState;
 import com.mygdx.game.model.states.MultiplayerSelectionState;
 
 import java.util.ArrayList;
@@ -102,7 +91,7 @@ public class SetupScreen implements Screen2{
         stage.addActor(backButton);
 
         for (int i = 0; i < this.numberOfPlayers; i++) {
-            inputPlayer = new inputPlayer(xPosition);
+            inputPlayer = new inputPlayer(xPosition,i+1);
             player = new Player();
             players.add(player);
             elements.add(inputPlayer);
@@ -114,6 +103,7 @@ public class SetupScreen implements Screen2{
         for (int i = 0; i < elements.size(); i++) {
             stage.addActor(elements.get(i).getTextfield());
             stage.addActor(elements.get(i).getSelectbox());
+            stage.addActor(elements.get(i).getIdTxt());
             stage.addActor(elements.get(i));
         }
 
