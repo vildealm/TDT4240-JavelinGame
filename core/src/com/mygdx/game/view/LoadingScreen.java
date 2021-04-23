@@ -1,16 +1,12 @@
 package com.mygdx.game.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.JavelinGame;
 import com.mygdx.game.model.Assets;
-import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MenuState;
 
@@ -31,9 +27,7 @@ public class LoadingScreen implements Screen2 {
     }
 
     @Override
-    public void show() {
-
-    }
+    public void show() { }
 
     @Override
     public void render(float delta, SpriteBatch sb) {
