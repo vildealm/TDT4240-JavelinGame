@@ -86,6 +86,8 @@ public class PlayScreen implements Screen2 {
     private Texture quitButton;
     private Button nextPlayerButtonn;
 
+    private Button nextThrowButton;
+
     private Sprite javelinSprite = new Sprite(Assets.getTexture(Assets.javelin));
 
     private double velocity = -17.0;
@@ -111,6 +113,10 @@ public class PlayScreen implements Screen2 {
         super();
         this.gsm = gsm;
         font = new BitmapFont();
+
+
+        Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
+
 
         viewport = new ScreenViewport();
         backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
@@ -204,9 +210,10 @@ public class PlayScreen implements Screen2 {
         throwButton.setPosition(Gdx.graphics.getWidth() -throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
 
         nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
-        final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
+        if(gsm.getGameRules().getPlayers().size()>1){
+            nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextPlayerButton)));
+        }
         nextThrowButton.setPosition(Gdx.graphics.getWidth() -550, 30);
-        nextPlayerButtonn.setPosition(Gdx.graphics.getWidth() -550, 30);
 
         finishGameImage = Assets.getTexture(Assets.goToScoreButton);
         final Button finishGameButton = new Button(new TextureRegionDrawable(new TextureRegion(finishGameImage)));
@@ -267,9 +274,6 @@ public class PlayScreen implements Screen2 {
                     }
                 }
                 else{
-                    if(gsm.getGameRules().getPlayers().size() > 1){
-                        stage.addActor(nextPlayerButtonn);
-                    }
 
                     stage.addActor(nextThrowButton);
                 }
@@ -283,13 +287,7 @@ public class PlayScreen implements Screen2 {
                 nextThrowButton.remove();
             }
         });
-        nextPlayerButtonn.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                reset();
-                nextPlayerButtonn.remove();
-            }
-        });
+
 
         finishGameButton.addListener(new ChangeListener(){
             @Override
