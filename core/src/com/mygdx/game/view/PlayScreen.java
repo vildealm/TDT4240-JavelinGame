@@ -135,7 +135,7 @@ public class PlayScreen implements Screen2 {
 
         man = new TextureAtlas(Gdx.files.internal("tttt/newRunAtlas.atlas"));
         throwMan = new TextureAtlas(Gdx.files.internal("tttt/throw.atlas"));
-        standingMan = new Texture(Gdx.files.internal("runningscreenshots/pixl-frame-0.png"));
+        //standingMan = new Texture(Gdx.files.internal("runningscreenshots/pixl-frame-0.png"));
         //currentAnim = standingMan;
         runningMan = new Animation(3f/ 20f, man.getRegions());
         throwingMan = new Animation( 0.41f, throwMan.getRegions());
