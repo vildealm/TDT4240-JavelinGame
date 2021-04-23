@@ -31,6 +31,7 @@ public class Assets {
     public static String backButton = "buttons/backButton.png";
     public static String learnButton = "buttons/learnButton.png";
     public static String resumeButton = "buttons/resumeButton.png";
+    public static String nextPlayer = "buttons/nextPlayerButton.png";
 
 
 
@@ -65,6 +66,7 @@ public class Assets {
         assetManager.load(txtfieldBackground, Texture.class);
         assetManager.load(javelin, Texture.class);
         assetManager.load(playerBackground, Texture.class);
+        assetManager.load(playerBackground, Texture.class);
 
         //MultiplayerSelection buttons
         assetManager.load(onePlayerButton, Texture.class);
@@ -83,6 +85,8 @@ public class Assets {
         assetManager.load(goToScoreButton, Texture.class);
         assetManager.load(backButton, Texture.class);
         assetManager.load(learnButton, Texture.class);
+        assetManager.load(nextPlayer, Texture.class);
+
         assetManager.load(learnImage, Texture.class);
         assetManager.load(pauseBackground, Texture.class);
 

@@ -75,6 +75,8 @@ public class PlayScreen implements Screen2 {
     private OrthographicCamera camera;
     private ScreenViewport viewport;
     private Texture throwButtonImage;
+    private Texture nextPlayerButton;
+
     private Texture nextThrowImage;
     private Texture pauseButtonImage;
     private Texture finishGameImage;
@@ -113,6 +115,7 @@ public class PlayScreen implements Screen2 {
         backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
         resumeButtonImage = Assets.getTexture(Assets.resumeButton);
+        nextPlayerButton = Assets.getTexture(Assets.nextPlayer);
         TextureRegionDrawable pauseDrawable = new TextureRegionDrawable(new TextureRegion(backgroundPauseImage));
         Window.WindowStyle windowstyle = new Window.WindowStyle();
         windowstyle.titleFont = font;
