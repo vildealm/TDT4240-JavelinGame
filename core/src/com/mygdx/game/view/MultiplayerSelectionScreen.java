@@ -96,9 +96,9 @@ public class MultiplayerSelectionScreen implements Screen2 {
 
         for(final Button i : playerButtons){
             i.setPosition(xPos,Gdx.graphics.getHeight()/2-(i.getHeight()/2));
-            xPos += Gdx.graphics.getWidth()/5;
+            xPos += Gdx.graphics.getWidth()/4.8;
             i.setTransform(true);
-            i.setScale(0.75f);
+            i.setScale(0.8f);
             stage.addActor(i);
             i.addListener(new ChangeListener(){
                 @Override
