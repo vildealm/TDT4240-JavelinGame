@@ -124,8 +124,11 @@ public class PlayScreen implements Screen2 {
 
         quitButton = Assets.getTexture(Assets.QuitButton);
         Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
-        quitButton1.setPosition(230,300);
+        quitButton1.setPosition(20,20);
         pause.add(quitButton1);
+        //pause.findActor(String.valueOf(quitButton1)).setPosition(50,200);
+       // quitButton1.setSize(300, 400);
+
         quitButton1.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -135,7 +138,6 @@ public class PlayScreen implements Screen2 {
         });
 
         Button continueButton = new Button(new TextureRegionDrawable(new TextureRegion(resumeButtonImage)));
-        continueButton.setPosition(300,300);
         pause.add(continueButton);
         continueButton.addListener(new ChangeListener(){
             @Override
@@ -144,12 +146,10 @@ public class PlayScreen implements Screen2 {
             }
         });
 
-        pause.padTop(64);
+        //pause.padTop(64);
         pause.setSize(stage.getWidth()-30,stage.getHeight()-10);
         pause.setPosition(stage.getWidth()/2-pause.getWidth()/2, stage.getHeight()/2-pause.getHeight()/2);
         pause.setMovable(false);
-
-
 
         Gdx.input.setInputProcessor(stage);
         this._FBIC = gsm.game.getFirebaseInterface();
@@ -207,9 +207,6 @@ public class PlayScreen implements Screen2 {
         finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
-
-
-
 
 
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));

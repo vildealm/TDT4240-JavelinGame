@@ -63,8 +63,8 @@ public class HighScoreScreen implements Screen2 {
         Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
         stage.addActor(quitButton1);
         quitButton1.setPosition(900, 650);
-        quitButton1.setHeight(100);
-        quitButton1.setWidth(300);
+        //quitButton1.setHeight(100);
+        //quitButton1.setWidth(400);
         Gdx.input.setInputProcessor(stage);
 
         quitButton1.addListener(new ChangeListener(){

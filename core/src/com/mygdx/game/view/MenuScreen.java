@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -74,12 +75,14 @@ public class MenuScreen implements Screen2 {
                 gsm.set(new LearnState(gsm));
             }
         });
-
     }
 
     public void show() { }
 
     public void render(float delta, SpriteBatch sb) {
+        Matrix4 mat = new Matrix4();
+        mat.setToOrtho2D(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        sb.setProjectionMatrix(mat);
         sb.begin();
         sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         sb.end();
