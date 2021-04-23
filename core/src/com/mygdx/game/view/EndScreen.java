@@ -68,15 +68,15 @@ public class EndScreen implements Screen2 {
         Collections.reverse(players);
 
         Button highscoreButton = new Button(new TextureRegionDrawable(new TextureRegion(highscoreImage)));
-        highscoreButton.setPosition(900, 650);
-        highscoreButton.setHeight(90);
-        highscoreButton.setWidth(300);
+        highscoreButton.setPosition((float)(Gdx.graphics.getWidth()*0.8), (float) (Gdx.graphics.getHeight()*0.85));
+        highscoreButton.setHeight((float) (Gdx.graphics.getHeight()*0.08));
+        highscoreButton.setWidth((float) (Gdx.graphics.getWidth()*0.22));
 
         Button quitButton = new Button(new TextureRegionDrawable(new TextureRegion(quitButtonImage)));
         stage.addActor(quitButton);
-        quitButton.setPosition(900, 500);
-        quitButton.setHeight(100);
-        quitButton.setWidth(300);
+        quitButton.setPosition((float) (Gdx.graphics.getWidth()*0.8), (float) (Gdx.graphics.getHeight()*0.75));
+        quitButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
+        quitButton.setWidth((float) (Gdx.graphics.getWidth()*0.22));
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(highscoreButton);

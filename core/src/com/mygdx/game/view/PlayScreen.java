@@ -168,7 +168,6 @@ public class PlayScreen implements Screen2 {
         runArea.setPosition(0,0);
         runArea.setWidth((Gdx.graphics.getWidth()*2)/3);
         runArea.setHeight(Gdx.graphics.getHeight());
-        runArea.getLabel().setFontScale(5, 5);
 
         stage.addActor(throwButton);
         stage.addActor(pauseButton);
@@ -360,7 +359,7 @@ public class PlayScreen implements Screen2 {
         javelinPosition.x = posX;
         javelinPosition.y = 55;
         addButtons();
-        camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
+        camera.position.set((float)((Gdx.graphics.getWidth()/2)), (float) ((Gdx.graphics.getHeight()/2)*0.9), 0 );
     }
 
     @Override
