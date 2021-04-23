@@ -206,6 +206,7 @@ public class PlayScreen implements Screen2 {
         nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
         final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
         nextThrowButton.setPosition(Gdx.graphics.getWidth() -550, 30);
+        nextPlayerButtonn.setPosition(Gdx.graphics.getWidth() -550, 30);
 
         finishGameImage = Assets.getTexture(Assets.goToScoreButton);
         final Button finishGameButton = new Button(new TextureRegionDrawable(new TextureRegion(finishGameImage)));
@@ -268,7 +269,6 @@ public class PlayScreen implements Screen2 {
                 else{
                     if(gsm.getGameRules().getPlayers().size() > 1){
                         stage.addActor(nextPlayerButtonn);
-                        stage.addActor(nextPlayerButtonn);
                     }
 
                     stage.addActor(nextThrowButton);
@@ -281,6 +281,13 @@ public class PlayScreen implements Screen2 {
             public void changed(ChangeEvent event, Actor actor){
                 reset();
                 nextThrowButton.remove();
+            }
+        });
+        nextPlayerButtonn.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                reset();
+                nextPlayerButtonn.remove();
             }
         });
 
