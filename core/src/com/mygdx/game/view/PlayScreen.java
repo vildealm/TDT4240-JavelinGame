@@ -140,8 +140,8 @@ public class PlayScreen implements Screen2 {
         runningMan = new Animation(3f/ 20f, man.getRegions());
         throwingMan = new Animation( 0.41f, throwMan.getRegions());
         currentAnim = runningMan;
-
     }
+
     public void addButtons(){
         throwButtonImage = Assets.getTexture(Assets.throwButton);
         final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
