@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -55,14 +54,17 @@ public class SetupScreen implements Screen2{
         this.gsm = gsm;
         this.stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
-        this.numberOfPlayers = gsm.getGameRules().getNumberOfPlayers();
-        //Components
+
+
+        //GUI Components
         elements = new ArrayList<>();
         players = new ArrayList<>();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
         playerBox = Assets.getTexture(Assets.playerBackground);
         playerBoxSprite = new Sprite(playerBox);
         region = new TextureRegion(playerBox);
+        //Sets the player number
+        this.numberOfPlayers = gsm.getGameRules().getNumberOfPlayers();
         if (numberOfPlayers == 4) {
             this.posChange = 275;
         }
@@ -77,7 +79,7 @@ public class SetupScreen implements Screen2{
             xPosition += 412.5;
         }
 
-        //Button
+        //Creating the PLAY and BACK button.
         font = new BitmapFont();
         buttonImage = Assets.getTexture(Assets.playButton);
         backImage = Assets.getTexture(Assets.backButton);
@@ -90,6 +92,7 @@ public class SetupScreen implements Screen2{
         stage.addActor(playButton);
         stage.addActor(backButton);
 
+        //Adds GUI elements to the screen
         for (int i = 0; i < this.numberOfPlayers; i++) {
             inputPlayer = new inputPlayer(xPosition,i+1);
             player = new Player();
@@ -106,7 +109,7 @@ public class SetupScreen implements Screen2{
             stage.addActor(elements.get(i).getIdTxt());
             stage.addActor(elements.get(i));
         }
-
+        //Button ClickListener
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
