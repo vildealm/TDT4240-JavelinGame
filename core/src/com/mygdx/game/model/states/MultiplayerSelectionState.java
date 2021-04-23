@@ -1,6 +1,4 @@
 package com.mygdx.game.model.states;
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.view.Screen2;
@@ -18,27 +16,14 @@ public class MultiplayerSelectionState extends State {
     }
 
     @Override
-    public void handleInput() {
-
-
-
-    }
-
-    @Override
-    public void update(float dt) {
-        //handleInput();
-    }
-
-
+    public void update(float dt) { }
 
     @Override
     public void renderScreen() {
         gsm.game.setScreen(currentScreen);
     }
 
-    public void dispose(){
-
-    }
+    public void dispose(){ }
 
     @Override
     public Screen2 getScreen() {

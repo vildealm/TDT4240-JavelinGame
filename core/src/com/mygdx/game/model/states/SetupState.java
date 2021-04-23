@@ -12,12 +12,15 @@ public class SetupState extends State {
 
     private Screen2 currentScreen;
 
+    /***
+     * All methods in this class is descirbed in the State interface
+     * This state renderes the loading screen and changes when all assets has been fully loaded.
+     * @param gsm: Game state manager
+     */
     public SetupState(GameStateManager gsm){
         super(gsm);
         currentScreen = ScreenFactory.getScreen("SETTING");
         renderScreen();
-        //Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        //Gdx.app.log("#SETTING", String.valueOf(gsm));
     }
 
     @Override
