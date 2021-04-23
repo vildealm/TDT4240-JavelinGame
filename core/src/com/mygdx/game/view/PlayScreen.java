@@ -116,10 +116,20 @@ public class PlayScreen implements Screen2 {
 
         stage = new Stage(viewport);
         stage2 = new Stage(viewport);
+        final Window pause = new Window("",windowstyle);
+
+        Button continueButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
+        continueButton.setHeight(100);
+        continueButton.setWidth(100);
+        continueButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                pause.remove();
+            }
+        });
 
 
 
-        Window pause = new Window("",windowstyle);
         pause.padTop(64);
         pause.setSize(stage.getWidth()/1.5f,stage.getHeight()/1.5f);
         pause.setPosition(stage.getWidth()/2-pause.getWidth()/2, stage.getHeight()/2-pause.getHeight()/2);
