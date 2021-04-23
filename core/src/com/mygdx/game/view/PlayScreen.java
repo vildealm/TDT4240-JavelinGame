@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
@@ -68,6 +69,7 @@ public class PlayScreen implements Screen2 {
     private int round;
 
     private Stage stage;
+    private Stage stage2;
     private Sprite playBackground;
     private OrthographicCamera camera;
     private ScreenViewport viewport;
@@ -87,6 +89,8 @@ public class PlayScreen implements Screen2 {
     private Vector2 javelinVelocityX = new Vector2();
     private Vector2 javelinVelocityY = new Vector2();
 
+
+
     private float javelinStateTime = 0;
     private Vector2 javelinGravity = new Vector2();
 
@@ -98,8 +102,32 @@ public class PlayScreen implements Screen2 {
         super();
         this.gsm = gsm;
         font = new BitmapFont();
+
         viewport = new ScreenViewport();
+
+        pauseButtonImage = Assets.getTexture(Assets.pauseButton);
+        TextureRegionDrawable pauseDrawable = new TextureRegionDrawable(new TextureRegion(pauseButtonImage));
+        Window.WindowStyle windowstyle = new Window.WindowStyle();
+        windowstyle.titleFont = font;
+        windowstyle.background = pauseDrawable;
+
+
+
+
         stage = new Stage(viewport);
+        stage2 = new Stage(viewport);
+
+
+
+        Window pause = new Window("",windowstyle);
+        pause.padTop(64);
+        pause.setSize(stage.getWidth()/1.5f,stage.getHeight()/1.5f);
+        pause.setPosition(stage.getWidth()/2-pause.getWidth()/2, stage.getHeight()/2-pause.getHeight()/2);
+
+
+
+        stage.addActor(pause);
+
         Gdx.input.setInputProcessor(stage);
         this._FBIC = gsm.game.getFirebaseInterface();
         _FBIC.initUser();
@@ -156,6 +184,8 @@ public class PlayScreen implements Screen2 {
         finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
+
+
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
         pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
         pauseButton.setHeight(100);
@@ -329,6 +359,7 @@ public class PlayScreen implements Screen2 {
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
     }
 
     public void checkScore(){
