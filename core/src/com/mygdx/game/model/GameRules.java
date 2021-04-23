@@ -49,6 +49,10 @@ public class GameRules {
         return this.players;
     }
 
+    public void clearPlayers(){
+        players.clear();
+    }
+
 
 
 }

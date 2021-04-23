@@ -68,6 +68,7 @@ public class HighScoreScreen implements Screen2 {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 highscores.clear();
+                gsm.getGameRules().clearPlayers();
                 gsm.set(new MenuState(gsm));
             }
         });

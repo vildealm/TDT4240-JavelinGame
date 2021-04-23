@@ -87,6 +87,7 @@ public class EndScreen implements Screen2 {
         quitButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                gsm.getGameRules().clearPlayers();
                 gsm.set(new MenuState(gsm));
             }
         });
