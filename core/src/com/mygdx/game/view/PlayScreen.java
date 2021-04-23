@@ -75,6 +75,7 @@ public class PlayScreen implements Screen2 {
     private Texture nextThrowImage;
     private Texture pauseButtonImage;
     private Texture finishGameImage;
+    private Texture resumeButtonImage;
     private Texture standingMan;
     private Texture backgroundPauseImage;
 
@@ -157,9 +158,8 @@ public class PlayScreen implements Screen2 {
         finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
-
         backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
-
+        resumeButtonImage = Assets.getTexture(Assets.resumeButton);
 
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
         pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
