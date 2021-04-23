@@ -1,30 +1,31 @@
-throw.png
+
+newRunSpritesheet.png
 size: 512, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-running-5
+pixil-frame-0
   rotate: false
   xy: 2, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-running-6
+pixil-frame-1
   rotate: false
   xy: 104, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-running-7
+pixil-frame-2
   rotate: false
   xy: 206, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-running-8
+pixil-frame-3
   rotate: false
   xy: 308, 2
   size: 100, 100
