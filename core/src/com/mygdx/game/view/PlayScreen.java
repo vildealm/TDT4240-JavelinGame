@@ -1,6 +1,5 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,20 +14,17 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
-import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.backend.FirebaseInterface;
 import com.mygdx.game.model.Assets;
-import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.EndState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.components.Player;
-import com.mygdx.game.model.states.MultiplayerSelectionState;
 
 
 import java.util.ArrayList;
@@ -229,7 +225,7 @@ public class PlayScreen implements Screen2 {
                 checkScore();
                 gsm.getGameRules().setPlayers(players);
                 for(Player player : players){
-                    _FBIC.setValueInDb(player.getUsername(), player.getScore(), player.getCountry());
+                    //_FBIC.setValueInDb(player.getUsername(), player.getScore(), player.getCountry());
                 }
                 dispose();
                 gsm.set(new EndState(gsm));

@@ -1,11 +1,10 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.backend.FirebaseInterface;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.controller.ScreenFactory;
 import com.mygdx.game.model.Assets;

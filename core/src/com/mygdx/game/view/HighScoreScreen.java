@@ -14,14 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.backend.FirebaseInterface;
 import com.mygdx.game.model.Assets;
-import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.components.Score;
 import com.mygdx.game.model.states.EndState;
-import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
-import com.mygdx.game.model.states.LoadingState;
 import com.mygdx.game.model.states.MenuState;
 
 import java.util.ArrayList;
