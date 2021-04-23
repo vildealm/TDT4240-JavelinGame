@@ -30,6 +30,8 @@ public class Assets {
     public static String goToScoreButton = "buttons/goToScore.png";
     public static String backButton = "buttons/backButton.png";
     public static String learnButton = "buttons/learnButton.png";
+    public static String resumeButton = "buttons/resumeButton.png";
+
 
 
     public static String onePlayerButton = "onePlayerButton.png";
@@ -75,6 +77,7 @@ public class Assets {
         assetManager.load(pauseButton, Texture.class);
         assetManager.load(settingsButton, Texture.class);
         assetManager.load(HighscoreButton, Texture.class);
+        assetManager.load(resumeButton, Texture.class);
         assetManager.load(QuitButton, Texture.class);
         assetManager.load(newxtThrowButton, Texture.class);
         assetManager.load(goToScoreButton, Texture.class);

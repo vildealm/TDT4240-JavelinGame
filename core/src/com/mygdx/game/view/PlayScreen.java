@@ -78,6 +78,7 @@ public class PlayScreen implements Screen2 {
     private Texture nextThrowImage;
     private Texture pauseButtonImage;
     private Texture finishGameImage;
+    private Texture resumeButtonImage;
     private Texture standingMan;
     private Texture backgroundPauseImage;
     private Texture quitButton;
@@ -111,6 +112,7 @@ public class PlayScreen implements Screen2 {
         viewport = new ScreenViewport();
         backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
+        resumeButtonImage = Assets.getTexture(Assets.resumeButton);
         TextureRegionDrawable pauseDrawable = new TextureRegionDrawable(new TextureRegion(backgroundPauseImage));
         Window.WindowStyle windowstyle = new Window.WindowStyle();
         windowstyle.titleFont = font;
@@ -122,9 +124,7 @@ public class PlayScreen implements Screen2 {
 
         quitButton = Assets.getTexture(Assets.QuitButton);
         Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
-        quitButton1.setPosition(300,300);
-        quitButton1.setHeight(100);
-        quitButton1.setWidth(100);
+        quitButton1.setPosition(230,300);
         pause.add(quitButton1);
         quitButton1.addListener(new ChangeListener(){
             @Override
@@ -134,10 +134,8 @@ public class PlayScreen implements Screen2 {
             }
         });
 
-        Button continueButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
+        Button continueButton = new Button(new TextureRegionDrawable(new TextureRegion(resumeButtonImage)));
         continueButton.setPosition(300,300);
-        continueButton.setHeight(100);
-        continueButton.setWidth(100);
         pause.add(continueButton);
         continueButton.addListener(new ChangeListener(){
             @Override
@@ -147,9 +145,9 @@ public class PlayScreen implements Screen2 {
         });
 
         pause.padTop(64);
-        pause.setSize(stage.getWidth()/1.5f,stage.getHeight()/1.5f);
+        pause.setSize(stage.getWidth()-30,stage.getHeight()-10);
         pause.setPosition(stage.getWidth()/2-pause.getWidth()/2, stage.getHeight()/2-pause.getHeight()/2);
-        stage.addActor(pause);
+        pause.setMovable(false);
 
 
 
@@ -209,6 +207,7 @@ public class PlayScreen implements Screen2 {
         finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
+
 
 
 
