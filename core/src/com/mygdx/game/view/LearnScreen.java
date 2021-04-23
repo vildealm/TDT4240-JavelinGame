@@ -69,11 +69,12 @@ public class LearnScreen implements Screen2 {
         font.setColor(Color.BLACK);
         font2.setColor(Color.BLACK);
         sb.draw(learnSprite,(Gdx.graphics.getWidth() /2) - (learnSprite.getWidth()/2) -150,(Gdx.graphics.getHeight()/2) - (learnSprite.getHeight()/2),     900 ,450);
-        font.draw(sb, "Tap in the red area to gain speed", 30, 160);
-        font.draw(sb, "Tap on THROW to throw the javelin" , 640, 170);
-        font2.draw(sb, "If you do not throw before the line, you loose." , (Gdx.graphics.getWidth() /2) - 250, 110);
+        font.draw(sb, "Tap in the red area to gain speed", 30, 200);
+        font.draw(sb, "Tap on THROW to throw the javelin" , 600, 200);
+        font2.draw(sb, "Each player gets to throw 2 times per game." , (Gdx.graphics.getWidth() /2) - 250, 150);
+        font2.draw(sb, "If you do not throw before the line, you get zero points." , (Gdx.graphics.getWidth() /2) - 300, 110);
         font2.draw(sb, "High speed ->  high score" , (Gdx.graphics.getWidth() /2 ) -150, 70);
-        font2.draw(sb, "Close to the line ->  high score" , (Gdx.graphics.getWidth() /2 ) -2000, 30);
+        font2.draw(sb, "Close to the line ->  high score" , (Gdx.graphics.getWidth() /2 ) -180, 30);
 
         font.getData().setScale(2.5f);
         font2.getData().setScale(2f);

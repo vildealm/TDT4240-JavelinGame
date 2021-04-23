@@ -67,6 +67,7 @@ public class HighScoreScreen implements Screen2 {
         quitButton1.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                highscores.clear();
                 gsm.set(new MenuState(gsm));
             }
         });
