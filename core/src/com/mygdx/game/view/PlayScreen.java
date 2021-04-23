@@ -112,9 +112,7 @@ public class PlayScreen implements Screen2 {
         this.gsm = gsm;
         font = new BitmapFont();
 
-
         nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(nextThrowImage)));
-
 
         viewport = new ScreenViewport();
         backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
