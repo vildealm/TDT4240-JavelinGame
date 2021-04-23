@@ -40,7 +40,7 @@ public class ScreenFactory {
                 return new MenuScreen(gsm);
             case "PLAY":
                 return new PlayScreen(gsm);
-            case "SETTING":
+            case "SETUP":
                 return new SetupScreen(gsm);
             case "END":
                 return new EndScreen(gsm);

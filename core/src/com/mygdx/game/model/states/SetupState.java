@@ -13,18 +13,15 @@ public class SetupState extends State {
     private Screen2 currentScreen;
 
     /***
-     * All methods in this class is descirbed in the State interface
-     * This state renderes the loading screen and changes when all assets has been fully loaded.
+     * All methods in this class is described in the State interface
+     * This state renderes the Setupscreen and changes when the PLAY buttons is clicked.
      * @param gsm: Game state manager
      */
     public SetupState(GameStateManager gsm){
         super(gsm);
-        currentScreen = ScreenFactory.getScreen("SETTING");
+        currentScreen = ScreenFactory.getScreen("SETUP");
         renderScreen();
     }
-
-    @Override
-    public void handleInput(){ }
 
     @Override
     public void update(float dt) {}
