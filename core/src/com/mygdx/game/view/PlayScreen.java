@@ -58,7 +58,6 @@ public class PlayScreen implements Screen2 {
     private OrthographicCamera camera;
     private ScreenViewport viewport;
     private Window pause;
-    private Animation currentAnim;
     private TextButton.TextButtonStyle runAreaStyle;
     private BitmapFont runAreafont;
 
@@ -69,14 +68,14 @@ public class PlayScreen implements Screen2 {
     private Texture finishGameImage;
     private Texture resumeButtonImage;
     private Texture backgroundPauseImage;
-    private Texture quitButton;
+    private Texture quitButtonImage;
     private Texture nextPlayerImage;
     private Texture currentNextImage;
-    private TextureAtlas man;
-    private TextureAtlas throwMan;
-    private Animation runningMan;
-    private Animation throwingMan;
-
+    private TextureAtlas manImageAtlas;
+    private TextureAtlas throwManAtlas;
+    private Animation runningManAnimation;
+    private Animation throwingManAnimation;
+    private Animation currentAnim;
 
     public PlayScreen(final GameStateManager gsm){
         super();
@@ -106,8 +105,8 @@ public class PlayScreen implements Screen2 {
 
         //Pause window
         this.pause = new Window("",windowstyle);
-        quitButton = Assets.getTexture(Assets.QuitButton);
-        Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
+        quitButtonImage = Assets.getTexture(Assets.QuitButton);
+        Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButtonImage)));
         quitButton1.setPosition(20,20);
         pause.add(quitButton1);
 
@@ -163,11 +162,11 @@ public class PlayScreen implements Screen2 {
         camera.position.set((float)((Gdx.graphics.getWidth()/2)), (float) ((Gdx.graphics.getHeight()/2)*0.9), 0 );
 
         //Animations
-        man = new TextureAtlas(Gdx.files.internal("newSprites/newRunAtlas.atlas"));
-        throwMan = new TextureAtlas(Gdx.files.internal("newSprites/throw.atlas"));
-        runningMan = new Animation(3f/ 20f, man.getRegions());
-        throwingMan = new Animation( 0.41f, throwMan.getRegions());
-        currentAnim = runningMan;
+        manImageAtlas = new TextureAtlas(Gdx.files.internal("newSprites/newRunAtlas.atlas"));
+        throwManAtlas = new TextureAtlas(Gdx.files.internal("newSprites/throw.atlas"));
+        runningManAnimation = new Animation(3f/ 20f, manImageAtlas.getRegions());
+        throwingManAnimation = new Animation( 0.41f, throwManAtlas.getRegions());
+        currentAnim = runningManAnimation;
     }
 
 
@@ -205,6 +204,7 @@ public class PlayScreen implements Screen2 {
         stage.addActor(pauseButton);
         stage.addActor(runArea);
 
+
         runArea.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -216,13 +216,14 @@ public class PlayScreen implements Screen2 {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 camera.translate(10f, 0f);
-                currentAnim = throwingMan;
+                currentAnim = throwingManAnimation;
                 loop = false;
                 posX += Gdx.graphics.getDeltaTime() * speedX;
                 javelin.setPositionX(posX);
                 prevScore = player.getScore();
                 player.calculateScore(playerController.getSpeed(), (680-(posX+50)));
                 thrown = true;
+                cameraLimit = (int) (player.getScore()*30);
 
                 playerController.setSpeed(0);
                 if (posX < 300) {
@@ -271,41 +272,6 @@ public class PlayScreen implements Screen2 {
     }
 
 
-    public Vector2 updateJavelinPosition(boolean normalThrow){
-        int upLimit;
-        cameraLimit = (int) (player.getScore()*30);
-        int downLimit;
-
-        if (normalThrow) {
-            upLimit = 800;
-            downLimit = cameraLimit - 500;
-        }
-        else {
-            if (posX == 20) {
-                upLimit = posX + 240;
-                downLimit = posX + 310;
-            }
-            else {
-                upLimit = posX + 300;
-                downLimit = posX + 350;
-            }
-        }
-
-        javelin.setPositionX((float)(javelin.getPosition().x - (javelin.getVelocity() * deltaTime)));
-        javelin.setPositionY((float) (javelin.getPosition().y - (javelin.getVelocity() * deltaTime)));
-
-        if (javelin.getPosition().x > upLimit) {
-            javelin.getJavelinSprite().setRotation(0);
-            javelin.setPositionY((float) (javelin.getPosition().y - (-javelin.getVelocity() * deltaTime)));
-        }
-        if ((javelin.getPosition().x > downLimit) ) {
-            javelin.setPositionY((float) (javelin.getPosition().y - (-javelin.getVelocity() * deltaTime)));
-            javelin.setSpriteRotation(-30);
-        }
-
-        return javelin.getPosition();
-    }
-
     @Override
     public void show() {
     }
@@ -338,7 +304,7 @@ public class PlayScreen implements Screen2 {
         sb.draw(playBackground, 0,0, 11000, 1000);
 
         if(thrown) {
-            javelin.getJavelinSprite().setPosition(updateJavelinPosition(normalThrow).x, updateJavelinPosition(normalThrow).y);
+            javelin.getJavelinSprite().setPosition(javelin.updateJavelinPosition(normalThrow, posX, cameraLimit, deltaTime).x, javelin.updateJavelinPosition(normalThrow, posX, cameraLimit, deltaTime).y);
             javelin.getJavelinSprite().draw(sb);
         }
 
@@ -375,7 +341,7 @@ public class PlayScreen implements Screen2 {
         }
         this.posX = 20;
         this.speedX = 0;
-        currentAnim = runningMan;
+        currentAnim = runningManAnimation;
         loop = true;
         thrown = false;
         normalThrow = true;
