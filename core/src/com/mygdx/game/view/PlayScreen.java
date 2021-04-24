@@ -35,33 +35,35 @@ public class PlayScreen implements Screen2 {
 
     private PlayerController playerController;
     private FirebaseInterface _FBIC;
-
     private GameStateManager gsm;
     private Javelin javelin;
     private Player player;
-    private BitmapFont font;
-    private TextureAtlas man;
-    private TextureAtlas throwMan;
-    private Animation runningMan;
-    private Animation throwingMan;
+    final ArrayList<Player> players = new ArrayList<>();
+
     private float elapsedTime = 0f;
     private int posX = 20;
     private int speedX = 0;
-    private Animation currentAnim;
-    private TextButton.TextButtonStyle runAreaStyle;
-    private BitmapFont runAreafont;
     private boolean thrown;
     private int cameraLimit;
     private double deltaTime = 0.3f;
     private boolean normalThrow = true;
     private double prevScore;
     private int round;
+    private boolean loop = true;
+    private boolean isPaused;
+
+    private BitmapFont font;
     private Stage stage;
     private Sprite playBackground;
     private OrthographicCamera camera;
     private ScreenViewport viewport;
-    private Texture throwButtonImage;
+    private Window pause;
+    private Animation currentAnim;
+    private TextButton.TextButtonStyle runAreaStyle;
+    private BitmapFont runAreafont;
 
+    //textures and animations
+    private Texture throwButtonImage;
     private Texture nextThrowImage;
     private Texture pauseButtonImage;
     private Texture finishGameImage;
@@ -70,20 +72,13 @@ public class PlayScreen implements Screen2 {
     private Texture quitButton;
     private Texture nextPlayerImage;
     private Texture currentNextImage;
+    private TextureAtlas man;
+    private TextureAtlas throwMan;
+    private Animation runningMan;
+    private Animation throwingMan;
 
-    private boolean loop = true;
-
-
-    private Window pause;
-
-    private Vector2 javelinGravity = new Vector2();
-
-    final ArrayList<Player> players = new ArrayList<>();
-
-    private boolean isPaused;
 
     public PlayScreen(final GameStateManager gsm){
-
         super();
         this.gsm = gsm;
         viewport = new ScreenViewport();
@@ -109,7 +104,7 @@ public class PlayScreen implements Screen2 {
             currentNextImage = nextThrowImage;
         }
 
-        //pause window
+        //Pause window
         this.pause = new Window("",windowstyle);
         quitButton = Assets.getTexture(Assets.QuitButton);
         Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
@@ -185,7 +180,6 @@ public class PlayScreen implements Screen2 {
         final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(currentNextImage)));
         final Button finishGameButton = new Button(new TextureRegionDrawable(new TextureRegion(finishGameImage)));
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
-
 
         throwButton.setPosition(Gdx.graphics.getWidth() -throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
         nextThrowButton.setPosition(Gdx.graphics.getWidth() -550, 30);
