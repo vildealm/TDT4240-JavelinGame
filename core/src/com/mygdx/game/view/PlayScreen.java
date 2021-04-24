@@ -87,14 +87,13 @@ public class PlayScreen implements Screen2 {
         backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
         resumeButtonImage = Assets.getTexture(Assets.resumeButton);
+        nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
+        nextPlayerImage = Assets.getTexture(Assets.nextPlayer);
+
         TextureRegionDrawable pauseDrawable = new TextureRegionDrawable(new TextureRegion(backgroundPauseImage));
         Window.WindowStyle windowstyle = new Window.WindowStyle();
         windowstyle.titleFont = font;
         windowstyle.background = pauseDrawable;
-
-        nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
-        nextPlayerImage = Assets.getTexture(Assets.nextPlayer);
-
 
         if (gsm.getGameRules().getPlayers().size() > 1){
             currentNextImage = nextPlayerImage;
@@ -102,6 +101,7 @@ public class PlayScreen implements Screen2 {
         else{
             currentNextImage = nextThrowImage;
         }
+
 
         //Pause window
         this.pause = new Window("",windowstyle);
@@ -169,7 +169,6 @@ public class PlayScreen implements Screen2 {
         currentAnim = runningManAnimation;
     }
 
-
     public void addButtons(){
         throwButtonImage = Assets.getTexture(Assets.throwButton);
         finishGameImage = Assets.getTexture(Assets.goToScoreButton);
@@ -203,7 +202,6 @@ public class PlayScreen implements Screen2 {
         stage.addActor(throwButton);
         stage.addActor(pauseButton);
         stage.addActor(runArea);
-
 
         runArea.addListener(new ChangeListener(){
             @Override
@@ -248,7 +246,6 @@ public class PlayScreen implements Screen2 {
             }
         });
 
-
         finishGameButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -270,7 +267,6 @@ public class PlayScreen implements Screen2 {
             }
         });
     }
-
 
     @Override
     public void show() {

@@ -16,11 +16,9 @@ import com.mygdx.game.model.Assets;
 
 public class Javelin extends Actor {
 
-
         private Sprite javelinSprite;
         private Vector2 javelinPosition;
         private double velocity = -17.0;
-        private boolean normalThrow;
 
         public Javelin(){
               javelinSprite  = new Sprite(Assets.getTexture(Assets.javelin));
