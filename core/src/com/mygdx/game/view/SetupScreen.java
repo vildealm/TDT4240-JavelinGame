@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.components.PlayerInputBox;
@@ -45,6 +46,7 @@ public class SetupScreen implements Screen2{
     private Image box;
     private Sprite playerBoxSprite;
     private Texture backImage;
+    private PlayerController playerController;
 
 
 
@@ -54,6 +56,10 @@ public class SetupScreen implements Screen2{
         this.gsm = gsm;
         this.stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
+
+        //Create PlayerController
+        this.playerController = new PlayerController();
+
 
 
         //GUI Components
@@ -113,7 +119,7 @@ public class SetupScreen implements Screen2{
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (inputPlayer.checkInputFields()) {
+                if (playerController.checkInputFields(elements)) {
                     for (int i = 0; i < players.size(); i++) {
                         players.get(i).setUsername(elements.get(i).getUsername());
                         players.get(i).setCountry(elements.get(i).getCountry());

@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.Assets;
 
 public class PlayerInputBox extends Actor {
@@ -27,6 +28,7 @@ public class PlayerInputBox extends Actor {
     private SelectBox selectBox;
     //Textfield background
     private Texture txtSprite = Assets.getTexture(Assets.txtfieldBackground);
+
 
     public PlayerInputBox(int xPosition, int id){
         this.selectBox = makeDropdown(xPosition + Gdx.graphics.getWidth()/7);
@@ -58,20 +60,6 @@ public class PlayerInputBox extends Actor {
         return idTxt;
     }
 
-    //Checks if username is correctly written
-    public boolean checkInputFields() {
-        if (!getUsername().isEmpty() &&
-                !getUsername().contains("æ") &&
-                !getUsername().contains("ø") &&
-                !getUsername().contains("å") &&
-                !getUsername().contains(" ") &&
-                getUsername().length() < 15 &&
-                !getCountry().contains("---")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     //Makes inputfield with parameter xPos that is defines in SetupScreen
     private TextField makeInputField(int xPos){
