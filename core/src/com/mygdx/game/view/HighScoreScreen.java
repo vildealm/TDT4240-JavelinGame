@@ -52,7 +52,7 @@ public class HighScoreScreen implements Screen2 {
         quitButton = Assets.getTexture(Assets.QuitButton);
 
         Button settingButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        settingButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.85));
+        settingButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.86));
         settingButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
         settingButton.setWidth((float) (Gdx.graphics.getWidth()*0.2));
         stage.addActor(settingButton);
