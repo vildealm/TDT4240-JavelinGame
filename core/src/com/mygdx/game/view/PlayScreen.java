@@ -140,6 +140,86 @@ public class PlayScreen implements Screen2 {
         currentAnim = runningManAnimation;
     }
 
+
+
+    @Override
+    public void show() {
+    }
+
+    @Override
+    public void render(float delta, SpriteBatch sb) {
+        javelin.setSpriteRotation(30);
+        camera.update();
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        posX += Gdx.graphics.getDeltaTime() * playerController.getSpeed();
+        playerController.reduceSpeed();
+
+
+        sb.begin();
+        sb.setProjectionMatrix(camera.combined);
+
+        sb.draw(playBackground, 0,0, 11000, Gdx.graphics.getHeight());
+
+        //if the player has thrown, the camera and javelin moves
+        if(thrown) {
+            cameraLimit = (int) (player.getScore()*30);
+            if(cameraLimit > 10500){ //Max length of background
+                cameraLimit = 10500;
+            }
+            if(camera.position.x < cameraLimit ){
+                camera.translate(10f, 0f);
+            }
+
+            javelin.getJavelinSprite().setPosition(javelin.updateJavelinPosition(normalThrow, posX, cameraLimit, deltaTime).x, javelin.updateJavelinPosition(normalThrow, posX, cameraLimit, deltaTime).y);
+            javelin.getJavelinSprite().draw(sb);
+        }
+
+        sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
+        javelin.landedJavelin(camera);
+        font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Round: "+round, camera.position.x-500, Gdx.graphics.getHeight()/2+150);
+        sb.end();
+
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+    }
+
+    public void checkScore(){
+        if(prevScore > player.getScore()){
+            player.setScore(prevScore);
+        }
+    }
+
+    //resets game between each round
+    public void reset(){
+        checkScore();
+        if(round <= players.size()){
+            players.set(round-1, player);
+        }
+        else{
+            players.set((round-1) - players.size(), player);
+        }
+        round++;
+        if(round <= players.size()){
+            player = players.get(round-1);
+        }
+        else{
+            player= players.get((round-1) - players.size());
+        }
+
+        this.posX = 20;
+        this.speedX = 0;
+        currentAnim = runningManAnimation;
+        loop = true;
+        thrown = false;
+        normalThrow = true;
+        javelin.setVelocity( -17.0);
+        javelin.setSpriteRotation(30);
+        javelin.setPositionX(posX);
+        javelin.setPositionY(55);
+        addButtons();
+        camera.position.set((float)((Gdx.graphics.getWidth()/2)), (float) ((Gdx.graphics.getHeight()/2)), 0 );
+    }
+
     public void addButtons(){
         throwButtonImage = Assets.getTexture(Assets.throwButton);
         nextThrowImage = Assets.getTexture(Assets.newxtThrowButton);
@@ -273,84 +353,6 @@ public class PlayScreen implements Screen2 {
                 pause.remove();
             }
         });
-    }
-
-    @Override
-    public void show() {
-    }
-
-    @Override
-    public void render(float delta, SpriteBatch sb) {
-        javelin.setSpriteRotation(30);
-        camera.update();
-        elapsedTime += Gdx.graphics.getDeltaTime();
-        posX += Gdx.graphics.getDeltaTime() * playerController.getSpeed();
-        playerController.reduceSpeed();
-
-
-        sb.begin();
-        sb.setProjectionMatrix(camera.combined);
-
-        sb.draw(playBackground, 0,0, 11000, Gdx.graphics.getHeight());
-
-        //if the player has thrown, the camera and javelin moves
-        if(thrown) {
-            cameraLimit = (int) (player.getScore()*30);
-            if(cameraLimit > 10500){ //Max length of background
-                cameraLimit = 10500;
-            }
-            if(camera.position.x < cameraLimit ){
-                camera.translate(10f, 0f);
-            }
-
-            javelin.getJavelinSprite().setPosition(javelin.updateJavelinPosition(normalThrow, posX, cameraLimit, deltaTime).x, javelin.updateJavelinPosition(normalThrow, posX, cameraLimit, deltaTime).y);
-            javelin.getJavelinSprite().draw(sb);
-        }
-
-        sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
-        javelin.landedJavelin(camera);
-        font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Round: "+round, camera.position.x-500, Gdx.graphics.getHeight()/2+150);
-        sb.end();
-
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-    }
-
-    public void checkScore(){
-        if(prevScore > player.getScore()){
-            player.setScore(prevScore);
-        }
-    }
-
-    //resets game between each round
-    public void reset(){
-        checkScore();
-        if(round <= players.size()){
-            players.set(round-1, player);
-        }
-        else{
-            players.set((round-1) - players.size(), player);
-        }
-        round++;
-        if(round <= players.size()){
-            player = players.get(round-1);
-        }
-        else{
-            player= players.get((round-1) - players.size());
-        }
-
-        this.posX = 20;
-        this.speedX = 0;
-        currentAnim = runningManAnimation;
-        loop = true;
-        thrown = false;
-        normalThrow = true;
-        javelin.setVelocity( -17.0);
-        javelin.setSpriteRotation(30);
-        javelin.setPositionX(posX);
-        javelin.setPositionY(55);
-        addButtons();
-        camera.position.set((float)((Gdx.graphics.getWidth()/2)), (float) ((Gdx.graphics.getHeight()/2)), 0 );
     }
 
     @Override
