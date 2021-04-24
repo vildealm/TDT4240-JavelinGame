@@ -85,7 +85,6 @@ public class PlayScreen implements Screen2 {
     private Texture backgroundPauseImage;
     private Texture quitButton;
     private Texture nextPlayerImage;
-    private Button nextPlayerButtonn;
     private Texture currentNextImage;
 
 
