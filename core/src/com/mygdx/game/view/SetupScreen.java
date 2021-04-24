@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Player;
-import com.mygdx.game.model.components.inputPlayer;
+import com.mygdx.game.model.components.PlayerInputBox;
 import com.mygdx.game.model.states.GameState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.mygdx.game.model.states.MultiplayerSelectionState;
@@ -29,12 +29,12 @@ public class SetupScreen implements Screen2{
     private Stage stage;
     private BitmapFont font;
     private Player player;
-    private int xPosition = 50;
-    private int posChange = 300;
+    private int xPosition = Gdx.graphics.getWidth()/20;
+    private int posChange = Gdx.graphics.getWidth()/4;
     //Components
     private ArrayList<Player> players;
-    private ArrayList<inputPlayer> elements;
-    private inputPlayer inputPlayer;
+    private ArrayList<PlayerInputBox> elements;
+    private PlayerInputBox inputPlayer;
     private Sprite background;
     private int numberOfPlayers;
     //Button
@@ -66,17 +66,16 @@ public class SetupScreen implements Screen2{
         //Sets the player number
         this.numberOfPlayers = gsm.getGameRules().getNumberOfPlayers();
         if (numberOfPlayers == 4) {
-            this.posChange = 275;
+            this.posChange =  ((Gdx.graphics.getWidth()*6)/26);
         }
-
         if (numberOfPlayers == 3) {
-            xPosition += 137.5;
+            xPosition = (Gdx.graphics.getWidth()*3)/18;
         }
         if (numberOfPlayers == 2) {
-            xPosition += 275;
+            xPosition += (Gdx.graphics.getWidth()*2)/9;
         }
         if (numberOfPlayers == 1) {
-            xPosition += 412.5;
+            xPosition = (Gdx.graphics.getWidth()/2)-(playerBox.getWidth()/2);
         }
 
         //Creating the PLAY and BACK button.
@@ -87,19 +86,20 @@ public class SetupScreen implements Screen2{
         Button backButton = new Button(new TextureRegionDrawable(new TextureRegion(backImage)));
         backButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
         backButton.setWidth((float) (Gdx.graphics.getWidth()*0.25));
-        backButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.85));
-        playButton.setPosition((Gdx.graphics.getWidth() / 2) - (playButton.getWidth() / 2), 100);
+        backButton.setPosition((float) (Gdx.graphics.getWidth()*0.02), (float) (Gdx.graphics.getHeight()*0.88));
+        playButton.setPosition((Gdx.graphics.getWidth() / 2) - (playButton.getWidth() / 2), Gdx.graphics.getHeight()/11);
         stage.addActor(playButton);
         stage.addActor(backButton);
 
         //Adds GUI elements to the screen
         for (int i = 0; i < this.numberOfPlayers; i++) {
-            inputPlayer = new inputPlayer(xPosition,i+1);
+            inputPlayer = new PlayerInputBox(xPosition,i+1);
             player = new Player();
             players.add(player);
             elements.add(inputPlayer);
             box = new Image(region);
-            box.setPosition(xPosition - 10, 370);
+            box.setPosition(xPosition - 10, ((Gdx.graphics.getHeight()*3)/5));
+            box.setSize((Gdx.graphics.getWidth()*2)/9,(Gdx.graphics.getHeight()*2)/7);
             stage.addActor(box);
             xPosition += posChange;
         }
