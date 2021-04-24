@@ -1,6 +1,5 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,15 +14,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JavelinGame;
-import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.backend.FirebaseInterface;
 import com.mygdx.game.model.Assets;
-import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.EndState;
 import com.mygdx.game.model.states.GameStateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -166,25 +163,21 @@ public class PlayScreen implements Screen2 {
         pause.setMovable(false);
 
         Gdx.input.setInputProcessor(stage);
-        this._FBIC = gsm.game.getFirebaseInterface();
-        _FBIC.initUser();
-        playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
-        playBackground.setPosition(0,0);
-        playBackground.setSize(800, 500);
-        thrown = false;
-        cameraLimit = 0;
-        round = 1;
-        isPaused = false;
-
-        Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
 
-        addButtons();
+        this._FBIC = gsm.game.getFirebaseInterface();
+        _FBIC.initUser();
+        playBackground = new Sprite(Assets.getTexture(Assets.playBackground));
+        playBackground.setPosition(0,0);
+        playBackground.setSize(Gdx.graphics.getWidth(), (float) (Gdx.graphics.getHeight()));
+        cameraLimit = 0;
+        round = 1;
+        thrown = false;
+        isPaused = false;
 
-        playerController = new PlayerController();
-        playerController.setSpeed(speedX);
+        addButtons();
 
         for (Player player : gsm.getGameRules().getPlayers()){
             players.add(player);
@@ -192,9 +185,11 @@ public class PlayScreen implements Screen2 {
         }
 
         player = players.get(round-1);
+        playerController = new PlayerController();
+        playerController.setSpeed(speedX);
 
-        camera = new OrthographicCamera(1184, 768);
-        camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), (float) (Gdx.graphics.getHeight()*0.9));
+        camera.position.set((float)((Gdx.graphics.getWidth()/2)), (float) ((Gdx.graphics.getHeight()/2)*0.9), 0 );
 
         //Animations
 
@@ -205,11 +200,9 @@ public class PlayScreen implements Screen2 {
         runningMan = new Animation(3f/ 20f, man.getRegions());
         throwingMan = new Animation( 0.41f, throwMan.getRegions());
         currentAnim = runningMan;
+
     }
-
     public void addButtons(){
-
-
         throwButtonImage = Assets.getTexture(Assets.throwButton);
         final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
         throwButton.setPosition(Gdx.graphics.getWidth() -throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
@@ -227,7 +220,6 @@ public class PlayScreen implements Screen2 {
         finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
-
         Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
         pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
         pauseButton.setHeight(100);
@@ -244,7 +236,6 @@ public class PlayScreen implements Screen2 {
         runArea.setPosition(0,0);
         runArea.setWidth((Gdx.graphics.getWidth()*2)/3);
         runArea.setHeight(Gdx.graphics.getHeight());
-        runArea.getLabel().setFontScale(5, 5);
 
         stage.addActor(throwButton);
         stage.addActor(pauseButton);
@@ -279,12 +270,11 @@ public class PlayScreen implements Screen2 {
                         stage.addActor(finishGameButton);
                     }
                 }
-
                 else{
+
                     stage.addActor(nextThrowButton);
                 }
             }
-
         });
 
         nextThrowButton.addListener(new ChangeListener(){
@@ -438,7 +428,7 @@ public class PlayScreen implements Screen2 {
         javelinPosition.x = posX;
         javelinPosition.y = 55;
         addButtons();
-        camera.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, 0 );
+        camera.position.set((float)((Gdx.graphics.getWidth()/2)), (float) ((Gdx.graphics.getHeight()/2)*0.9), 0 );
     }
 
     @Override

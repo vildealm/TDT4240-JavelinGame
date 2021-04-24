@@ -42,9 +42,11 @@ public class LearnScreen implements Screen2 {
         font2 = new BitmapFont();
         backImage = Assets.getTexture(Assets.backButton);
         backButton = new Button(new TextureRegionDrawable(new TextureRegion(backImage)));
-        backButton.setHeight(90);
-        backButton.setWidth(350);
-        backButton.setPosition(20, 650);
+        backButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
+        backButton.setWidth((float) (Gdx.graphics.getWidth()*0.25));
+        backButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.85));
+
+
         stage.addActor(backButton);
 
         backButton.addListener(new ChangeListener(){
@@ -69,8 +71,8 @@ public class LearnScreen implements Screen2 {
         font.setColor(Color.BLACK);
         font2.setColor(Color.BLACK);
         sb.draw(learnSprite,(Gdx.graphics.getWidth() /2) - (learnSprite.getWidth()/2) -150,(Gdx.graphics.getHeight()/2) - (learnSprite.getHeight()/2),     900 ,450);
-        font.draw(sb, "Tap in the red area to gain speed", 30, 200);
-        font.draw(sb, "Tap on THROW to throw the javelin" , 600, 200);
+        font.draw(sb, "Tap in the red area to gain speed", (float) ((Gdx.graphics.getWidth()*0.5)-Gdx.graphics.getWidth()/2.3), 200);
+        font.draw(sb, "Tap on THROW to throw the javelin" , (float) (Gdx.graphics.getWidth()*0.52), 200);
         font2.draw(sb, "Each player gets to throw 2 times per game." , (Gdx.graphics.getWidth() /2) - 250, 150);
         font2.draw(sb, "If you do not throw before the line, you get zero points." , (Gdx.graphics.getWidth() /2) - 300, 110);
         font2.draw(sb, "High speed ->  higher score" , (Gdx.graphics.getWidth() /2 ) -150, 70);

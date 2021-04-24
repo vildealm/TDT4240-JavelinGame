@@ -1,6 +1,6 @@
-package com.mygdx.game.desktop;
+package com.mygdx.game.desktop.backend;
 
-import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.backend.FirebaseInterface;
 import com.mygdx.game.model.components.Score;
 
 import java.util.ArrayList;

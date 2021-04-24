@@ -85,9 +85,9 @@ public class SetupScreen implements Screen2{
         backImage = Assets.getTexture(Assets.backButton);
         Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
         Button backButton = new Button(new TextureRegionDrawable(new TextureRegion(backImage)));
-        backButton.setHeight(90);
-        backButton.setWidth(350);
-        backButton.setPosition(20, 650);
+        backButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
+        backButton.setWidth((float) (Gdx.graphics.getWidth()*0.25));
+        backButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.85));
         playButton.setPosition((Gdx.graphics.getWidth() / 2) - (playButton.getWidth() / 2), 100);
         stage.addActor(playButton);
         stage.addActor(backButton);

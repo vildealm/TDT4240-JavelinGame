@@ -58,24 +58,30 @@ public class EndScreen implements Screen2 {
         font.getData().setScale(3);
         quitButtonImage = Assets.getTexture(Assets.QuitButton);
 
+        players = gsm.getGameRules().getPlayers();
+        Collections.sort(players, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return p1.getScore().compareTo(p2.getScore());
+            }
+        });
+        Collections.reverse(players);
 
         Button highscoreButton = new Button(new TextureRegionDrawable(new TextureRegion(highscoreImage)));
-        highscoreButton.setPosition(900, 650);
-        highscoreButton.setHeight(90);
-        highscoreButton.setWidth(300);
+        highscoreButton.setPosition((float)(Gdx.graphics.getWidth()*0.7), (float) (Gdx.graphics.getHeight()*0.85));
+        highscoreButton.setHeight((float) (Gdx.graphics.getHeight()*0.08));
+        highscoreButton.setWidth((float) (Gdx.graphics.getWidth()*0.22));
 
         Button quitButton = new Button(new TextureRegionDrawable(new TextureRegion(quitButtonImage)));
         stage.addActor(quitButton);
-        quitButton.setPosition(900, 500);
-        quitButton.setHeight(100);
-        quitButton.setWidth(300);
+        quitButton.setPosition((float) (Gdx.graphics.getWidth()*0.7), (float) (Gdx.graphics.getHeight()*0.75));
+        quitButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
+        quitButton.setWidth((float) (Gdx.graphics.getWidth()*0.22));
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(highscoreButton);
         stage.addActor(quitButton);
         Gdx.input.setInputProcessor(stage);
-
-        players = gsm.getGameRules().getPlayers();
 
         highscoreButton.addListener(new ChangeListener(){
             @Override
@@ -105,13 +111,6 @@ public class EndScreen implements Screen2 {
         mat.setToOrtho2D(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.setProjectionMatrix(mat);
         font.draw(sb,  "SCORES: ", Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight()/2 +200 );
-        Collections.sort(players, new Comparator<Player>() {
-            @Override
-            public int compare(Player p1, Player p2) {
-                return p1.getScore().compareTo(p2.getScore());
-            }
-        });
-        Collections.reverse(players);
         int counter = 1;
         for (int i=0; i < players.size(); i++){
             font.draw(sb, counter + ". " + players.get(i).getUsername() + ": " + players.get(i).getScore(), Gdx.graphics.getWidth()/2 -150, 500 - (i*100));

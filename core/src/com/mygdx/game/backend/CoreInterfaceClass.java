@@ -1,4 +1,4 @@
-package com.mygdx.game.controller;
+package com.mygdx.game.backend;
 
 import com.mygdx.game.model.components.Score;
 

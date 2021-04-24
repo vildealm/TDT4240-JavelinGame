@@ -81,9 +81,9 @@ public class MultiplayerSelectionScreen implements Screen2 {
         playerButtons.add(fourPlayerButton);
 
         stage.addActor(backButton);
-        backButton.setHeight(90);
-        backButton.setWidth(350);
-        backButton.setPosition(20, 650);
+        backButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
+        backButton.setWidth((float) (Gdx.graphics.getWidth()*0.25));
+        backButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.85));
 
         backButton.addListener(new ChangeListener(){
             @Override
@@ -92,13 +92,13 @@ public class MultiplayerSelectionScreen implements Screen2 {
             }
         });
 
-        xPos = 100;
+        xPos = Gdx.graphics.getWidth()/10;
 
         for(final Button i : playerButtons){
-            i.setPosition(xPos,275);
-            xPos += 250;
+            i.setPosition(xPos,Gdx.graphics.getHeight()/2-(i.getHeight()/2));
+            xPos += Gdx.graphics.getWidth()/4.8;
             i.setTransform(true);
-            i.setScale(0.75f);
+            i.setScale(0.8f);
             stage.addActor(i);
             i.addListener(new ChangeListener(){
                 @Override

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.backend;
 
 import androidx.annotation.NonNull;
 
@@ -14,7 +14,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
-import com.mygdx.game.controller.FirebaseInterface;
+import com.mygdx.game.backend.FirebaseInterface;
 import com.mygdx.game.model.components.Score;
 
 import java.util.ArrayList;
