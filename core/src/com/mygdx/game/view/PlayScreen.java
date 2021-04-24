@@ -16,10 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-//import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-//import com.mygdx.game.JavelinGame;
 import com.mygdx.game.backend.FirebaseInterface;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
@@ -29,15 +27,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.components.Player;
 import com.mygdx.game.model.states.MenuState;
-//import com.mygdx.game.model.states.MultiplayerSelectionState;
 
 
 import java.util.ArrayList;
 
 public class PlayScreen implements Screen2 {
 
-    private BitmapFont font;
+    private PlayerController playerController;
+    private FirebaseInterface _FBIC;
+
     private GameStateManager gsm;
+    private Javelin javelin;
+    private Player player;
+    private BitmapFont font;
     private TextureAtlas man;
     private TextureAtlas throwMan;
     private Animation runningMan;
@@ -51,29 +53,14 @@ public class PlayScreen implements Screen2 {
     private boolean thrown;
     private int cameraLimit;
     private double deltaTime = 0.3f;
-
     private boolean normalThrow = true;
     private double prevScore;
-
-
-    private Javelin  javelin;
-
-
-    //PLayerController
-    private PlayerController playerController;
-
-    private FirebaseInterface _FBIC;
-
-    //Player
-    private Player player;
     private int round;
-
     private Stage stage;
     private Sprite playBackground;
     private OrthographicCamera camera;
     private ScreenViewport viewport;
     private Texture throwButtonImage;
-    private Texture nextPlayerButton;
 
     private Texture nextThrowImage;
     private Texture pauseButtonImage;
@@ -99,13 +86,13 @@ public class PlayScreen implements Screen2 {
 
         super();
         this.gsm = gsm;
+        viewport = new ScreenViewport();
+        stage = new Stage(viewport);
         font = new BitmapFont();
         javelin = new Javelin();
-        viewport = new ScreenViewport();
         backgroundPauseImage = Assets.getTexture(Assets.pauseBackground);
         pauseButtonImage = Assets.getTexture(Assets.pauseButton);
         resumeButtonImage = Assets.getTexture(Assets.resumeButton);
-        nextPlayerButton = Assets.getTexture(Assets.nextPlayer);
         TextureRegionDrawable pauseDrawable = new TextureRegionDrawable(new TextureRegion(backgroundPauseImage));
         Window.WindowStyle windowstyle = new Window.WindowStyle();
         windowstyle.titleFont = font;
@@ -122,10 +109,8 @@ public class PlayScreen implements Screen2 {
             currentNextImage = nextThrowImage;
         }
 
-        stage = new Stage(viewport);
-
+        //pause window
         this.pause = new Window("",windowstyle);
-
         quitButton = Assets.getTexture(Assets.QuitButton);
         Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
         quitButton1.setPosition(20,20);
@@ -151,6 +136,7 @@ public class PlayScreen implements Screen2 {
         pause.setSize(stage.getWidth()-30,stage.getHeight()-10);
         pause.setPosition(stage.getWidth()/2-pause.getWidth()/2, stage.getHeight()/2-pause.getHeight()/2);
         pause.setMovable(false);
+
 
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
@@ -182,30 +168,29 @@ public class PlayScreen implements Screen2 {
         camera.position.set((float)((Gdx.graphics.getWidth()/2)), (float) ((Gdx.graphics.getHeight()/2)*0.9), 0 );
 
         //Animations
-
-        man = new TextureAtlas(Gdx.files.internal("tttt/newRunAtlas.atlas"));
-        throwMan = new TextureAtlas(Gdx.files.internal("tttt/throw.atlas"));
+        man = new TextureAtlas(Gdx.files.internal("newSprites/newRunAtlas.atlas"));
+        throwMan = new TextureAtlas(Gdx.files.internal("newSprites/throw.atlas"));
         runningMan = new Animation(3f/ 20f, man.getRegions());
         throwingMan = new Animation( 0.41f, throwMan.getRegions());
         currentAnim = runningMan;
-
     }
+
+
     public void addButtons(){
         throwButtonImage = Assets.getTexture(Assets.throwButton);
-        final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
-        throwButton.setPosition(Gdx.graphics.getWidth() -throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
-
-
-        final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(currentNextImage)));
-
-        nextThrowButton.setPosition(Gdx.graphics.getWidth() -550, 30);
-
         finishGameImage = Assets.getTexture(Assets.goToScoreButton);
+        pauseButtonImage = Assets.getTexture(Assets.pauseButton);
+
+        final Button throwButton = new Button(new TextureRegionDrawable(new TextureRegion(throwButtonImage)));
+        final Button nextThrowButton = new Button(new TextureRegionDrawable(new TextureRegion(currentNextImage)));
         final Button finishGameButton = new Button(new TextureRegionDrawable(new TextureRegion(finishGameImage)));
+        Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
+
+
+        throwButton.setPosition(Gdx.graphics.getWidth() -throwButton.getWidth()-10, Gdx.graphics.getHeight()/7);
+        nextThrowButton.setPosition(Gdx.graphics.getWidth() -550, 30);
         finishGameButton.setPosition(Gdx.graphics.getWidth() -500, 20 );
 
-        pauseButtonImage = Assets.getTexture(Assets.pauseButton);
-        Button pauseButton = new Button(new TextureRegionDrawable(new TextureRegion(pauseButtonImage)));
         pauseButton.setPosition(Gdx.graphics.getWidth()-110, Gdx.graphics.getHeight()-110);
         pauseButton.setHeight(100);
         pauseButton.setWidth(100);
@@ -292,7 +277,6 @@ public class PlayScreen implements Screen2 {
     }
 
 
-
     public Vector2 updateJavelinPosition(boolean normalThrow){
         int upLimit;
         cameraLimit = (int) (player.getScore()*30);
@@ -374,7 +358,7 @@ public class PlayScreen implements Screen2 {
     }
 
     public void checkScore(){
-        //Check which score is best
+
         if(prevScore > player.getScore()){
             player.setScore(prevScore);
         }
@@ -428,7 +412,6 @@ public class PlayScreen implements Screen2 {
     public void hide() {
 
     }
-
 
     @Override
     public void dispose() {

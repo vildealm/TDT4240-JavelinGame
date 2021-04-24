@@ -21,8 +21,6 @@ public class Javelin extends Actor {
         private Vector2 javelinPosition;
         private double velocity = -17.0;
 
-
-
         public Javelin(){
               javelinSprite  = new Sprite(Assets.getTexture(Assets.javelin));
               javelinPosition = new Vector2(550,55);
