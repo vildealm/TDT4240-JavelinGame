@@ -68,15 +68,15 @@ public class EndScreen implements Screen2 {
         Collections.reverse(players);
 
         Button highscoreButton = new Button(new TextureRegionDrawable(new TextureRegion(highscoreImage)));
-        highscoreButton.setPosition((float)(Gdx.graphics.getWidth()*0.7), (float) (Gdx.graphics.getHeight()*0.85));
-        highscoreButton.setHeight((float) (Gdx.graphics.getHeight()*0.08));
-        highscoreButton.setWidth((float) (Gdx.graphics.getWidth()*0.22));
+        highscoreButton.setPosition((float)(Gdx.graphics.getWidth()*0.79), (float) (Gdx.graphics.getHeight()*0.82));
+        highscoreButton.setHeight((float) (Gdx.graphics.getHeight()*0.13));
+        highscoreButton.setWidth((float) (Gdx.graphics.getWidth()*0.20));
 
         Button quitButton = new Button(new TextureRegionDrawable(new TextureRegion(quitButtonImage)));
         stage.addActor(quitButton);
-        quitButton.setPosition((float) (Gdx.graphics.getWidth()*0.7), (float) (Gdx.graphics.getHeight()*0.75));
-        quitButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
-        quitButton.setWidth((float) (Gdx.graphics.getWidth()*0.22));
+        quitButton.setPosition((float) (Gdx.graphics.getWidth()*0.82), (float) (Gdx.graphics.getHeight()*0.65));
+        quitButton.setHeight((float) (Gdx.graphics.getHeight()*0.15));
+        quitButton.setWidth((float) (Gdx.graphics.getWidth()*0.15));
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(highscoreButton);
