@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -35,9 +36,9 @@ import java.util.ArrayList;
 public class PlayScreen implements Screen2 {
 
     private BitmapFont font;
-    private JavelinGame game;
-    private Texture gameName;
-    private Texture background;
+   // private JavelinGame game;
+    //private Texture gameName;
+   // private Texture background;
     private GameStateManager gsm;
     private TextureAtlas man;
     private TextureAtlas throwMan;
@@ -56,6 +57,8 @@ public class PlayScreen implements Screen2 {
 
     private boolean normalThrow = true;
     private double prevScore;
+
+
     //PLayerController
     private PlayerController playerController;
     private boolean showScore;
@@ -67,7 +70,7 @@ public class PlayScreen implements Screen2 {
     private int round;
 
     private Stage stage;
-    private Stage stage2;
+   // private Stage stage2;
     private Sprite playBackground;
     private OrthographicCamera camera;
     private ScreenViewport viewport;
@@ -130,7 +133,7 @@ public class PlayScreen implements Screen2 {
         }
 
         stage = new Stage(viewport);
-        stage2 = new Stage(viewport);
+      //  stage2 = new Stage(viewport);
         this.pause = new Window("",windowstyle);
 
         quitButton = Assets.getTexture(Assets.QuitButton);
@@ -438,14 +441,7 @@ public class PlayScreen implements Screen2 {
 
     @Override
     public void pause() {
-        /*skin = new Skin();
-        table = new Table();
-        table.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Window pause = new Window("PAUSE", skin);
-        pause.padTop(64);
-        pause.add(new TextButton("continue", skin));
-        pause.pack();
-        stage.addActor(pause);*/
+
     }
 
     @Override
