@@ -38,9 +38,17 @@ public class PlayScreen implements Screen2 {
     private JavelinController javelinController;
     private FirebaseInterface _FBIC;
     private GameStateManager gsm;
+    private Stage stage;
+    private OrthographicCamera camera;
+    private Window pause;
+
     private Javelin javelin;
     private Player player;
     final ArrayList<Player> players = new ArrayList<>();
+    private BitmapFont font;
+    private Sprite playBackground;
+    private TextButton.TextButtonStyle runAreaStyle;
+    private BitmapFont runAreafont;
 
     private float elapsedTime = 0f;
     private int posX = 20;
@@ -51,14 +59,6 @@ public class PlayScreen implements Screen2 {
     private double prevScore;
     private int round;
     private boolean loop = true;
-
-    private BitmapFont font;
-    private Stage stage;
-    private Sprite playBackground;
-    private OrthographicCamera camera;
-    private Window pause;
-    private TextButton.TextButtonStyle runAreaStyle;
-    private BitmapFont runAreafont;
 
     //textures and animations
     private Texture throwButtonImage;
