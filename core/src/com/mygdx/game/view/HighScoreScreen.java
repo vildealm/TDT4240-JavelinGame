@@ -25,46 +25,53 @@ import java.util.ArrayList;
 
 public class HighScoreScreen implements Screen2 {
     private FirebaseInterface _FBIC;
+    private GameStateManager gsm;
+    private Stage stage;
+
     private ArrayList<Score> highscores;
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;
-    private GameStateManager gsm;
-    private Stage stage;
-    Texture buttonImage;
-    Texture quitButton;
+    private Texture backButtonImage;
+    private Texture quitButtonImage;
+    private Button backButton;
+    private Button quitButton;
 
 
     public HighScoreScreen(FirebaseInterface FBIC, final GameStateManager gsm){
         _FBIC = FBIC;
+        this.gsm = gsm;
+        stage = new Stage(new ScreenViewport());
+        shapeRenderer = new ShapeRenderer();
+        _FBIC.initUser();
+
         if(highscores!=null){
             highscores.clear();
         }
-        this.gsm = gsm;
-        shapeRenderer = new ShapeRenderer();
+        highscores = _FBIC.getDataFromDb();
+
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
-        _FBIC.initUser();
-        highscores = _FBIC.getDataFromDb();
 
-        stage = new Stage(new ScreenViewport());
-        buttonImage = Assets.getTexture(Assets.backButton);
-        quitButton = Assets.getTexture(Assets.QuitButton);
 
-        Button settingButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        settingButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.86));
-        settingButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
-        settingButton.setWidth((float) (Gdx.graphics.getWidth()*0.2));
-        stage.addActor(settingButton);
+        //buttons
+        backButtonImage = Assets.getTexture(Assets.backButton);
+        quitButtonImage = Assets.getTexture(Assets.QuitButton);
 
-        Button quitButton1 = new Button(new TextureRegionDrawable(new TextureRegion(quitButton)));
-        stage.addActor(quitButton1);
-        quitButton1.setPosition((float) (Gdx.graphics.getWidth()*0.87), (float) (Gdx.graphics.getHeight()*0.85));
-        quitButton1.setHeight((float) (Gdx.graphics.getHeight()*0.12));
-        quitButton1.setWidth((float) (Gdx.graphics.getWidth()*0.12));
+        backButton = new Button(new TextureRegionDrawable(new TextureRegion(backButtonImage)));
+        backButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.86));
+        backButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
+        backButton.setWidth((float) (Gdx.graphics.getWidth()*0.2));
+        stage.addActor(backButton);
+
+        quitButton = new Button(new TextureRegionDrawable(new TextureRegion(quitButtonImage)));
+        stage.addActor(quitButton);
+        quitButton.setPosition((float) (Gdx.graphics.getWidth()*0.87), (float) (Gdx.graphics.getHeight()*0.85));
+        quitButton.setHeight((float) (Gdx.graphics.getHeight()*0.12));
+        quitButton.setWidth((float) (Gdx.graphics.getWidth()*0.12));
         Gdx.input.setInputProcessor(stage);
 
-        quitButton1.addListener(new ChangeListener(){
+        quitButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 highscores.clear();
@@ -73,7 +80,7 @@ public class HighScoreScreen implements Screen2 {
             }
         });
 
-        settingButton.addListener(new ChangeListener(){
+        backButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 highscores.clear();
@@ -100,6 +107,7 @@ public class HighScoreScreen implements Screen2 {
             shapeRenderer.rect((float) (Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*0.9)), (float) (Gdx.graphics.getHeight()-(Gdx.graphics.getHeight())+j*Gdx.graphics.getHeight()*0.1), (float) (Gdx.graphics.getWidth()*0.8), Gdx.graphics.getHeight()/11);
         }
         shapeRenderer.end();
+
         int counter = 1;
         sb.begin();
         for(int i=highscores.size()-1; i>= 0; i--){
@@ -109,6 +117,7 @@ public class HighScoreScreen implements Screen2 {
             counter++;
         }
         sb.end();
+
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

@@ -74,38 +74,7 @@ public class Javelin extends Actor {
                 this.velocity = v;
         }
 
-        public Vector2 updateJavelinPosition(boolean normalThrow, int posX, int cameraLimit, double deltaTime){
-                int upLimit;
-                int downLimit;
-                if (normalThrow) {
-                        upLimit = 800;
-                        downLimit = cameraLimit - 500;
-                }
-                else {
-                        if (posX == 20) {
-                                upLimit = posX + 240;
-                                downLimit = posX + 310;
-                        }
-                        else {
-                                upLimit = posX + 300;
-                                downLimit = posX + 350;
-                        }
-                }
 
-                setPositionX((float)(getPosition().x - (getVelocity() * deltaTime)));
-                setPositionY((float) (getPosition().y - (getVelocity() * deltaTime)));
-
-                if (getPosition().x > upLimit) {
-                        getJavelinSprite().setRotation(0);
-                        setPositionY((float) (getPosition().y - (-getVelocity() * deltaTime)));
-                }
-                if ((getPosition().x > downLimit) ) {
-                        setPositionY((float) (getPosition().y - (-getVelocity() * deltaTime)));
-                        setSpriteRotation(-30);
-                }
-
-                return getPosition();
-        }
 
 
 }
