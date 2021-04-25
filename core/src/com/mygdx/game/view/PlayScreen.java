@@ -171,8 +171,7 @@ public class PlayScreen implements Screen2 {
             if(camera.position.x < cameraLimit ){
                 camera.translate(10f, 0f);
             }
-            Vector2 javelinPos = javelinController.updateJavelinPosition(javelin, normalThrow, posX, cameraLimit);
-            javelin.getJavelinSprite().setPosition(javelinPos.x, javelinPos.y);
+            javelin.getJavelinSprite().setPosition(javelinController.updateJavelinPosition(javelin, normalThrow, posX, cameraLimit).x, javelinController.updateJavelinPosition(javelin, normalThrow, posX, cameraLimit).y);
             javelin.getJavelinSprite().draw(sb);
         }
         camera.update();
@@ -180,7 +179,6 @@ public class PlayScreen implements Screen2 {
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
         javelin.landedJavelin(camera);
         font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Round: "+round, camera.position.x-500, Gdx.graphics.getHeight()/2+150);
-        font.draw(sb, "FPS:" + Gdx.graphics.getFramesPerSecond(), camera.position.x, Gdx.graphics.getHeight()-200);
         sb.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
