@@ -13,22 +13,18 @@ import com.mygdx.game.model.states.LoadingState;
 import com.mygdx.game.view.Screen2;
 
 public class JavelinGame extends ApplicationAdapter {
-	private SpriteBatch batch;
 	private FirebaseInterface _FBIC;
-
 	public JavelinGame(FirebaseInterface FBIC){_FBIC = FBIC; }
 	private GameStateManager gsm;
 	private Assets assets;
+	public ScreenFactory screenFactory;
+	private SpriteBatch batch;
+	protected Screen2 screen;
+
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 480;
 	public static final String TITLE = "Javelin Game";
-	public ScreenFactory screenFactory;
-	protected Screen2 screen;
-	private Stage stage;
 
-	public static final JavelinGame INSTANCE = new JavelinGame();
-
-	public JavelinGame(){}
 
 	@Override
 	public void create () {
@@ -41,12 +37,14 @@ public class JavelinGame extends ApplicationAdapter {
 	}
 
 
-	public static JavelinGame getInstance() {
-		return INSTANCE;
-	}
-
-	public SpriteBatch getBatch() {
-		return batch;
+	@Override
+	public void render () {
+		Gdx.gl.glClearColor(165.0f/255.0f, 214.0f/255.0f, 244.0f/255.0f, 1.0f);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		gsm.update(Gdx.graphics.getDeltaTime());
+		if(screen!=null){
+			gsm.renderBatch(batch);
+		}
 	}
 
 	public FirebaseInterface getFirebaseInterface(){
@@ -59,16 +57,6 @@ public class JavelinGame extends ApplicationAdapter {
 		if (this.screen != null) {
 			this.screen.show();
 			this.screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		}
-	}
-
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(165.0f/255.0f, 214.0f/255.0f, 244.0f/255.0f, 1.0f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		gsm.update(Gdx.graphics.getDeltaTime());
-		if(screen!=null){
-			gsm.renderBatch(batch);
 		}
 	}
 
