@@ -28,7 +28,6 @@ public class SetupScreen implements Screen2{
     //Stage
     private GameStateManager gsm;
     private Stage stage;
-    private BitmapFont font;
     private Player player;
     private int xPosition = Gdx.graphics.getWidth()/20;
     private int posChange = Gdx.graphics.getWidth()/4;
@@ -39,13 +38,15 @@ public class SetupScreen implements Screen2{
     private Sprite background;
     private int numberOfPlayers;
     //Button
-    private TextButton.TextButtonStyle playButtonStyle;
-    private Texture buttonImage;
+    private Texture playButtonImage;
+    private Texture backButtonImage;
+    private Button playButton;
+    private Button backButton;
+
     private Texture playerBox;
     private TextureRegion region;
     private Image box;
     private Sprite playerBoxSprite;
-    private Texture backImage;
     private PlayerController playerController;
 
 
@@ -59,7 +60,6 @@ public class SetupScreen implements Screen2{
 
         //Create PlayerController
         this.playerController = new PlayerController();
-
 
 
         //GUI Components
@@ -85,11 +85,10 @@ public class SetupScreen implements Screen2{
         }
 
         //Creating the PLAY and BACK button.
-        font = new BitmapFont();
-        buttonImage = Assets.getTexture(Assets.playButton);
-        backImage = Assets.getTexture(Assets.backButton);
-        Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
-        Button backButton = new Button(new TextureRegionDrawable(new TextureRegion(backImage)));
+        playButtonImage = Assets.getTexture(Assets.playButton);
+        backButtonImage = Assets.getTexture(Assets.backButton);
+        playButton = new Button(new TextureRegionDrawable(new TextureRegion(playButtonImage)));
+        backButton = new Button(new TextureRegionDrawable(new TextureRegion(backButtonImage)));
         backButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
         backButton.setWidth((float) (Gdx.graphics.getWidth()*0.25));
         backButton.setPosition((float) (Gdx.graphics.getWidth()*0.02), (float) (Gdx.graphics.getHeight()*0.88));

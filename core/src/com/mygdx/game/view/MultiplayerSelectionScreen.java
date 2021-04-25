@@ -30,51 +30,43 @@ import java.util.ArrayList;
 
 public class MultiplayerSelectionScreen implements Screen2 {
 
-    private BitmapFont font;
-    private Stage stage;
     private GameStateManager gsm;
-    private TextureAtlas buttonAtlas;
+    private Stage stage;
+    private Sprite background;
+    private Texture onePlayerButtonImage;
+    private Texture twoPlayerButtonImage;
+    private Texture threePlayerButtonImage;
+    private Texture fourPlayerButtonImage;
+    private Texture backButtonImage;
     private Button onePlayerButton;
     private Button twoPlayerButton;
     private Button threePlayerButton;
     private Button fourPlayerButton;
     private Button backButton;
-    private Texture onePlayerButtonImage;
-    private Texture twoPlayerButtonImage;
-    private Texture threePlayerButtonImage;
-    private Texture fourPlayerButtonImage;
-    private Texture backButtonTexture;
-
-    private int xPos;
-
     private ArrayList<Button> playerButtons;
-
-    private Sprite background;
+    private int xPos;
 
 
     public MultiplayerSelectionScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
         stage = new Stage(new ScreenViewport());
+        background = new Sprite(Assets.getTexture(Assets.setupBackground));
+
+
+        //Multiplayer buttons
+        playerButtons = new ArrayList<>();
 
         onePlayerButtonImage = Assets.getTexture(Assets.onePlayerButton);
         twoPlayerButtonImage = Assets.getTexture(Assets.twoPlayerButton);
         threePlayerButtonImage = Assets.getTexture(Assets.threePlayerButton);
         fourPlayerButtonImage = Assets.getTexture(Assets.fourPlayerButton);
-        backButtonTexture = Assets.getTexture(Assets.backButton);
-
-
-        font = new BitmapFont();
-        playerButtons = new ArrayList<>();
-        background = new Sprite(Assets.getTexture(Assets.setupBackground));
-
-
-        //Multiplayer buttons
+        backButtonImage = Assets.getTexture(Assets.backButton);
         onePlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(onePlayerButtonImage)));
         twoPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(twoPlayerButtonImage)));
         threePlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(threePlayerButtonImage)));
         fourPlayerButton = new Button(new TextureRegionDrawable(new TextureRegion(fourPlayerButtonImage)));
-        backButton = new Button(new TextureRegionDrawable(new TextureRegion(backButtonTexture)));
+        backButton = new Button(new TextureRegionDrawable(new TextureRegion(backButtonImage)));
         playerButtons.add(onePlayerButton);
         playerButtons.add(twoPlayerButton);
         playerButtons.add(threePlayerButton);
@@ -110,7 +102,6 @@ public class MultiplayerSelectionScreen implements Screen2 {
         }
 
         Gdx.input.setInputProcessor(stage);
-        font = new BitmapFont();
 
     }
 
@@ -118,9 +109,9 @@ public class MultiplayerSelectionScreen implements Screen2 {
 
     public void render(float delta, SpriteBatch sb) {
         sb.begin();
-        font.draw(sb, "MENU", 70, 100);
         sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         sb.end();
+
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

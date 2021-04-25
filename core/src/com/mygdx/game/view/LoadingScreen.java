@@ -13,15 +13,13 @@ import com.mygdx.game.model.states.MenuState;
 public class LoadingScreen implements Screen2 {
 
     private GameStateManager gsm;
-    private float progress;
-    private Stage stage;
-    private BitmapFont font;
     private Assets assets;
+    private BitmapFont font;
+    private float progress;
 
     public LoadingScreen(GameStateManager gsm, Assets assets){
         this.gsm = gsm;
         this.assets = assets;
-        stage = new Stage(new ScreenViewport());
         font = new BitmapFont();
         this.progress = 0f;
     }
@@ -40,7 +38,6 @@ public class LoadingScreen implements Screen2 {
             dispose();
             gsm.set(new MenuState(gsm));
         }
-        stage.draw();
     }
 
     @Override

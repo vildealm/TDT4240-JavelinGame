@@ -33,34 +33,33 @@ import java.util.ArrayList;
 
 public class MenuScreen implements Screen2 {
 
-    private BitmapFont font;
+    private GameStateManager gsm;
     private Stage stage;
+    private Sprite background;
+    private Texture playButtonImage;
+    private Texture learnButtonImage;
     private Button playButton;
     private Button learnButton;
-
-    private GameStateManager gsm;
-    private TextureAtlas buttonAtlas;
-    private Texture buttonImage;
-    private Sprite background;
-    private Texture learnImage;
 
     public MenuScreen(final GameStateManager gsm){
         super();
         this.gsm = gsm;
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        buttonImage = Assets.getTexture(Assets.playButton);
-        learnImage = Assets.getTexture(Assets.learnButton);
-        learnButton = new Button(new TextureRegionDrawable(new TextureRegion(learnImage)));
-        stage.addActor(learnButton);
-        font = new BitmapFont();
         background = new Sprite(Assets.getTexture(Assets.setupBackground));
-        Button playButton = new Button(new TextureRegionDrawable(new TextureRegion(buttonImage)));
+
+        //buttons
+        playButtonImage = Assets.getTexture(Assets.playButton);
+        learnButtonImage = Assets.getTexture(Assets.learnButton);
+        playButton = new Button(new TextureRegionDrawable(new TextureRegion(playButtonImage)));
+        learnButton = new Button(new TextureRegionDrawable(new TextureRegion(learnButtonImage)));
         playButton.setPosition((Gdx.graphics.getWidth()/2)-(playButton.getWidth()/2), (Gdx.graphics.getHeight()/2)-(playButton.getHeight())/2);
         learnButton.setWidth(300);
         learnButton.setHeight(80);
         learnButton.setPosition((Gdx.graphics.getWidth()/2)-(learnButton.getWidth()/2) , (Gdx.graphics.getHeight()/2)-(learnButton.getHeight())/2 -200);
+
         stage.addActor(playButton);
+        stage.addActor(learnButton);
 
         playButton.addListener(new ChangeListener(){
             @Override
@@ -83,6 +82,7 @@ public class MenuScreen implements Screen2 {
         Matrix4 mat = new Matrix4();
         mat.setToOrtho2D(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.setProjectionMatrix(mat);
+
         sb.begin();
         sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         sb.end();
