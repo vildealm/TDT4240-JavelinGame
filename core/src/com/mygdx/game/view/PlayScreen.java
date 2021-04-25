@@ -47,7 +47,6 @@ public class PlayScreen implements Screen2 {
     private int speedX = 0;
     private boolean thrown;
     private int cameraLimit;
-    private double deltaTime = 0.3f;
     private boolean normalThrow = true;
     private double prevScore;
     private int round;
@@ -135,7 +134,6 @@ public class PlayScreen implements Screen2 {
         playerController = new PlayerController();
         playerController.setSpeed(speedX);
 
-
         //Animations
         manImageAtlas = new TextureAtlas(Gdx.files.internal("newSprites/newRunAtlas.atlas"));
         throwManAtlas = new TextureAtlas(Gdx.files.internal("newSprites/throw.atlas"));
@@ -173,10 +171,11 @@ public class PlayScreen implements Screen2 {
             if(camera.position.x < cameraLimit ){
                 camera.translate(10f, 0f);
             }
-            Vector2 javelinPos = javelinController.updateJavelinPosition(javelin, normalThrow, posX, cameraLimit, deltaTime);
+            Vector2 javelinPos = javelinController.updateJavelinPosition(javelin, normalThrow, posX, cameraLimit);
             javelin.getJavelinSprite().setPosition(javelinPos.x, javelinPos.y);
             javelin.getJavelinSprite().draw(sb);
         }
+        camera.update();
 
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
         javelin.landedJavelin(camera);

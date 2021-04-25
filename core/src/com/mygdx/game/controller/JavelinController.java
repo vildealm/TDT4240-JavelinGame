@@ -5,11 +5,13 @@ import com.mygdx.game.model.components.Javelin;
 
 public class JavelinController {
 
+    private double deltaTime = 0.3;
+
     public JavelinController(){
 
     }
 
-    public Vector2 updateJavelinPosition(Javelin javelin, boolean normalThrow, int posX, int cameraLimit, double deltaTime){
+    public Vector2 updateJavelinPosition(Javelin javelin, boolean normalThrow, int posX, int cameraLimit){
         int upLimit;
         int downLimit;
         if (normalThrow) {
