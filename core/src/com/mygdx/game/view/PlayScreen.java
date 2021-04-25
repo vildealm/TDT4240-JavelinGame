@@ -181,6 +181,7 @@ public class PlayScreen implements Screen2 {
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
         javelin.landedJavelin(camera);
         font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Round: "+round, camera.position.x-500, Gdx.graphics.getHeight()/2+150);
+        font.draw(sb, "FPS:" + Gdx.graphics.getFramesPerSecond(), camera.position.x, Gdx.graphics.getHeight()-200);
         sb.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
