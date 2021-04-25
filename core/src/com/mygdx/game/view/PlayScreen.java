@@ -171,7 +171,7 @@ public class PlayScreen implements Screen2 {
             if(camera.position.x < cameraLimit ){
                 camera.translate(10f, 0f);
             }
-            javelin.getJavelinSprite().setPosition(javelinController.updateJavelinPosition(javelin, normalThrow, posX, cameraLimit).x, javelinController.updateJavelinPosition(javelin, normalThrow, posX, cameraLimit).y);
+            javelin.getJavelinSprite().setPosition(javelinController.throwJavelin(javelin, normalThrow, posX, cameraLimit).x, javelinController.throwJavelin(javelin, normalThrow, posX, cameraLimit).y);
             javelin.getJavelinSprite().draw(sb);
         }
         camera.update();

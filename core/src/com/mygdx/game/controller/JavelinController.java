@@ -11,7 +11,7 @@ public class JavelinController {
 
     }
 
-    public Vector2 updateJavelinPosition(Javelin javelin, boolean normalThrow, int posX, int cameraLimit){
+    public Vector2 throwJavelin(Javelin javelin, boolean normalThrow, int posX, int cameraLimit){
         int upLimit;
         int downLimit;
         if (normalThrow) {
