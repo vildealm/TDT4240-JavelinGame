@@ -74,7 +74,6 @@ public class Javelin extends Actor {
                 this.velocity = v;
         }
 
-
         public Vector2 updateJavelinPosition(boolean normalThrow, int posX, int cameraLimit, double deltaTime){
                 int upLimit;
                 int downLimit;
@@ -107,7 +106,6 @@ public class Javelin extends Actor {
 
                 return getPosition();
         }
-
 
 
 }

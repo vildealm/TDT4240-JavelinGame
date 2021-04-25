@@ -102,7 +102,6 @@ public class PlayScreen implements Screen2 {
             currentNextImage = nextThrowImage;
         }
 
-
         //Pause window
         this.pause = new Window("",windowstyle);
         quitButtonImage = Assets.getTexture(Assets.QuitButton);
@@ -288,7 +287,6 @@ public class PlayScreen implements Screen2 {
                 camera.translate(10f, 0f);
             }
         }
-
         camera.update();
         elapsedTime += Gdx.graphics.getDeltaTime();
         posX += Gdx.graphics.getDeltaTime() * playerController.getSpeed();
@@ -306,7 +304,7 @@ public class PlayScreen implements Screen2 {
 
         sb.draw((TextureRegion) currentAnim.getKeyFrame(elapsedTime, loop), posX, 20);
         javelin.landedJavelin(camera);
-        font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Round: "+round, camera.position.x-500, 600);
+        font.draw(sb, "Player: "+ player.getUsername() + " Country: "+ player.getCountry() + " Score: "+player.getScore()+" Throw: "+round, camera.position.x-500, 600);
         sb.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
