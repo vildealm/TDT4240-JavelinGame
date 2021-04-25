@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.backend.FirebaseInterface;
+import com.mygdx.game.controller.JavelinController;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.components.Javelin;
 import com.mygdx.game.model.states.EndState;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 public class PlayScreen implements Screen2 {
 
     private PlayerController playerController;
+    private JavelinController javelinController;
     private FirebaseInterface _FBIC;
     private GameStateManager gsm;
     private Javelin javelin;
@@ -85,6 +88,7 @@ public class PlayScreen implements Screen2 {
         _FBIC.initUser();
 
         javelin = new Javelin();
+        javelinController = new JavelinController();
         font = new BitmapFont();
 
         //camera
@@ -169,8 +173,8 @@ public class PlayScreen implements Screen2 {
             if(camera.position.x < cameraLimit ){
                 camera.translate(10f, 0f);
             }
-
-            javelin.getJavelinSprite().setPosition(javelin.updateJavelinPosition(normalThrow, posX, cameraLimit, deltaTime).x, javelin.updateJavelinPosition(normalThrow, posX, cameraLimit, deltaTime).y);
+            Vector2 javelinPos = javelinController.updateJavelinPosition(javelin, normalThrow, posX, cameraLimit, deltaTime);
+            javelin.getJavelinSprite().setPosition(javelinPos.x, javelinPos.y);
             javelin.getJavelinSprite().draw(sb);
         }
 
