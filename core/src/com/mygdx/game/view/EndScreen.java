@@ -32,32 +32,28 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class EndScreen implements Screen2 {
-    private Texture HSbuttonTexture;
-    private ArrayList<Player> players;
+
     private GameStateManager gsm;
-
-    private BitmapFont getHighscoreFont;
-    private TextButton.TextButtonStyle getHighscoreFontStyle;
-
     private Stage stage;
-    private Viewport viewport;
-    private Texture highscoreImage;
     private BitmapFont font;
+    private ArrayList<Player> players;
+    private Texture highscoreButtonImage;
     private Texture quitButtonImage;
+    private Button highscoreButton;
+    private Button quitButton;
+
 
     public EndScreen(final GameStateManager gsm) {
         super();
         this.gsm = gsm;
-        viewport = new ScreenViewport();
-        stage = new Stage(viewport);
         stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
 
-        highscoreImage = Assets.getTexture(Assets.HighscoreButton);
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
-        quitButtonImage = Assets.getTexture(Assets.QuitButton);
 
+        //get players from game
         players = gsm.getGameRules().getPlayers();
         Collections.sort(players, new Comparator<Player>() {
             @Override
@@ -67,21 +63,22 @@ public class EndScreen implements Screen2 {
         });
         Collections.reverse(players);
 
-        Button highscoreButton = new Button(new TextureRegionDrawable(new TextureRegion(highscoreImage)));
+        //buttons
+        highscoreButtonImage = Assets.getTexture(Assets.HighscoreButton);
+        quitButtonImage = Assets.getTexture(Assets.QuitButton);
+        highscoreButton = new Button(new TextureRegionDrawable(new TextureRegion(highscoreButtonImage)));
+        quitButton = new Button(new TextureRegionDrawable(new TextureRegion(quitButtonImage)));
+
         highscoreButton.setPosition((float)(Gdx.graphics.getWidth()*0.79), (float) (Gdx.graphics.getHeight()*0.82));
         highscoreButton.setHeight((float) (Gdx.graphics.getHeight()*0.13));
         highscoreButton.setWidth((float) (Gdx.graphics.getWidth()*0.20));
 
-        Button quitButton = new Button(new TextureRegionDrawable(new TextureRegion(quitButtonImage)));
-        stage.addActor(quitButton);
         quitButton.setPosition((float) (Gdx.graphics.getWidth()*0.82), (float) (Gdx.graphics.getHeight()*0.65));
         quitButton.setHeight((float) (Gdx.graphics.getHeight()*0.15));
         quitButton.setWidth((float) (Gdx.graphics.getWidth()*0.15));
-        Gdx.input.setInputProcessor(stage);
 
         stage.addActor(highscoreButton);
         stage.addActor(quitButton);
-        Gdx.input.setInputProcessor(stage);
 
         highscoreButton.addListener(new ChangeListener(){
             @Override
@@ -146,7 +143,6 @@ public class EndScreen implements Screen2 {
     @Override
     public void dispose() {
         stage.dispose();
-        getHighscoreFont.dispose();
 
     }
 }

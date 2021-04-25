@@ -23,30 +23,28 @@ import com.mygdx.game.model.states.MultiplayerSelectionState;
 public class LearnScreen implements Screen2 {
     private GameStateManager gsm;
     private Stage stage;
-    private Texture learnTexture;
     private Sprite learnSprite;
     private BitmapFont font;
     private BitmapFont font2;
-    private Texture backImage;
+    private Texture backButtonImage;
     private Button backButton;
+
 
 
     public LearnScreen(final GameStateManager gsm){
         this.gsm = gsm;
-        learnTexture = (Assets.getTexture(Assets.learnImage));
-        learnSprite = new Sprite(Assets.getTexture(Assets.learnImage));
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-
+        learnSprite = new Sprite(Assets.getTexture(Assets.learnImage));
         font = new BitmapFont();
         font2 = new BitmapFont();
-        backImage = Assets.getTexture(Assets.backButton);
-        backButton = new Button(new TextureRegionDrawable(new TextureRegion(backImage)));
+
+        //button
+        backButtonImage = Assets.getTexture(Assets.backButton);
+        backButton = new Button(new TextureRegionDrawable(new TextureRegion(backButtonImage)));
         backButton.setHeight((float) (Gdx.graphics.getHeight()*0.1));
         backButton.setWidth((float) (Gdx.graphics.getWidth()*0.25));
         backButton.setPosition((float) (Gdx.graphics.getWidth()*0.03), (float) (Gdx.graphics.getHeight()*0.85));
-
-
         stage.addActor(backButton);
 
         backButton.addListener(new ChangeListener(){
@@ -55,8 +53,6 @@ public class LearnScreen implements Screen2 {
                 gsm.set(new MenuState(gsm));
             }
         });
-
-
 
     }
 
