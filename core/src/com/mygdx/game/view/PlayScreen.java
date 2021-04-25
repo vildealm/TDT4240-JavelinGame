@@ -183,6 +183,7 @@ public class PlayScreen implements Screen2 {
         stage.draw();
     }
 
+    //Check if previous score was better than second throw
     public void checkScore(){
         if(prevScore > player.getScore()){
             player.setScore(prevScore);

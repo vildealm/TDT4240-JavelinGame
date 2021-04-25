@@ -8,13 +8,11 @@ import java.util.Random;
 
 public class PlayerController {
 
-    private Player player;
     private int speed;
     private int dist;
 
 
     public PlayerController(){
-        this.player = new Player();
         speed = 0;
         dist = 0;
     }
