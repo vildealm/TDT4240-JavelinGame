@@ -37,23 +37,19 @@ public class HighScoreScreen implements Screen2 {
     private Button quitButton;
 
 
-    public HighScoreScreen(FirebaseInterface FBIC, final GameStateManager gsm){
-        _FBIC = FBIC;
+    public HighScoreScreen( final GameStateManager gsm){
         this.gsm = gsm;
+        _FBIC = gsm.game.getFirebaseInterface();
         stage = new Stage(new ScreenViewport());
         shapeRenderer = new ShapeRenderer();
         _FBIC.initUser();
 
-        if(highscores!=null){
-            highscores.clear();
-        }
         highscores = _FBIC.getDataFromDb();
 
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(3);
-
-
+        
         //buttons
         backButtonImage = Assets.getTexture(Assets.backButton);
         quitButtonImage = Assets.getTexture(Assets.QuitButton);

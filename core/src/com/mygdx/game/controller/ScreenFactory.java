@@ -22,12 +22,10 @@ import com.mygdx.game.view.SetupScreen;
 public class ScreenFactory {
     private static GameStateManager gsm;
     private static Assets assets;
-    private JavelinGame game;
 
     public ScreenFactory(GameStateManager gsm, Assets assets){
         this.gsm = gsm;
         this.assets = assets;
-        this.game = gsm.game;
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ScreenFactorygsm", String.valueOf(gsm.getStates()));
     }
@@ -45,7 +43,7 @@ public class ScreenFactory {
             case "END":
                 return new EndScreen(gsm);
             case "HIGHSCORE":
-                return new HighScoreScreen(gsm.game.getFirebaseInterface(), gsm);
+                return new HighScoreScreen(gsm);
             case "MULTIPLAYER":
                 return new MultiplayerSelectionScreen(gsm);
             case "LEARN":
