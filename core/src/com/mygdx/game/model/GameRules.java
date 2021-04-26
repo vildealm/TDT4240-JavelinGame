@@ -2,35 +2,19 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.model.components.Player;
-import com.mygdx.game.model.states.GameStateManager;
-import com.mygdx.game.view.PlayScreen;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GameRules {
 
     private int numberOfPlayers;
-    private String name;
     private ArrayList<Player> players;
-    private Player player1;
+    private Player player;
 
     public GameRules(){
-        this.player1 = new Player();
+        this.player = new Player();
         players = new ArrayList<Player>();
-        players.add(player1);
-        /*for(int i = 0; i< players;i++){
-            name = "player" + i;
-            Player name = new Player();
-            playerList.add(name);
-        }*/
-    }
-
-
-    public void playGame(){
-        for (Player player : players ){
-
-        }
+        players.add(player);
     }
 
     public void setPlayers(ArrayList<Player> players) {
@@ -52,7 +36,5 @@ public class GameRules {
     public void clearPlayers(){
         players.clear();
     }
-
-
 
 }
