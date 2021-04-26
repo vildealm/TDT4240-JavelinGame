@@ -9,12 +9,9 @@ public class GameRules {
 
     private int numberOfPlayers;
     private ArrayList<Player> players;
-    private Player player;
 
     public GameRules(){
-        this.player = new Player();
-        players = new ArrayList<Player>();
-        players.add(player);
+        
     }
 
     public void setPlayers(ArrayList<Player> players) {
